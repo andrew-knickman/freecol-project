@@ -1,11 +1,11 @@
-/MANIFEST.MF
-/net/
+*.ipr
 *.el
 *.ipr
 *.iws
 *.pif
 .ant.properties
 .classpath
+.DS_Store
 .project
 .settings
 bin
@@ -23,4 +23,10 @@ lib/optional/*.jar
 src/tests/antunit/core/output
 .idea
 *.iml
-/bin
+/src/GPATH
+/src/GRTAGS
+/src/GSYMS
+/src/GTAGS
+/log.xml
+lib/optional/license.txt
+/release/distrib/
