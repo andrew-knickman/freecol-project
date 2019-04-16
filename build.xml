@@ -3,7 +3,7 @@
 <!-- This file includes targets for building FreeCol,
      the metaserver, distribution packages, running tests
      and creating documentation. -->
-<project name="FreeCol" default="package">
+<project name="FreeCol" default="package" xmlns:jacoco="antlib:org.jacoco.ant">
     <description>
         This file includes targets for building FreeCol,
         the metaserver, distribution packages, running tests
@@ -32,7 +32,11 @@
               value="jars/miglayout-core-4.2.jar"/>
     <property name="cli.jar" value="jars/commons-cli-1.1.jar"/>
     <property name="cortado.jar" value="jars/cortado-0.6.0.jar"/>
-
+	<property name="result.exec.file" location="${result.dir}/jacoco.exec" />
+	<property name="result.dir" location="./build" />
+	<property name="result.classes.dir" location="${result.dir}/net" />
+	<property name="result.report.dir" location="${result.dir}/site/jacoco" />
+	<property name="src.dir" location="./src"/>
 
     <path id="libraries.classpath">
         <!-- MigLayout manager -->
@@ -88,10 +92,13 @@
                  classname="net.charabia.jsmoothgen.ant.JSmoothGen"
                  classpath="${freecol.build.dir}/jars/jsmoothgen-ant.jar"/>
     </target>
-
     <target name="init" unless="TSTAMP">
         <tstamp/>
     </target>
+	
+	<taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
+			<classpath path="${basedir}/jars/jacoco-0.8.3/lib/jacocoant.jar" />
+	</taskdef>
 
     <!-- Compiles the java source files. -->
     <target name="compile" depends="init">
@@ -337,6 +344,7 @@
             <fileset dir="${freecol.doc.dir}"
                      excludes="*.tex *.sty images/* specification.*" />
         </delete>
+    	<delete dir="${results.dir}"/>
         <delete quiet="true" file="${freecol.jar.file}"/>
         <delete quiet="true" file="${freecol.metaserver.jar.file}"/>
         <delete quiet="true" file="TESTS-TestSuites.xml"/>
@@ -385,22 +393,22 @@
              if you have a version of Ant prior to 1.6 on UNIX:
              export CLASSPATH=${CLASSPATH}:test/lib/junit.jar; ant testall
         -->
-        <junit printsummary="yes">
-            <classpath refid="test.run.classpath"/>
-            <formatter type="brief" usefile="false" />
-            <formatter type="plain" />
-            <test todir="${freecol.build.dir}" name="net.sf.freecol.${test}" />
-            <sysproperty key="java.awt.headless" value="true" />
-        </junit>
-        <echo message="For more detailed information about this test run see:"/>
-        <echo message="${freecol.build.dir}/TEST-net.sf.freecol.${test}.txt"/>
+	        <junit printsummary="yes">
+	            <classpath refid="test.run.classpath"/>
+	            <formatter type="brief" usefile="false" />
+	            <formatter type="plain" />
+	            <test todir="${freecol.build.dir}" name="net.sf.freecol.${test}" />
+	            <sysproperty key="java.awt.headless" value="true" />
+	        </junit>
+	        <echo message="For more detailed information about this test run see:"/>
+	        <echo message="${freecol.build.dir}/TEST-net.sf.freecol.${test}.txt"/>
     </target>
 
     <target name="testall" depends="build-unit-tests" unless="skip.dist.test"
             description="Runs all unit tests">
-        <delete dir="${freecol.build.dir}/report" />
-        <mkdir dir="${freecol.build.dir}/report"/>
-        <mkdir dir="${freecol.build.dir}/report/xml"/>
+        <delete dir="${freecol.build.dir}\report" />
+        <mkdir dir="${freecol.build.dir}\report"/>
+        <mkdir dir="${freecol.build.dir}\report\xml"/>
         <!-- if the next fails then here is the long answer:
              http://ant.apache.org/faq.html#delegating-classloader
              the short answer depends.
@@ -415,12 +423,13 @@
              if you have a version of Ant prior to 1.6 on UNIX:
              export CLASSPATH=${CLASSPATH}:test/lib/junit.jar; ant testall
         -->
+    	<jacoco:coverage destfile="${result.exec.file}">
         <junit printsummary="on" errorProperty="error.junit"
                failureProperty="error.junit" fork="yes" maxmemory="96M">
             <classpath refid="test.run.classpath"/>
             <formatter type="xml" />
 
-            <test todir="${freecol.build.dir}/report/xml"
+            <test todir="${freecol.build.dir}\report\xml"
                   name="net.sf.freecol.AllTests" fork="yes"/>
 
             <!--
@@ -430,15 +439,16 @@
             -->
             <sysproperty key="java.awt.headless" value="true" />
         </junit>
+        	</jacoco:coverage>
 
         <junitreport>
-            <fileset dir="${freecol.build.dir}/report/xml">
+            <fileset dir="${freecol.build.dir}\report\xml">
                 <include name="TEST-*.xml"/>
             </fileset>
-            <report todir="${freecol.build.dir}/report" />
+            <report todir="${freecol.build.dir}\report" />
         </junitreport>
 
-        <echo message="For detailed results of the test run see: ${freecol.build.dir}/report/index.html"/>
+        <echo message="For detailed results of the test run see: ${freecol.build.dir}\report\index.html"/>
 
         <fail if="error.junit" message="Automated Unit Tests failed."/>
     </target>
@@ -489,4 +499,32 @@
         </java>
     </target>
 
+	<target name="report" depends="testall">
+			<!-- Step 3: Create coverage report -->
+			<jacoco:report>
+
+				<!-- This task needs the collected execution data and ... -->
+				<executiondata>
+					<file file="${result.exec.file}" />
+				</executiondata>
+
+				<!-- the class files and optional source files ... -->
+				<structure name="JaCoCo Ant Example">
+					<classfiles>
+						<fileset dir="${result.classes.dir}" />
+					</classfiles>
+					<sourcefiles encoding="UTF-8">
+						<fileset dir="${src.dir}" />
+					</sourcefiles>
+				</structure>
+
+				<!-- to produce reports in different formats. -->
+				<html destdir="${result.report.dir}" />
+				<csv destfile="${result.report.dir}/report.csv" />
+				<xml destfile="${result.report.dir}/report.xml" />
+			</jacoco:report>
+		</target>
+
+
+	
 </project>
