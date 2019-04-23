@@ -32,8 +32,8 @@
               value="jars/miglayout-core-4.2.jar"/>
     <property name="cli.jar" value="jars/commons-cli-1.1.jar"/>
     <property name="cortado.jar" value="jars/cortado-0.6.0.jar"/>
-	<property name="result.exec.file" location="${result.dir}/jacoco.exec" />
 	<property name="result.dir" location="./build" />
+	<property name="result.exec.file" location="${result.dir}/jacoco.exec" />
 	<property name="result.classes.dir" location="${result.dir}/net" />
 	<property name="result.report.dir" location="${result.dir}/site/jacoco" />
 	<property name="src.dir" location="./src"/>
@@ -97,7 +97,7 @@
     </target>
 	
 	<taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
-			<classpath path="${basedir}/jars/jacoco-0.8.3/lib/jacocoant.jar" />
+			<classpath path="${basedir}/jars/jacocoant.jar" />
 	</taskdef>
 
     <!-- Compiles the java source files. -->

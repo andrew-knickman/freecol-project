@@ -9,6 +9,7 @@
 .project
 .settings
 bin
+bin/
 apache-ant-1.*
 bootstrap
 build
