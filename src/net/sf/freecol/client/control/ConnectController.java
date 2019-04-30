@@ -350,7 +350,7 @@ public final class ConnectController {
             return false;
         }
         
-        boolean setup = this.setupClientPostLogin(freeColClient, user, game, msg);
+        boolean setup = this.setupClientPostLogin(user, game, msg);
         
         return setup;
     }
