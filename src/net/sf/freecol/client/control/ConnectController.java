@@ -248,12 +248,11 @@ public final class ConnectController {
     /**
      * Setup client after logging in
      * 
-     * @param freeColClient The game client
      * @param user The name of the player to use.
      * @param game The entire game.
      * @param msg LoginMessage
      */
-    public boolean setupClientPostLogin(FreeColClient freeColClient, String user, Game game, LoginMessage msg) {
+    public boolean setupClientPostLogin(String user, Game game, LoginMessage msg) {
     	// This completes the client's view of the spec with options
         // obtained from the server difficulty.  It should not be
         // required in the client, to be removed later, when newTurn()
@@ -422,47 +421,47 @@ public final class ConnectController {
         GameState state = getGameState(host, port);
         if (state == null) return false;
         switch (state) {
-        case STARTING_GAME:
-            if (!login(FreeCol.getName(), host, port)) return false;
-            gui.showStartGamePanel(freeColClient.getGame(),
-                                   freeColClient.getMyPlayer(), false);
-            freeColClient.setSinglePlayer(false);
-            break;
-
-        case IN_GAME:
-            // Disable this check if you need to debug a multiplayer client.
-            if (FreeColDebugger.isInDebugMode(FreeColDebugger.DebugMode.MENUS)) {
-                gui.showErrorMessage("client.debugConnect");
-                return false;
-            }
-            List<String> names = getVacantPlayers(host, port);
-            if (names == null || names.isEmpty()) {
-                gui.showErrorMessage("client.noPlayers");
-                return false;
-            }
-
-            List<ChoiceItem<String>> choices = new ArrayList<>();
-            for (String n : names) {
-                String nam = Messages.message(StringTemplate
-                    .template("countryName")
-                    .add("%nation%", Messages.nameKey(n)));
-                choices.add(new ChoiceItem<>(nam, n));
-            }
-            String choice = gui.getChoice(null,
-                Messages.message("client.choicePlayer"),
-                "cancel", choices);
-            if (choice == null) return false; // User cancelled
-
-            if (!login(Messages.getRulerName(choice), host, port)) {
-                // login() shows error messages
-                return false;
-            }
-            freeColClient.setSinglePlayer(false);
-            break;
-
-        case ENDING_GAME: default:
-            gui.showErrorMessage("client.ending");
-            return false;
+	        case STARTING_GAME:
+	            if (!login(FreeCol.getName(), host, port)) return false;
+	            gui.showStartGamePanel(freeColClient.getGame(),
+	                                   freeColClient.getMyPlayer(), false);
+	            freeColClient.setSinglePlayer(false);
+	            break;
+	
+	        case IN_GAME:
+	            // Disable this check if you need to debug a multiplayer client.
+	            if (FreeColDebugger.isInDebugMode(FreeColDebugger.DebugMode.MENUS)) {
+	                gui.showErrorMessage("client.debugConnect");
+	                return false;
+	            }
+	            List<String> names = getVacantPlayers(host, port);
+	            if (names == null || names.isEmpty()) {
+	                gui.showErrorMessage("client.noPlayers");
+	                return false;
+	            }
+	
+	            List<ChoiceItem<String>> choices = new ArrayList<>();
+	            for (String n : names) {
+	                String nam = Messages.message(StringTemplate
+	                    .template("countryName")
+	                    .add("%nation%", Messages.nameKey(n)));
+	                choices.add(new ChoiceItem<>(nam, n));
+	            }
+	            String choice = gui.getChoice(null,
+	                Messages.message("client.choicePlayer"),
+	                "cancel", choices);
+	            if (choice == null) return false; // User cancelled
+	
+	            if (!login(Messages.getRulerName(choice), host, port)) {
+	                // login() shows error messages
+	                return false;
+	            }
+	            freeColClient.setSinglePlayer(false);
+	            break;
+	
+	        case ENDING_GAME: default:
+	            gui.showErrorMessage("client.ending");
+	            return false;
         }
         return true;
     }
