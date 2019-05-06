@@ -239,7 +239,7 @@ public class DiplomaticTrade extends FreeColObject {
 
     /**
      * ISSUE 9
-     * Commit 1
+     * Commit 1, 2
      * Extracted method from add(TradeItem newItem)
      * 
      * @param newItem the <code>TradeItem</code> to check for uniqueness.
@@ -276,12 +276,24 @@ public class DiplomaticTrade extends FreeColObject {
      */
     public void removeType(Class<? extends TradeItem> itemClass) {
         Iterator<TradeItem> itemIterator = items.iterator();
-        while (itemIterator.hasNext()) {
+        removeItems(itemClass, itemIterator);
+    }
+
+    /**
+     * ISSUE 9
+     * Commit 3
+     * Extracted method from removeType(Class<? extends TradeItem> itemClass)
+     * 
+     * @param itemClass the type of <code>TradeItem</code> to remove.
+     * @param itemIterator the type of <code>Iterator<TradeItem></code> to use for removal.
+     */
+	public void removeItems(Class<? extends TradeItem> itemClass, Iterator<TradeItem> itemIterator) {
+		while (itemIterator.hasNext()) {
             if (itemIterator.next().getClass() == itemClass) {
                 itemIterator.remove();
             }
         }
-    }
+	}
 
     /**
      * Remove all trade items from this agreement.
