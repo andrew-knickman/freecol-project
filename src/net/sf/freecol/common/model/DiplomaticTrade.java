@@ -239,6 +239,7 @@ public class DiplomaticTrade extends FreeColObject {
 
     /**
      * ISSUE 9
+     * Commit 1
      * Extracted method from add(TradeItem newItem)
      * 
      * @param newItem the <code>TradeItem</code> to check for uniqueness.
