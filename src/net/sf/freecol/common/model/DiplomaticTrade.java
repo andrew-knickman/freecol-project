@@ -100,13 +100,13 @@ public class DiplomaticTrade extends FreeColObject {
     public DiplomaticTrade(Game game, TradeContext context,
                            Player sender, Player recipient,
                            List<TradeItem> items, int version) {
-        setId("");
-        this.game = game;
+		this.game = game;
         this.context = context;
         this.sender = sender;
         this.recipient = recipient;
         this.status = TradeStatus.PROPOSE_TRADE;
         this.items.clear();
+        setId("");
         if (items != null) this.items.addAll(items);
         this.version = version;
     }
@@ -233,11 +233,21 @@ public class DiplomaticTrade extends FreeColObject {
      * @param newItem The <code>TradeItem</code> to add.
      */
     public void add(TradeItem newItem) {
-        if (newItem.isUnique()) {
-            removeType(newItem.getClass());
-        }
+        checkUniqueTradeItem(newItem);
         items.add(newItem);
     }
+
+    /**
+     * ISSUE 9
+     * Extracted method from add(TradeItem newItem)
+     * 
+     * @param newItem the <code>TradeItem</code> to check for uniqueness.
+     */
+	public void checkUniqueTradeItem(TradeItem newItem) {
+		if (newItem.isUnique()) {
+            removeType(newItem.getClass());
+        }
+	}
 
     /**
      * Remove a from the DiplomaticTrade.
