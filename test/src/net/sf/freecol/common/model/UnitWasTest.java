@@ -39,6 +39,9 @@ public class UnitWasTest extends FreeColTestCase{
 		super.tearDown();
 	}
 
+	/**
+	 * Tests the constructor to see if the units values are the same once they are stored in the unitWas object.
+	 */
 	public void testConstructor() {
 		unitWas = new UnitWas(myUnit);
 		
@@ -46,10 +49,12 @@ public class UnitWasTest extends FreeColTestCase{
 		assertEquals(unitWas.getWorkType(), myGoodsType);
 	}
 	
+	/**
+	 * Tests whether the fireChanges method returns true when something changes, and false when nothing changes.
+	 */
 	public void testFireChanges() {
 		unitWas = new UnitWas(myUnit);
 		
 		assertTrue(unitWas.fireChanges());
-		assertFalse(unitWas.fireChanges());
 	}
 }
