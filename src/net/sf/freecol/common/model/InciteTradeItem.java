@@ -181,19 +181,4 @@ public class InciteTradeItem extends TradeItem {
             .append(" ").append(victim.getId()).append("]");
         return sb.toString();
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getXMLTagName() { return getXMLElementTagName(); }
-
-    /**
-     * Gets the tag name of the root element representing this object.
-     *
-     * @return "inciteTradeItem".
-     */
-    public static String getXMLElementTagName() {
-        return "inciteTradeItem";
-    }
 }

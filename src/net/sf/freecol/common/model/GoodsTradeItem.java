@@ -206,19 +206,4 @@ public class GoodsTradeItem extends TradeItem {
             .append(Messages.getName(goods)).append("]");
         return sb.toString();
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getXMLTagName() { return getXMLElementTagName(); }
-
-    /**
-     * Gets the tag name of the root element representing this object.
-     *
-     * @return "goodsTradeItem".
-     */
-    public static String getXMLElementTagName() {
-        return "goodsTradeItem";
-    }
 }

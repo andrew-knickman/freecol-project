@@ -190,19 +190,4 @@ public class StanceTradeItem extends TradeItem {
 
         stance = xr.getAttribute(STANCE_TAG, Stance.class, (Stance)null);
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getXMLTagName() { return getXMLElementTagName(); }
-
-    /**
-     * Gets the tag name of the root element representing this object.
-     *
-     * @return "stanceTradeItem".
-     */
-    public static String getXMLElementTagName() {
-        return "stanceTradeItem";
-    }
 }

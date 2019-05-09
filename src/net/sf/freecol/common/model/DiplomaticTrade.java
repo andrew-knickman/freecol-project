@@ -512,6 +512,10 @@ public class DiplomaticTrade extends FreeColObject {
     protected void readChild(FreeColXMLReader xr) throws XMLStreamException {
         final String tag = xr.getLocalName();
 
+        if(TradeItem.getXMLElementTagName().equals(tag)){
+        	add(new TradeItem(game, xr));
+        }
+        
         if (ColonyTradeItem.getXMLElementTagName().equals(tag)) {
             add(new ColonyTradeItem(game, xr));
 
