@@ -37,7 +37,11 @@
 	<property name="result.classes.dir" location="${result.dir}/net" />
 	<property name="result.report.dir" location="${result.dir}/site/jacoco" />
 	<property name="src.dir" location="./src"/>
+	<property name="mockito" value="${basedir}/test/lib/Mockito"/>
 
+	<path id="mockito.classpath">
+		<fileset dir="${mockito}" includes="**/*.jar"/>
+	</path>
     <path id="libraries.classpath">
         <!-- MigLayout manager -->
         <pathelement location="${basedir}/${miglayout-swing.jar}"/>
@@ -58,11 +62,13 @@
     </path>
     <path id="test.build.classpath">
         <path refid="junit.classpath"/>
+    	<path refid="mockito.classpath"/>
         <path refid="libraries.classpath" />
      </path>
     <path id="test.run.classpath">
         <pathelement location="${freecol.build.dir}" />
         <path refid="junit.classpath"/>
+    	<path refid="mockito.classpath"/>
         <path refid="libraries.classpath" />
     </path>
 
