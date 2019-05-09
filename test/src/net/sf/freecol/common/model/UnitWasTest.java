@@ -1,6 +1,7 @@
 package net.sf.freecol.common.model;
 
 import net.sf.freecol.util.test.FreeColTestCase;
+import static org.mockito.Mockito.*;
 
 public class UnitWasTest extends FreeColTestCase{
 	private Unit myUnit;
@@ -10,6 +11,7 @@ public class UnitWasTest extends FreeColTestCase{
 	private Specification mySpecs;
 	private UnitType myType;
 	private Role myRole;
+	private GoodsType myGoodsType;
 	private static final int ROLE_COUNT = 1;
 	private static final int MOVES_LEFT = 2;
 	
@@ -21,19 +23,33 @@ public class UnitWasTest extends FreeColTestCase{
 		myType = new UnitType(unitID, mySpecs);
 		myUnit = new Unit(testGame);
 		myRole = new Role(unitID, mySpecs);
+		myGoodsType = new GoodsType(unitID, mySpecs);
 		myUnit.setId(unitID);
 		myUnit.setType(myType);
 		myUnit.setRole(myRole);
 		myUnit.setRoleCount(ROLE_COUNT);
-		myUnit.setWorkType(new GoodsType(unitID, mySpecs));
+		myUnit.setWorkType(myGoodsType);
 		myUnit.setMovesLeft(MOVES_LEFT);
+	}
+	
+	@Override
+	protected void tearDown() throws Exception {
+		myUnit = null;
+		unitWas = null;
+		super.tearDown();
 	}
 
 	public void testConstructor() {
 		unitWas = new UnitWas(myUnit);
 		
-		assertEquals(myUnit.getId(), unitID);
-		assertEquals(myUnit.getType(), myType);
-		assertEquals(myUnit.getRole(), myRole);
+		assertEquals(unitWas.getUnit(), myUnit);
+		assertEquals(unitWas.getWorkType(), myGoodsType);
+	}
+	
+	public void testFireChanges() {
+		unitWas = new UnitWas(myUnit);
+		
+		assertTrue(unitWas.fireChanges());
+		assertFalse(unitWas.fireChanges());
 	}
 }
