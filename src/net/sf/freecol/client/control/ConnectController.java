@@ -244,16 +244,47 @@ public final class ConnectController {
 
         return items;
     }
-    
+
     /**
-     * Setup client after logging in
-     * 
+     * Starts the client and connects to <i>host:port</i>.
+     *
+     * Public for the test suite.
+     *
      * @param user The name of the player to use.
-     * @param game The entire game.
-     * @param msg LoginMessage
+     * @param host The name of the machine running the
+     *            <code>FreeColServer</code>.
+     * @param port The port to use when connecting to the host.
+     * @return True if the login succeeds.
      */
-    public boolean setupClientPostLogin(String user, Game game, LoginMessage msg) {
-    	// This completes the client's view of the spec with options
+    public boolean login(String user, String host, int port) {
+        freeColClient.setMapEditor(false);
+ 
+        freeColClient.askServer().disconnect();
+
+        String message = null;
+        try {
+            if (!freeColClient.askServer().connect(FreeCol.CLIENT_THREAD + user,
+                    host, port, freeColClient.getPreGameInputHandler())) {
+                message = "repeated failure";
+            }
+        } catch (Exception e) {
+            message = e.getMessage();
+        }
+        if (message != null) {
+            gui.showErrorMessage("server.couldNotConnect", message);
+            return false;
+        }
+        logger.info("Connected to " + host + ":" + port);
+
+        LoginMessage msg = freeColClient.askServer().login(user,
+            FreeCol.getVersion());
+        Game game;
+        if (msg == null || (game = msg.getGame()) == null) {
+            gui.showErrorMessage("server.couldNotLogin");
+            return false;
+        }
+
+        // This completes the client's view of the spec with options
         // obtained from the server difficulty.  It should not be
         // required in the client, to be removed later, when newTurn()
         // only runs in the server
@@ -300,60 +331,6 @@ public final class ConnectController {
         return true;
     }
 
-    /**
-     * Starts the client and connects to <i>host:port</i>.
-     *
-     * Public for the test suite.
-     *
-     * @param user The name of the player to use.
-     * @param host The name of the machine running the
-     *            <code>FreeColServer</code>.
-     * @param port The port to use when connecting to the host.
-     * @return True if the login succeeds.
-     */
-    public boolean login(String user, String host, int port) {
-        freeColClient.setMapEditor(false);
- 
-        freeColClient.askServer().disconnect();
-        
-        boolean connected = false;
-
-        try {
-        	boolean connection = freeColClient
-    			.askServer()
-    			.connect(
-        			FreeCol.CLIENT_THREAD + user,
-                    host,
-                    port,
-                    freeColClient.getPreGameInputHandler()
-				);
-        	
-            if (!connection) {
-                gui.showErrorMessage("server.couldNotConnect", "repeated failure");
-                connected = false;
-            }
-        } catch (Exception e) {
-        	connected = false;
-        }
-        
-        if (!connected) {
-            return false;
-        }
-        
-        logger.info("Connected to " + host + ":" + port);
-
-        LoginMessage msg = freeColClient.askServer().login(user, FreeCol.getVersion());
-        Game game;
-        
-        if (msg == null || (game = msg.getGame()) == null) {
-            gui.showErrorMessage("server.couldNotLogin");
-            return false;
-        }
-        
-        boolean setup = this.setupClientPostLogin(user, game, msg);
-        
-        return setup;
-    }
 
     //
     // There are several ways to start a game.

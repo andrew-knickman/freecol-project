@@ -75,8 +75,7 @@ public final class PreGameInputHandler extends InputHandler {
      * @return The reply.
      */
     @Override
-    public synchronized Element handle(Connection connection,
-                                       Element element) {
+    public synchronized Element handle(Connection connection, Element element) {
         String type = (element == null) ? "(null)" : element.getTagName();
         
         ArrayList<String> validMethods = (ArrayList<String>) Arrays.asList(new String[] {
@@ -87,11 +86,16 @@ public final class PreGameInputHandler extends InputHandler {
         
         Element ret = null;
         
+        
         if(validMethods.contains(type)) {
         	try {
-        	Method method = this.getClass().getMethod(type, element.getClass());
-        	
-        	ret = (Element) method.invoke(this, element);
+	        	if(type.equals("multiple")) {
+	        		Method method = PreGameInputHandler.class.getMethod(type, Connection.class, Element.class);
+	        		ret = (Element) method.invoke(this, connection, element);
+	        	} else {
+	        		Method method = PreGameInputHandler.class.getMethod(type, Element.class);
+	        		ret = (Element) method.invoke(this, element);
+	        	}
         	} catch(Exception e) {
         		ret = unknown(element);
         	}
