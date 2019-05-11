@@ -244,47 +244,16 @@ public final class ConnectController {
 
         return items;
     }
-
+    
     /**
-     * Starts the client and connects to <i>host:port</i>.
-     *
-     * Public for the test suite.
-     *
+     * Setup client after logging in
+     * 
      * @param user The name of the player to use.
-     * @param host The name of the machine running the
-     *            <code>FreeColServer</code>.
-     * @param port The port to use when connecting to the host.
-     * @return True if the login succeeds.
+     * @param game The entire game.
+     * @param msg LoginMessage
      */
-    public boolean login(String user, String host, int port) {
-        freeColClient.setMapEditor(false);
- 
-        freeColClient.askServer().disconnect();
-
-        String message = null;
-        try {
-            if (!freeColClient.askServer().connect(FreeCol.CLIENT_THREAD + user,
-                    host, port, freeColClient.getPreGameInputHandler())) {
-                message = "repeated failure";
-            }
-        } catch (Exception e) {
-            message = e.getMessage();
-        }
-        if (message != null) {
-            gui.showErrorMessage("server.couldNotConnect", message);
-            return false;
-        }
-        logger.info("Connected to " + host + ":" + port);
-
-        LoginMessage msg = freeColClient.askServer().login(user,
-            FreeCol.getVersion());
-        Game game;
-        if (msg == null || (game = msg.getGame()) == null) {
-            gui.showErrorMessage("server.couldNotLogin");
-            return false;
-        }
-
-        // This completes the client's view of the spec with options
+    public boolean setupClientPostLogin(String user, Game game, LoginMessage msg) {
+    	// This completes the client's view of the spec with options
         // obtained from the server difficulty.  It should not be
         // required in the client, to be removed later, when newTurn()
         // only runs in the server
@@ -329,6 +298,61 @@ public final class ConnectController {
         // All done.
         freeColClient.setLoggedIn(true);
         return true;
+    }
+
+    /**
+     * Starts the client and connects to <i>host:port</i>.
+     *
+     * Public for the test suite.
+     *
+     * @param user The name of the player to use.
+     * @param host The name of the machine running the
+     *            <code>FreeColServer</code>.
+     * @param port The port to use when connecting to the host.
+     * @return True if the login succeeds.
+     */
+    public boolean login(String user, String host, int port) {
+        freeColClient.setMapEditor(false);
+ 
+        freeColClient.askServer().disconnect();
+        
+        boolean connected = false;
+
+        try {
+        	boolean connection = freeColClient
+    			.askServer()
+    			.connect(
+        			FreeCol.CLIENT_THREAD + user,
+                    host,
+                    port,
+                    freeColClient.getPreGameInputHandler()
+				);
+        	
+            if (!connection) {
+                gui.showErrorMessage("server.couldNotConnect", "repeated failure");
+                connected = false;
+            }
+        } catch (Exception e) {
+        	connected = false;
+        }
+        
+        if (!connected) {
+            return false;
+        }
+        
+        logger.info("Connected to " + host + ":" + port);
+
+        LoginMessage msg = freeColClient.askServer().login(user, FreeCol.getVersion());
+        Game game;
+        
+        if (msg == null || (game = msg.getGame()) == null) {
+            gui.showErrorMessage("server.couldNotLogin");
+            return false;
+        }
+        
+        boolean setup = this.setupClientPostLogin(user, game, msg);
+        
+        return setup;
     }
 
     //
@@ -381,6 +405,90 @@ public final class ConnectController {
         return joinMultiplayerGame(freeColServer.getHost(),
                                    freeColServer.getPort());
     }
+    
+    /**
+     * Join an existing multiplayer game with starting state.
+     *
+     * @param host The name of the machine running the server.
+     * @param port The port to use when connecting to the host.
+     * @return True if the game starts successfully.
+     */
+    private boolean jmpStartingState(String host, int port) {
+    	if (!login(FreeCol.getName(), host, port)) return false;
+        gui.showStartGamePanel(freeColClient.getGame(),
+                               freeColClient.getMyPlayer(), false);
+        freeColClient.setSinglePlayer(false);
+        
+        return true;
+    }
+    
+    /**
+     * Join an existing multiplayer game with in-game state.
+     *
+     * @param host The name of the machine running the server.
+     * @param port The port to use when connecting to the host.
+     * @return True if the game starts successfully.
+     */
+    private boolean jmpInGameState(String host, int port) {
+    	// Disable this check if you need to debug a multiplayer client.
+        if (FreeColDebugger.isInDebugMode(FreeColDebugger.DebugMode.MENUS)) {
+            gui.showErrorMessage("client.debugConnect");
+            return false;
+        }
+        List<String> names = getVacantPlayers(host, port);
+        if (names == null || names.isEmpty()) {
+            gui.showErrorMessage("client.noPlayers");
+            return false;
+        }
+
+        List<ChoiceItem<String>> choices = new ArrayList<>();
+        for (String n : names) {
+            String nam = Messages.message(StringTemplate
+                .template("countryName")
+                .add("%nation%", Messages.nameKey(n)));
+            choices.add(new ChoiceItem<>(nam, n));
+        }
+        String choice = gui.getChoice(null,
+            Messages.message("client.choicePlayer"),
+            "cancel", choices);
+        if (choice == null) return false; // User cancelled
+
+        if (!login(Messages.getRulerName(choice), host, port)) {
+            // login() shows error messages
+            return false;
+        }
+        freeColClient.setSinglePlayer(false);
+        
+        return true;
+    }
+    
+    /**
+     * Switch current multiplayer game state.
+     *
+     * @param host The name of the machine running the server.
+     * @param port The port to use when connecting to the host.
+     * @return True if the game starts successfully.
+     */
+    private boolean switchGameState(GameState state, String host, int port) {
+        boolean success = true;
+    	
+    	switch (state) {
+	        case STARTING_GAME:
+	            success = this.jmpStartingState(host, port);
+	            break;
+	
+	        case IN_GAME:
+	        	success = this.jmpInGameState(host, port);
+	            break;
+	
+	        case ENDING_GAME:
+        	default:
+	            gui.showErrorMessage("client.ending");
+	            return false;
+	    }
+    	
+	    return success;
+    }
 
     /**
      * Join an existing multiplayer game.
@@ -393,78 +501,27 @@ public final class ConnectController {
         freeColClient.setMapEditor(false);
 
         if (freeColClient.isLoggedIn()) logout(true);
-
+        
         GameState state = getGameState(host, port);
-        if (state == null) return false;
-        switch (state) {
-        case STARTING_GAME:
-            if (!login(FreeCol.getName(), host, port)) return false;
-            gui.showStartGamePanel(freeColClient.getGame(),
-                                   freeColClient.getMyPlayer(), false);
-            freeColClient.setSinglePlayer(false);
-            break;
-
-        case IN_GAME:
-            // Disable this check if you need to debug a multiplayer client.
-            if (FreeColDebugger.isInDebugMode(FreeColDebugger.DebugMode.MENUS)) {
-                gui.showErrorMessage("client.debugConnect");
-                return false;
-            }
-            List<String> names = getVacantPlayers(host, port);
-            if (names == null || names.isEmpty()) {
-                gui.showErrorMessage("client.noPlayers");
-                return false;
-            }
-
-            List<ChoiceItem<String>> choices = new ArrayList<>();
-            for (String n : names) {
-                String nam = Messages.message(StringTemplate
-                    .template("countryName")
-                    .add("%nation%", Messages.nameKey(n)));
-                choices.add(new ChoiceItem<>(nam, n));
-            }
-            String choice = gui.getChoice(null,
-                Messages.message("client.choicePlayer"),
-                "cancel", choices);
-            if (choice == null) return false; // User cancelled
-
-            if (!login(Messages.getRulerName(choice), host, port)) {
-                // login() shows error messages
-                return false;
-            }
-            freeColClient.setSinglePlayer(false);
-            break;
-
-        case ENDING_GAME: default:
-            gui.showErrorMessage("client.ending");
-            return false;
+        
+        if (state == null) {
+        	return false;
         }
-        return true;
+        
+        return this.switchGameState(state, host, port);
     }
-
+    
     /**
-     * Starts a new single player game by connecting to the server.
-     *
-     * FIXME: connect client/server directly (not using network-classes)
-     *
+     * Load the player mods into the specification that is about to be
+     * used to initialize the server.
+     * 
      * @param spec The <code>Specification</code> for the game.
      * @param skip Skip the start game panel.
-     * @return True if the game starts successfully.
+     * @return True if successful.
      */
-    public boolean startSinglePlayerGame(Specification spec, boolean skip) {
-        freeColClient.setMapEditor(false);
-
-        if (freeColClient.isLoggedIn()) logout(true);
-
-        if (!unblockServer(FreeCol.getServerPort())) return false;
-
-        // Load the player mods into the specification that is about to be
-        // used to initialize the server.
-        //
-        // ATM we only allow mods in single player games.
-        // FIXME: allow in stand alone server starts?
-        List<FreeColModFile> mods = freeColClient.getClientOptions()
-            .getActiveMods();
+    private boolean loadPlayerMods(Specification spec, boolean skip) {
+    	List<FreeColModFile> mods = freeColClient.getClientOptions()
+                .getActiveMods();
         spec.loadMods(mods);    
         Messages.loadActiveModMessageBundle(mods, FreeCol.getLocale());
         FreeColServer freeColServer = startServer(false, true, spec, -1);
@@ -486,7 +543,41 @@ public final class ConnectController {
             gui.showStartGamePanel(freeColClient.getGame(),
                                    freeColClient.getMyPlayer(), true);
         }
+        
         return true;
+    }
+
+    /**
+     * Starts a new single player game by connecting to the server.
+     *
+     * FIXME: connect client/server directly (not using network-classes)
+     *
+     * @param spec The <code>Specification</code> for the game.
+     * @param skip Skip the start game panel.
+     * @return True if the game starts successfully.
+     */
+    public boolean startSinglePlayerGame(Specification spec, boolean skip) {
+        freeColClient.setMapEditor(false);
+
+        if (freeColClient.isLoggedIn()) logout(true);
+
+        if (!unblockServer(FreeCol.getServerPort())) return false;
+
+        boolean loadedMods = this.loadPlayerMods(spec, skip);
+        
+        return loadedMods;
+    }
+    
+    private FreeColSavegameFile loadFile(File file) {
+    	try {
+            return new FreeColSavegameFile(file);
+        } catch (IOException ioe) {
+            SwingUtilities.invokeLater(new ErrorJob(FreeCol.badLoad(file)));
+            logger.log(Level.WARNING, "Could not open save file: "
+                + file.getName());
+        }
+    	
+    	return null;
     }
 
     /**
@@ -499,43 +590,15 @@ public final class ConnectController {
     public boolean startSavedGame(File file, final String userMsg) {
         freeColClient.setMapEditor(false);
 
-        class ErrorJob implements Runnable {
-            private final String message;
-            private final StringTemplate template;
-            
-            ErrorJob(String message) {
-                this.message = message;
-                this.template = null;
-            }
-
-            ErrorJob(StringTemplate template) {
-                this.message = null;
-                this.template = template;
-            }
-            
-            @Override
-            public void run() {
-                gui.closeMenus();
-                if (this.template != null) {
-                    gui.showErrorMessage(template);
-                } else {
-                    gui.showErrorMessage(message);
-                }
-            }
-        }
-
         final ClientOptions options = freeColClient.getClientOptions();
         final boolean defaultSinglePlayer;
         final boolean defaultPublicServer;
-        FreeColSavegameFile fis = null;
-        try {
-            fis = new FreeColSavegameFile(file);
-        } catch (IOException ioe) {
-            SwingUtilities.invokeLater(new ErrorJob(FreeCol.badLoad(file)));
-            logger.log(Level.WARNING, "Could not open save file: "
-                + file.getName());
-            return false;
+        FreeColSavegameFile fis = this.loadFile(file);
+        
+        if(fis == null) {
+        	return false;
         }
+        
         options.merge(fis);
         options.fixClientOptions();
 
@@ -581,6 +644,7 @@ public final class ConnectController {
         boolean show = sgo == ClientOptions.SHOW_SAVEGAME_SETTINGS_ALWAYS
             || (!defaultSinglePlayer
                 && sgo == ClientOptions.SHOW_SAVEGAME_SETTINGS_MULTIPLAYER);
+        
         if (show) {
             if (!gui.showLoadingSavegameDialog(defaultPublicServer,
                                                defaultSinglePlayer))
@@ -600,7 +664,23 @@ public final class ConnectController {
         gui.showStatusPanel(Messages.message("status.loadingGame"));
 
         final File theFile = file;
-        Runnable loadGameJob = () -> {
+        Runnable loadGameJob = this.getGameJob(theFile, userMsg, port, name, singlePlayer);
+        freeColClient.setWork(loadGameJob);
+        return true;
+    }
+    
+    /**
+     * Load game job.
+     *
+     * @param theFile the file
+     * @param userMsg the user message
+     * @param port the port
+     * @param name the name
+     * @param singlePlayer the single player
+     * @return the game job
+     */
+    private Runnable getGameJob(File theFile, final String userMsg, int port, String name, final boolean singlePlayer) {
+    	Runnable loadGameJob = () -> {
             FreeColServer freeColServer = null;
             StringTemplate err = null;
             try {
@@ -651,10 +731,35 @@ public final class ConnectController {
                 SwingUtilities.invokeLater(new ErrorJob(err));
             }
         };
-        freeColClient.setWork(loadGameJob);
-        return true;
+        
+        return loadGameJob;
     }
+    
+    class ErrorJob implements Runnable {
+        private final String message;
+        private final StringTemplate template;
+        
+        ErrorJob(String message) {
+            this.message = message;
+            this.template = null;
+        }
 
+        ErrorJob(StringTemplate template) {
+            this.message = null;
+            this.template = template;
+        }
+        
+        @Override
+        public void run() {
+            gui.closeMenus();
+            if (this.template != null) {
+                gui.showErrorMessage(template);
+            } else {
+                gui.showErrorMessage(message);
+            }
+        }
+    }
+    
     /**
      * Reconnects to the server.
      *
