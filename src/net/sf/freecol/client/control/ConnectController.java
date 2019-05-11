@@ -470,27 +470,24 @@ public final class ConnectController {
      * @return True if the game starts successfully.
      */
     private boolean switchGameState(GameState state, String host, int port) {
-        
+        boolean success = true;
+    	
     	switch (state) {
 	        case STARTING_GAME:
-	            boolean successStart = this.jmpStartingState(host, port);
-	            if(!successStart) {
-	            	return false;
-	            }
+	            success = this.jmpStartingState(host, port);
 	            break;
 	
 	        case IN_GAME:
-	            boolean successInGame = this.jmpInGameState(host, port);
-	            if(!successInGame) {
-	            	return false;
-	            }
+	        	success = this.jmpInGameState(host, port);
 	            break;
 	
-	        case ENDING_GAME: default:
+	        case ENDING_GAME:
+        	default:
 	            gui.showErrorMessage("client.ending");
 	            return false;
 	    }
-	    return true;
+    	
+	    return success;
     }
 
     /**
@@ -570,6 +567,18 @@ public final class ConnectController {
         
         return loadedMods;
     }
+    
+    private FreeColSavegameFile loadFile(File file) {
+    	try {
+            return new FreeColSavegameFile(file);
+        } catch (IOException ioe) {
+            SwingUtilities.invokeLater(new ErrorJob(FreeCol.badLoad(file)));
+            logger.log(Level.WARNING, "Could not open save file: "
+                + file.getName());
+        }
+    	
+    	return null;
+    }
 
     /**
      * Loads and starts a game from the given file.
@@ -581,43 +590,15 @@ public final class ConnectController {
     public boolean startSavedGame(File file, final String userMsg) {
         freeColClient.setMapEditor(false);
 
-        class ErrorJob implements Runnable {
-            private final String message;
-            private final StringTemplate template;
-            
-            ErrorJob(String message) {
-                this.message = message;
-                this.template = null;
-            }
-
-            ErrorJob(StringTemplate template) {
-                this.message = null;
-                this.template = template;
-            }
-            
-            @Override
-            public void run() {
-                gui.closeMenus();
-                if (this.template != null) {
-                    gui.showErrorMessage(template);
-                } else {
-                    gui.showErrorMessage(message);
-                }
-            }
-        }
-
         final ClientOptions options = freeColClient.getClientOptions();
         final boolean defaultSinglePlayer;
         final boolean defaultPublicServer;
-        FreeColSavegameFile fis = null;
-        try {
-            fis = new FreeColSavegameFile(file);
-        } catch (IOException ioe) {
-            SwingUtilities.invokeLater(new ErrorJob(FreeCol.badLoad(file)));
-            logger.log(Level.WARNING, "Could not open save file: "
-                + file.getName());
-            return false;
+        FreeColSavegameFile fis = this.loadFile(file);
+        
+        if(fis == null) {
+        	return false;
         }
+        
         options.merge(fis);
         options.fixClientOptions();
 
@@ -663,6 +644,7 @@ public final class ConnectController {
         boolean show = sgo == ClientOptions.SHOW_SAVEGAME_SETTINGS_ALWAYS
             || (!defaultSinglePlayer
                 && sgo == ClientOptions.SHOW_SAVEGAME_SETTINGS_MULTIPLAYER);
+        
         if (show) {
             if (!gui.showLoadingSavegameDialog(defaultPublicServer,
                                                defaultSinglePlayer))
@@ -682,7 +664,23 @@ public final class ConnectController {
         gui.showStatusPanel(Messages.message("status.loadingGame"));
 
         final File theFile = file;
-        Runnable loadGameJob = () -> {
+        Runnable loadGameJob = this.getGameJob(theFile, userMsg, port, name, singlePlayer);
+        freeColClient.setWork(loadGameJob);
+        return true;
+    }
+    
+    /**
+     * Load game job.
+     *
+     * @param theFile the file
+     * @param userMsg the user message
+     * @param port the port
+     * @param name the name
+     * @param singlePlayer the single player
+     * @return the game job
+     */
+    private Runnable getGameJob(File theFile, final String userMsg, int port, String name, final boolean singlePlayer) {
+    	Runnable loadGameJob = () -> {
             FreeColServer freeColServer = null;
             StringTemplate err = null;
             try {
@@ -733,10 +731,35 @@ public final class ConnectController {
                 SwingUtilities.invokeLater(new ErrorJob(err));
             }
         };
-        freeColClient.setWork(loadGameJob);
-        return true;
+        
+        return loadGameJob;
     }
+    
+    class ErrorJob implements Runnable {
+        private final String message;
+        private final StringTemplate template;
+        
+        ErrorJob(String message) {
+            this.message = message;
+            this.template = null;
+        }
 
+        ErrorJob(StringTemplate template) {
+            this.message = null;
+            this.template = template;
+        }
+        
+        @Override
+        public void run() {
+            gui.closeMenus();
+            if (this.template != null) {
+                gui.showErrorMessage(template);
+            } else {
+                gui.showErrorMessage(message);
+            }
+        }
+    }
+    
     /**
      * Reconnects to the server.
      *
