@@ -413,11 +413,13 @@ public final class ConnectController {
      * @param port The port to use when connecting to the host.
      * @return True if the game starts successfully.
      */
-    private void jmpStartingState(String host, int port) {
+    private boolean jmpStartingState(String host, int port) {
     	if (!login(FreeCol.getName(), host, port)) return false;
         gui.showStartGamePanel(freeColClient.getGame(),
                                freeColClient.getMyPlayer(), false);
         freeColClient.setSinglePlayer(false);
+        
+        return true;
     }
     
     /**
@@ -471,12 +473,15 @@ public final class ConnectController {
         
     	switch (state) {
 	        case STARTING_GAME:
-	            this.jmpStartingState(host, port);
+	            boolean successStart = this.jmpStartingState(host, port);
+	            if(!successStart) {
+	            	return false;
+	            }
 	            break;
 	
 	        case IN_GAME:
-	            boolean success = this.jmpInGameState(host, port);
-	            if(!success) {
+	            boolean successInGame = this.jmpInGameState(host, port);
+	            if(!successInGame) {
 	            	return false;
 	            }
 	            break;
