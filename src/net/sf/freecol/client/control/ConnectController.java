@@ -405,6 +405,88 @@ public final class ConnectController {
         return joinMultiplayerGame(freeColServer.getHost(),
                                    freeColServer.getPort());
     }
+    
+    /**
+     * Join an existing multiplayer game with starting state.
+     *
+     * @param host The name of the machine running the server.
+     * @param port The port to use when connecting to the host.
+     * @return True if the game starts successfully.
+     */
+    private void jmpStartingState(String host, int port) {
+    	if (!login(FreeCol.getName(), host, port)) return false;
+        gui.showStartGamePanel(freeColClient.getGame(),
+                               freeColClient.getMyPlayer(), false);
+        freeColClient.setSinglePlayer(false);
+    }
+    
+    /**
+     * Join an existing multiplayer game with in-game state.
+     *
+     * @param host The name of the machine running the server.
+     * @param port The port to use when connecting to the host.
+     * @return True if the game starts successfully.
+     */
+    private boolean jmpInGameState(String host, int port) {
+    	// Disable this check if you need to debug a multiplayer client.
+        if (FreeColDebugger.isInDebugMode(FreeColDebugger.DebugMode.MENUS)) {
+            gui.showErrorMessage("client.debugConnect");
+            return false;
+        }
+        List<String> names = getVacantPlayers(host, port);
+        if (names == null || names.isEmpty()) {
+            gui.showErrorMessage("client.noPlayers");
+            return false;
+        }
+
+        List<ChoiceItem<String>> choices = new ArrayList<>();
+        for (String n : names) {
+            String nam = Messages.message(StringTemplate
+                .template("countryName")
+                .add("%nation%", Messages.nameKey(n)));
+            choices.add(new ChoiceItem<>(nam, n));
+        }
+        String choice = gui.getChoice(null,
+            Messages.message("client.choicePlayer"),
+            "cancel", choices);
+        if (choice == null) return false; // User cancelled
+
+        if (!login(Messages.getRulerName(choice), host, port)) {
+            // login() shows error messages
+            return false;
+        }
+        freeColClient.setSinglePlayer(false);
+        
+        return true;
+    }
+    
+    /**
+     * Switch current multiplayer game state.
+     *
+     * @param host The name of the machine running the server.
+     * @param port The port to use when connecting to the host.
+     * @return True if the game starts successfully.
+     */
+    private boolean switchGameState(GameState state, String host, int port) {
+        
+    	switch (state) {
+	        case STARTING_GAME:
+	            this.jmpStartingState(host, port);
+	            break;
+	
+	        case IN_GAME:
+	            boolean success = this.jmpInGameState(host, port);
+	            if(!success) {
+	            	return false;
+	            }
+	            break;
+	
+	        case ENDING_GAME: default:
+	            gui.showErrorMessage("client.ending");
+	            return false;
+	    }
+	    return true;
+    }
 
     /**
      * Join an existing multiplayer game.
@@ -417,78 +499,27 @@ public final class ConnectController {
         freeColClient.setMapEditor(false);
 
         if (freeColClient.isLoggedIn()) logout(true);
-
+        
         GameState state = getGameState(host, port);
-        if (state == null) return false;
-        switch (state) {
-	        case STARTING_GAME:
-	            if (!login(FreeCol.getName(), host, port)) return false;
-	            gui.showStartGamePanel(freeColClient.getGame(),
-	                                   freeColClient.getMyPlayer(), false);
-	            freeColClient.setSinglePlayer(false);
-	            break;
-	
-	        case IN_GAME:
-	            // Disable this check if you need to debug a multiplayer client.
-	            if (FreeColDebugger.isInDebugMode(FreeColDebugger.DebugMode.MENUS)) {
-	                gui.showErrorMessage("client.debugConnect");
-	                return false;
-	            }
-	            List<String> names = getVacantPlayers(host, port);
-	            if (names == null || names.isEmpty()) {
-	                gui.showErrorMessage("client.noPlayers");
-	                return false;
-	            }
-	
-	            List<ChoiceItem<String>> choices = new ArrayList<>();
-	            for (String n : names) {
-	                String nam = Messages.message(StringTemplate
-	                    .template("countryName")
-	                    .add("%nation%", Messages.nameKey(n)));
-	                choices.add(new ChoiceItem<>(nam, n));
-	            }
-	            String choice = gui.getChoice(null,
-	                Messages.message("client.choicePlayer"),
-	                "cancel", choices);
-	            if (choice == null) return false; // User cancelled
-	
-	            if (!login(Messages.getRulerName(choice), host, port)) {
-	                // login() shows error messages
-	                return false;
-	            }
-	            freeColClient.setSinglePlayer(false);
-	            break;
-	
-	        case ENDING_GAME: default:
-	            gui.showErrorMessage("client.ending");
-	            return false;
+        
+        if (state == null) {
+        	return false;
         }
-        return true;
+        
+        return this.switchGameState(state, host, port);
     }
-
+    
     /**
-     * Starts a new single player game by connecting to the server.
-     *
-     * FIXME: connect client/server directly (not using network-classes)
-     *
+     * Load the player mods into the specification that is about to be
+     * used to initialize the server.
+     * 
      * @param spec The <code>Specification</code> for the game.
      * @param skip Skip the start game panel.
-     * @return True if the game starts successfully.
+     * @return True if successful.
      */
-    public boolean startSinglePlayerGame(Specification spec, boolean skip) {
-        freeColClient.setMapEditor(false);
-
-        if (freeColClient.isLoggedIn()) logout(true);
-
-        if (!unblockServer(FreeCol.getServerPort())) return false;
-
-        // Load the player mods into the specification that is about to be
-        // used to initialize the server.
-        //
-        // ATM we only allow mods in single player games.
-        // FIXME: allow in stand alone server starts?
-        List<FreeColModFile> mods = freeColClient.getClientOptions()
-            .getActiveMods();
+    private boolean loadPlayerMods(Specification spec, boolean skip) {
+    	List<FreeColModFile> mods = freeColClient.getClientOptions()
+                .getActiveMods();
         spec.loadMods(mods);    
         Messages.loadActiveModMessageBundle(mods, FreeCol.getLocale());
         FreeColServer freeColServer = startServer(false, true, spec, -1);
@@ -510,7 +541,29 @@ public final class ConnectController {
             gui.showStartGamePanel(freeColClient.getGame(),
                                    freeColClient.getMyPlayer(), true);
         }
+        
         return true;
+    }
+
+    /**
+     * Starts a new single player game by connecting to the server.
+     *
+     * FIXME: connect client/server directly (not using network-classes)
+     *
+     * @param spec The <code>Specification</code> for the game.
+     * @param skip Skip the start game panel.
+     * @return True if the game starts successfully.
+     */
+    public boolean startSinglePlayerGame(Specification spec, boolean skip) {
+        freeColClient.setMapEditor(false);
+
+        if (freeColClient.isLoggedIn()) logout(true);
+
+        if (!unblockServer(FreeCol.getServerPort())) return false;
+
+        boolean loadedMods = this.loadPlayerMods(spec, skip);
+        
+        return loadedMods;
     }
 
     /**
