@@ -20,6 +20,10 @@
 package net.sf.freecol.client.control;
 
 import java.awt.Color;
+import java.awt.List;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.logging.Logger;
 
 import javax.swing.SwingUtilities;
@@ -71,42 +75,33 @@ public final class PreGameInputHandler extends InputHandler {
      * @return The reply.
      */
     @Override
-    public synchronized Element handle(Connection connection,
-                                       Element element) {
+    public synchronized Element handle(Connection connection, Element element) {
         String type = (element == null) ? "(null)" : element.getTagName();
-        return ("addPlayer".equals(type))
-            ? addPlayer(element)
-            : ("chat".equals(type))
-            ? chat(element)
-            : ("disconnect".equals(type))
-            ? disconnect(element)
-            : ("error".equals(type))
-            ? error(element)
-            : ("logout".equals(type))
-            ? logout(element)
-            : ("multiple".equals(type))
-            ? multiple(connection, element)
-            : ("playerReady".equals(type))
-            ? playerReady(element)
-            : ("removePlayer".equals(type))
-            ? removePlayer(element)
-            : ("setAvailable".equals(type))
-            ? setAvailable(element)
-            : ("startGame".equals(type))
-            ? startGame(element)
-            : ("updateColor".equals(type))
-            ? updateColor(element)
-            : ("updateGame".equals(type))
-            ? updateGame(element)
-            : ("updateGameOptions".equals(type))
-            ? updateGameOptions(element)
-            : ("updateMapGeneratorOptions".equals(type))
-            ? updateMapGeneratorOptions(element)
-            : ("updateNation".equals(type))
-            ? updateNation(element)
-            : ("updateNationType".equals(type))
-            ? updateNationType(element)
-            : unknown(element);
+        
+        ArrayList<String> validMethods = (ArrayList<String>) Arrays.asList(new String[] {
+    		"addPlayer", "chat", "disconnect", "error", "logout", "multiple", "playerReady",
+    		"removePlayer", "setAvailable", "startGame", "updateColor", "updateGame", "updateGameOptions",
+    		"updateMapGeneratorOptions", "updateNation", "updateNationType"
+        });
+        
+        Element ret = null;
+        
+        
+        if(validMethods.contains(type)) {
+        	try {
+	        	if(type.equals("multiple")) {
+	        		Method method = PreGameInputHandler.class.getMethod(type, Connection.class, Element.class);
+	        		ret = (Element) method.invoke(this, connection, element);
+	        	} else {
+	        		Method method = PreGameInputHandler.class.getMethod(type, Element.class);
+	        		ret = (Element) method.invoke(this, element);
+	        	}
+        	} catch(Exception e) {
+        		ret = unknown(element);
+        	}
+        }
+        
+        return ret;
     }
 
     /**
