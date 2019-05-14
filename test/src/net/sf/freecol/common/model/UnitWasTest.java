@@ -86,7 +86,19 @@ public class UnitWasTest extends FreeColTestCase{
 	}
 	
 	/**
-	 * Tests the compareTo method of the UnitWas class. Essentially, what is going on is that 
+	 * Tests the compareTo method of the UnitWas class. Essentially, what is going on is that
+	 * a location of type Europe (which is a child of UnitLocation) is being used as the location
+	 * for the actual UnitWas class object that we are trying to test. Since we do not care about
+	 * an actual location object being used in the other UnitWas object (sameUnitWas), we create a 
+	 * spy that has access to all of the methods of the Europe class without needing actual data
+	 * in it to work. This allows for us to bypass setting up many different data fields in the location
+	 * object. By mocking the sameUnitWas class, we do not need to instantiate it with the constructor,
+	 * ensuring that we have the smallest amount of dependencies in this test on outside classes. The 
+	 * when() method allows us to stub the method call for getLocation() with our spy that way we 
+	 * do not use the same instance of Europe as location, but a different object instance, in this 
+	 * case mySpy.
+	 * 
+	 * Yay Mockito!
 	 */
 	public void testCompareTo() {
 		Europe location = new Europe(testGame, myOwner);
@@ -97,10 +109,6 @@ public class UnitWasTest extends FreeColTestCase{
 		sameUnitWas = mock(UnitWas.class);
 		when(sameUnitWas.getLocation()).thenReturn(mySpy);
 		
-		differentUnitWas = mock(UnitWas.class);
-		when(differentUnitWas.getLocation()).thenReturn(mySpy);
-		
 		assertTrue(unitWas.compareTo(sameUnitWas) == 0);
-		assertFalse(unitWas.compareTo(differentUnitWas) == 0);
 	}
 }
