@@ -178,4 +178,14 @@ public class UnitTradeItem extends TradeItem {
 
         unit = xr.getAttribute(getGame(), UNIT_TAG, Unit.class, (Unit)null);
     }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getXMLTagName() { return getXMLElementTagName(); }
+    
+    public static String getXMLElementTagName() {
+        return "unitTradeItem";
+    }
 }

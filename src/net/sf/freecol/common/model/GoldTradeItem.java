@@ -174,4 +174,14 @@ public class GoldTradeItem extends TradeItem {
         sb.append("[").append(getId()).append(" ").append(gold).append("]");
         return sb.toString();
     }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getXMLTagName() { return getXMLElementTagName(); }
+    
+    public static String getXMLElementTagName() {
+        return "goldTradeItem";
+    }
 }

@@ -190,4 +190,14 @@ public class ColonyTradeItem extends TradeItem {
             .append(" ").append(colonyName).append("]");
         return sb.toString();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getXMLTagName() { return getXMLElementTagName(); }
+    
+    public static String getXMLElementTagName() {
+        return "colonyTradeItem";
+    }
 }

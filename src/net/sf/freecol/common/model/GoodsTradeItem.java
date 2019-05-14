@@ -194,6 +194,16 @@ public class GoodsTradeItem extends TradeItem {
             super.readChild(xr);
         }
     }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getXMLTagName() { return getXMLElementTagName(); }
+    
+    public static String getXMLElementTagName() {
+        return "goodsTradeItem";
+    }
 
     /**
      * {@inheritDoc}

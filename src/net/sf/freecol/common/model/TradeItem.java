@@ -32,8 +32,7 @@ import net.sf.freecol.common.util.Utils;
  */
 public abstract class TradeItem extends FreeColObject {
 
-
-	/** The game this TradeItem belongs to. */
+    /** The game this TradeItem belongs to. */
     protected final Game game;
 
     /** The player who is to provide this item. */
@@ -278,21 +277,6 @@ public abstract class TradeItem extends FreeColObject {
     }
 
     /**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String getXMLTagName() { return getXMLElementTagName(); }
-
-    /**
-	 * Gets the tag name of the root element representing this object.
-	 *
-	 * @return "colonyTradeItem".
-	 */
-	public static String getXMLElementTagName() {
-	    return "colonyTradeItem";
-	}
-	
-	/**
      * {@inheritDoc}
      */
     @Override
@@ -307,6 +291,17 @@ public abstract class TradeItem extends FreeColObject {
     }
     
     /**
-     * 
+     * {@inheritDoc}
      */
+    @Override
+    public String getXMLTagName() { return getXMLElementTagName(); }
+    
+    /**
+     * Gets the tag name of the root element representing this object.
+     *
+     * @return "tradeItem".
+     */
+    public static String getXMLElementTagName() {
+        return "tradeItem";
+    }
 }
