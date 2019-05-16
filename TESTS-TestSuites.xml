@@ -352,7 +352,7 @@
 
       <testcase classname="net.sf.freecol.common.model.SpecificationTest" name="testNationTypes" time="0.001" />
 
-      <testcase classname="net.sf.freecol.common.model.SpecificationTest" name="testGetDefaultUnitType" time="0.002" />
+      <testcase classname="net.sf.freecol.common.model.SpecificationTest" name="testGetDefaultUnitType" time="0.001" />
 
       <testcase classname="net.sf.freecol.common.model.SpecificationTest" name="testGoodsTypes" time="0.0" />
 
@@ -432,7 +432,7 @@
 
       <testcase classname="net.sf.freecol.common.model.ColonyProductionTest" name="testNoHorsesOverProduction" time="0.002" />
 
-      <testcase classname="net.sf.freecol.common.model.ColonyProductionTest" name="testBellNetProduction" time="0.004" />
+      <testcase classname="net.sf.freecol.common.model.ColonyProductionTest" name="testBellNetProduction" time="0.003" />
 
       <testcase classname="net.sf.freecol.common.model.ColonyProductionTest" name="testProductionMap" time="0.001" />
 
@@ -456,7 +456,7 @@
 
       <testcase classname="net.sf.freecol.common.model.CombatTest" name="testSpanishAgainstNatives" time="0.002" />
 
-      <testcase classname="net.sf.freecol.common.model.CombatTest" name="testColonistAttackedByVeteran" time="0.002" />
+      <testcase classname="net.sf.freecol.common.model.CombatTest" name="testColonistAttackedByVeteran" time="0.001" />
 
       <testcase classname="net.sf.freecol.common.model.CombatTest" name="testAttackIgnoresMovementPoints" time="0.001" />
 
@@ -490,7 +490,7 @@
 
       <testcase classname="net.sf.freecol.common.model.GoodsTest" name="testSetGetAmount" time="0.001" />
 
-      <testcase classname="net.sf.freecol.common.model.GoodsTest" name="testGoodsGameLocationIntInt" time="0.001" />
+      <testcase classname="net.sf.freecol.common.model.GoodsTest" name="testGoodsGameLocationIntInt" time="0.002" />
 
       <testcase classname="net.sf.freecol.common.model.GoodsTest" name="testToString" time="0.03" />
 
@@ -514,13 +514,13 @@
 
       <testcase classname="net.sf.freecol.common.model.GoodsTest" name="testSetOwner" time="0.001" />
 
-      <testcase classname="net.sf.freecol.common.model.GoodsContainerTest" name="testContainer" time="0.003" />
+      <testcase classname="net.sf.freecol.common.model.GoodsContainerTest" name="testContainer" time="0.002" />
 
       <testcase classname="net.sf.freecol.common.model.IndianSettlementTest" name="testAutomaticEquipBraves" time="0.002" />
 
       <testcase classname="net.sf.freecol.common.model.IndianSettlementTest" name="testSettlementDoesNotOwnWaterTiles" time="0.002" />
 
-      <testcase classname="net.sf.freecol.common.model.IndianSettlementTest" name="testTradeGoodsWithSetlement" time="0.002" />
+      <testcase classname="net.sf.freecol.common.model.IndianSettlementTest" name="testTradeGoodsWithSetlement" time="0.001" />
 
       <testcase classname="net.sf.freecol.common.model.IndividualFatherTest" name="testPaine" time="0.005" />
 
@@ -584,7 +584,7 @@
 
       <testcase classname="net.sf.freecol.common.model.MarketTest" name="testTransactionListeners" time="0.0" />
 
-      <testcase classname="net.sf.freecol.common.model.MarketTest" name="testInitialMarket" time="0.001" />
+      <testcase classname="net.sf.freecol.common.model.MarketTest" name="testInitialMarket" time="0.0" />
 
       <testcase classname="net.sf.freecol.common.model.ModelMessageTest" name="testDefaultId" time="0.002" />
 
@@ -616,9 +616,9 @@
 
       <testcase classname="net.sf.freecol.common.model.ModifierTest" name="testCombineAdditiveModifiers" time="0.0" />
 
-      <testcase classname="net.sf.freecol.common.model.MonarchTest" name="testTaxActionChoices" time="0.017" />
+      <testcase classname="net.sf.freecol.common.model.MonarchTest" name="testTaxActionChoices" time="0.005" />
 
-      <testcase classname="net.sf.freecol.common.model.MonarchTest" name="testSerialize" time="0.001" />
+      <testcase classname="net.sf.freecol.common.model.MonarchTest" name="testSerialize" time="0.0" />
 
       <testcase classname="net.sf.freecol.common.model.MonarchTest" name="testRaiseTax" time="0.04">
           <error message="Could not initialize plugin: interface org.mockito.plugins.MockMaker (alternate: null)" type="java.lang.IllegalStateException">java.lang.IllegalStateException: Could not initialize plugin: interface org.mockito.plugins.MockMaker (alternate: null)
@@ -659,7 +659,7 @@ Caused by: java.lang.ClassNotFoundException: net.bytebuddy.dynamic.loading.Class
 
       <testcase classname="net.sf.freecol.common.model.MovementTest" name="testMoveAlongRoad" time="0.006" />
 
-      <testcase classname="net.sf.freecol.common.model.MovementTest" name="testMoveAlongRiver" time="0.002" />
+      <testcase classname="net.sf.freecol.common.model.MovementTest" name="testMoveAlongRiver" time="0.001" />
 
       <testcase classname="net.sf.freecol.common.model.MovementTest" name="testMoveFromPlainsToHills" time="0.001" />
 
@@ -667,7 +667,7 @@ Caused by: java.lang.ClassNotFoundException: net.bytebuddy.dynamic.loading.Class
 
       <testcase classname="net.sf.freecol.common.model.MovementTest" name="testScoutIndianSettlement" time="0.002" />
 
-      <testcase classname="net.sf.freecol.common.model.MovementTest" name="testScoutColony" time="0.003" />
+      <testcase classname="net.sf.freecol.common.model.MovementTest" name="testScoutColony" time="0.002" />
 
       <testcase classname="net.sf.freecol.common.model.NationTypeTest" name="testSettlementType" time="0.0" />
 
@@ -679,17 +679,17 @@ Caused by: java.lang.ClassNotFoundException: net.bytebuddy.dynamic.loading.Class
 
       <testcase classname="net.sf.freecol.common.model.NationTypeTest" name="testHasType" time="0.0" />
 
-      <testcase classname="net.sf.freecol.common.model.NationTypeTest" name="testStartingUnits" time="0.002" />
+      <testcase classname="net.sf.freecol.common.model.NationTypeTest" name="testStartingUnits" time="0.001" />
 
-      <testcase classname="net.sf.freecol.common.model.PlayerTest" name="testAddAnotherPlayersUnit" time="0.002" />
+      <testcase classname="net.sf.freecol.common.model.PlayerTest" name="testAddAnotherPlayersUnit" time="0.001" />
 
-      <testcase classname="net.sf.freecol.common.model.PlayerTest" name="testFreecolPlayers" time="0.004" />
+      <testcase classname="net.sf.freecol.common.model.PlayerTest" name="testFreecolPlayers" time="0.003" />
 
       <testcase classname="net.sf.freecol.common.model.PlayerTest" name="testTension" time="0.001" />
 
-      <testcase classname="net.sf.freecol.common.model.PlayerTest" name="testUnits" time="0.002" />
+      <testcase classname="net.sf.freecol.common.model.PlayerTest" name="testUnits" time="0.001" />
 
-      <testcase classname="net.sf.freecol.common.model.PlayerTest" name="testClassicPlayers" time="0.002" />
+      <testcase classname="net.sf.freecol.common.model.PlayerTest" name="testClassicPlayers" time="0.001" />
 
       <testcase classname="net.sf.freecol.common.model.ProductionTypeTest" name="testOtherBuildings" time="0.0" />
 
@@ -707,7 +707,7 @@ Caused by: java.lang.ClassNotFoundException: net.bytebuddy.dynamic.loading.Class
 
       <testcase classname="net.sf.freecol.common.model.ProductionTypeTest" name="testSwamp" time="0.0" />
 
-      <testcase classname="net.sf.freecol.common.model.ProductionTypeTest" name="testCoatProduction" time="0.0" />
+      <testcase classname="net.sf.freecol.common.model.ProductionTypeTest" name="testCoatProduction" time="0.001" />
 
       <testcase classname="net.sf.freecol.common.model.ProductionTypeTest" name="testLake" time="0.0" />
 
@@ -715,7 +715,7 @@ Caused by: java.lang.ClassNotFoundException: net.bytebuddy.dynamic.loading.Class
 
       <testcase classname="net.sf.freecol.common.model.ProductionTypeTest" name="testPrairie" time="0.0" />
 
-      <testcase classname="net.sf.freecol.common.model.ProductionTypeTest" name="testWetlandForest" time="0.0" />
+      <testcase classname="net.sf.freecol.common.model.ProductionTypeTest" name="testWetlandForest" time="0.001" />
 
       <testcase classname="net.sf.freecol.common.model.ProductionTypeTest" name="testGrassland" time="0.0" />
 
@@ -723,7 +723,7 @@ Caused by: java.lang.ClassNotFoundException: net.bytebuddy.dynamic.loading.Class
 
       <testcase classname="net.sf.freecol.common.model.ProductionTypeTest" name="testCrossProduction" time="0.0" />
 
-      <testcase classname="net.sf.freecol.common.model.ProductionTypeTest" name="testGreatRiver" time="0.0" />
+      <testcase classname="net.sf.freecol.common.model.ProductionTypeTest" name="testGreatRiver" time="0.001" />
 
       <testcase classname="net.sf.freecol.common.model.ProductionTypeTest" name="testToolsProduction" time="0.0" />
 
@@ -763,7 +763,7 @@ Caused by: java.lang.ClassNotFoundException: net.bytebuddy.dynamic.loading.Class
 
       <testcase classname="net.sf.freecol.common.model.RoleTest" name="testRoleComparator" time="0.0" />
 
-      <testcase classname="net.sf.freecol.common.model.RoleTest" name="testMilitaryRoles" time="0.002" />
+      <testcase classname="net.sf.freecol.common.model.RoleTest" name="testMilitaryRoles" time="0.001" />
 
       <testcase classname="net.sf.freecol.common.model.RoleTest" name="testGoodsDifference" time="0.001" />
 
@@ -787,7 +787,7 @@ Caused by: java.lang.ClassNotFoundException: net.bytebuddy.dynamic.loading.Class
 
       <testcase classname="net.sf.freecol.common.model.ScopeTest" name="testAbilityScope" time="0.0" />
 
-      <testcase classname="net.sf.freecol.common.model.ScopeTest" name="testEquality" time="0.0" />
+      <testcase classname="net.sf.freecol.common.model.ScopeTest" name="testEquality" time="0.001" />
 
       <testcase classname="net.sf.freecol.common.model.ScopeTest" name="testMatchesNull" time="0.0" />
 
@@ -815,7 +815,7 @@ Caused by: java.lang.ClassNotFoundException: net.bytebuddy.dynamic.loading.Class
 
       <testcase classname="net.sf.freecol.common.model.SettlementTest" name="testLineOfSight" time="0.002" />
 
-      <testcase classname="net.sf.freecol.common.model.SettlementTest" name="testSettlementRadius" time="0.003" />
+      <testcase classname="net.sf.freecol.common.model.SettlementTest" name="testSettlementRadius" time="0.002" />
 
       <testcase classname="net.sf.freecol.common.model.SettlementTest" name="testCanImproveUnitMilitaryRole" time="0.004" />
 
@@ -835,7 +835,7 @@ Caused by: java.lang.ClassNotFoundException: net.bytebuddy.dynamic.loading.Class
 
       <testcase classname="net.sf.freecol.common.model.TileImprovementTest" name="testEquality" time="0.0" />
 
-      <testcase classname="net.sf.freecol.common.model.TileItemContainerTest" name="testCopyFromWithEveryThing" time="0.002" />
+      <testcase classname="net.sf.freecol.common.model.TileItemContainerTest" name="testCopyFromWithEveryThing" time="0.001" />
 
       <testcase classname="net.sf.freecol.common.model.TileTest" name="testTileTypeChangeProduction" time="0.0" />
 
@@ -857,7 +857,7 @@ Caused by: java.lang.ClassNotFoundException: net.bytebuddy.dynamic.loading.Class
 
       <testcase classname="net.sf.freecol.common.model.TileTest" name="testGetWorkAmount" time="0.005" />
 
-      <testcase classname="net.sf.freecol.common.model.TileTest" name="testGetBestDisembarkTile" time="0.004" />
+      <testcase classname="net.sf.freecol.common.model.TileTest" name="testGetBestDisembarkTile" time="0.002" />
 
       <testcase classname="net.sf.freecol.common.model.TileTest" name="testColonyImprovements" time="0.001" />
 
@@ -885,11 +885,11 @@ Caused by: java.lang.ClassNotFoundException: net.bytebuddy.dynamic.loading.Class
 
       <testcase classname="net.sf.freecol.common.model.UnitTest" name="testCopy" time="0.002" />
 
-      <testcase classname="net.sf.freecol.common.model.UnitTest" name="testDefaultRole" time="0.0" />
+      <testcase classname="net.sf.freecol.common.model.UnitTest" name="testDefaultRole" time="0.001" />
 
       <testcase classname="net.sf.freecol.common.model.UnitTest" name="testMissionary" time="0.004" />
 
-      <testcase classname="net.sf.freecol.common.model.UnitTest" name="testUnitCanBuildColony" time="0.002" />
+      <testcase classname="net.sf.freecol.common.model.UnitTest" name="testUnitCanBuildColony" time="0.001" />
 
       <testcase classname="net.sf.freecol.common.model.UnitTest" name="testCarrierOwnerChange" time="0.001" />
 
@@ -901,7 +901,7 @@ Caused by: java.lang.ClassNotFoundException: net.bytebuddy.dynamic.loading.Class
 
       <testcase classname="net.sf.freecol.common.model.UnitTest" name="testCanAdd" time="0.0" />
 
-      <testcase classname="net.sf.freecol.common.model.UnitTest" name="testUnitLocationAfterBuildingColony" time="0.002" />
+      <testcase classname="net.sf.freecol.common.model.UnitTest" name="testUnitLocationAfterBuildingColony" time="0.001" />
 
       <testcase classname="net.sf.freecol.common.model.UnitTypeChangeTest" name="testEmptyScope" time="0.001" />
 
@@ -913,7 +913,7 @@ Caused by: java.lang.ClassNotFoundException: net.bytebuddy.dynamic.loading.Class
 
       <testcase classname="net.sf.freecol.common.model.UnitWasTest" name="testFireChanges" time="0.011" />
 
-      <testcase classname="net.sf.freecol.common.model.UnitWasTest" name="testConstructor" time="0.001" />
+      <testcase classname="net.sf.freecol.common.model.UnitWasTest" name="testConstructor" time="0.002" />
 
       <testcase classname="net.sf.freecol.common.utils.UtilsTest" name="testComparator" time="0.0" />
 
@@ -953,7 +953,7 @@ Caused by: java.lang.ClassNotFoundException: net.bytebuddy.dynamic.loading.Class
 
       <testcase classname="net.sf.freecol.server.ai.ColonyPlanTest" name="testGetBestWorker" time="0.063" />
 
-      <testcase classname="net.sf.freecol.server.ai.ColonyPlanTest" name="testBestImprovements" time="0.002" />
+      <testcase classname="net.sf.freecol.server.ai.ColonyPlanTest" name="testBestImprovements" time="0.015" />
 
       <testcase classname="net.sf.freecol.server.ai.ColonyPlanTest" name="testNoBuildRawMatTiles" time="0.037" />
 
@@ -985,7 +985,7 @@ Caused by: java.lang.ClassNotFoundException: net.bytebuddy.dynamic.loading.Class
 
       <testcase classname="net.sf.freecol.server.ai.mission.ScoutingMissionTest" name="testHorsesLost" time="0.089" />
 
-      <testcase classname="net.sf.freecol.server.ai.mission.TransportMissionTest" name="testGetNextStopAlreadyAtDestination" time="0.134" />
+      <testcase classname="net.sf.freecol.server.ai.mission.TransportMissionTest" name="testGetNextStopAlreadyAtDestination" time="0.051" />
 
       <testcase classname="net.sf.freecol.server.ai.mission.TransportMissionTest" name="testGetDefaultDestination" time="0.044" />
 
@@ -1129,7 +1129,7 @@ Caused by: java.lang.ClassNotFoundException: net.bytebuddy.dynamic.loading.Class
 
       <testcase classname="net.sf.freecol.server.model.ServerColonyTest" name="testAvoidStarvation" time="0.023" />
 
-      <testcase classname="net.sf.freecol.server.model.ServerColonyTest" name="testNoBuildingMaterialsProductionWhenBuildingNothing" time="0.003" />
+      <testcase classname="net.sf.freecol.server.model.ServerColonyTest" name="testNoBuildingMaterialsProductionWhenBuildingNothing" time="0.002" />
 
       <testcase classname="net.sf.freecol.server.model.ServerColonyTest" name="testFoodConsumption" time="0.021" />
 
