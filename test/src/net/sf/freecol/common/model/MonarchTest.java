@@ -113,7 +113,6 @@ public class MonarchTest extends FreeColTestCase {
     	Monarch monarch = new Monarch(getStandardGame(), player);
     	Random rand = new Random();
     	
-    	int tax = monarch.raiseTax(rand);
-    	System.out.println(tax);
+    	assertTrue(monarch.raiseTax(rand) > 0);
     }
 }
