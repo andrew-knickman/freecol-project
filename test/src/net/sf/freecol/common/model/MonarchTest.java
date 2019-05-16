@@ -115,4 +115,15 @@ public class MonarchTest extends FreeColTestCase {
     	
     	assertTrue(monarch.raiseTax(rand) > 0);
     }
+    
+    public void testLowerTax() {
+    	Player player = mock(Player.class);
+    	when(player.getTax()).thenReturn(10);
+    	//Specification spec = mock(Specification.class);
+    	//when(spec.get)
+    	Monarch monarch = new Monarch(getStandardGame(), player);
+    	Random rand = new Random();
+    	
+    	assertTrue(monarch.lowerTax(rand) < 10);
+    }
 }
