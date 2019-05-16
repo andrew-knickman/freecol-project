@@ -19,8 +19,14 @@
 
 package net.sf.freecol.common.model;
 
+import static org.mockito.Mockito.*;
+
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
 import java.io.StringWriter;
 import java.util.List;
+import java.util.Random;
 
 import net.sf.freecol.common.io.FreeColXMLWriter;
 import net.sf.freecol.common.model.Colony;
@@ -99,4 +105,15 @@ public class MonarchTest extends FreeColTestCase {
         return false;
     }
 
+    public void testRaiseTax() {
+    	Player player = mock(Player.class);
+    	when(player.getTax()).thenReturn(1);
+    	//Specification spec = mock(Specification.class);
+    	//when(spec.get)
+    	Monarch monarch = new Monarch(getStandardGame(), player);
+    	Random rand = new Random();
+    	
+    	int tax = monarch.raiseTax(rand);
+    	System.out.println(tax);
+    }
 }
