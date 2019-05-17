@@ -21,7 +21,7 @@ import org.w3c.dom.Element;
  * @author Andrew Knickman
  * @version $Revision: 1.0 $
  */
-public class DiplomaticTradeTest {
+public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the DiplomaticTrade(Game,Element) constructor test.
 	 *
@@ -32,7 +32,7 @@ public class DiplomaticTradeTest {
 	@Test
 	public void testDiplomaticTrade_1()
 		throws Exception {
-		Game game = new Game(new IIOMetadataNode(), "");
+		Game game = getGame();
 		Element element = new IIOMetadataNode();
 
 		DiplomaticTrade result = new DiplomaticTrade(game, element);
@@ -55,7 +55,7 @@ public class DiplomaticTradeTest {
 	@Test
 	public void testDiplomaticTrade_2()
 		throws Exception {
-		Game game = new Game(new IIOMetadataNode(), "");
+		Game game = getGame();
 		DiplomaticTrade.TradeContext context = DiplomaticTrade.TradeContext.CONTACT;
 		Player sender = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
 		Player recipient = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
@@ -82,7 +82,7 @@ public class DiplomaticTradeTest {
 	@Test
 	public void testDiplomaticTrade_3()
 		throws Exception {
-		Game game = new Game(new IIOMetadataNode(), "");
+		Game game = getGame();
 		DiplomaticTrade.TradeContext context = DiplomaticTrade.TradeContext.CONTACT;
 		Player sender = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
 		Player recipient = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
