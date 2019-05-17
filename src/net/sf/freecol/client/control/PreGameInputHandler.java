@@ -71,42 +71,46 @@ public final class PreGameInputHandler extends InputHandler {
      * @return The reply.
      */
     @Override
-    public synchronized Element handle(Connection connection,
-                                       Element element) {
+    public synchronized Element handle(Connection connection, Element element) {
         String type = (element == null) ? "(null)" : element.getTagName();
-        return ("addPlayer".equals(type))
-            ? addPlayer(element)
-            : ("chat".equals(type))
-            ? chat(element)
-            : ("disconnect".equals(type))
-            ? disconnect(element)
-            : ("error".equals(type))
-            ? error(element)
-            : ("logout".equals(type))
-            ? logout(element)
-            : ("multiple".equals(type))
-            ? multiple(connection, element)
-            : ("playerReady".equals(type))
-            ? playerReady(element)
-            : ("removePlayer".equals(type))
-            ? removePlayer(element)
-            : ("setAvailable".equals(type))
-            ? setAvailable(element)
-            : ("startGame".equals(type))
-            ? startGame(element)
-            : ("updateColor".equals(type))
-            ? updateColor(element)
-            : ("updateGame".equals(type))
-            ? updateGame(element)
-            : ("updateGameOptions".equals(type))
-            ? updateGameOptions(element)
-            : ("updateMapGeneratorOptions".equals(type))
-            ? updateMapGeneratorOptions(element)
-            : ("updateNation".equals(type))
-            ? updateNation(element)
-            : ("updateNationType".equals(type))
-            ? updateNationType(element)
-            : unknown(element);
+        
+        switch(type) {
+        	case "addPlayer":
+        		return addPlayer(element);
+        	case "chat":
+        		return chat(element);
+        	case "disconnect":
+        		return disconnect(element);
+        	case "error":
+        		return error(element);
+        	case "logout":
+        		return logout(element);
+        	case "multiple":
+        		return multiple(connection, element);
+        	case "playerReady":
+    			return playerReady(element);
+        	case "removePlayer":
+        		return removePlayer(element);
+        	case "setAvailable":
+        		return setAvailable(element);
+        	case "startGame":
+        		return startGame(element);
+        	case "updateColor":
+    			return updateColor(element);
+        	case "updateGame":
+        		return updateGame(element);
+        	case "updateGameOptions":
+        		return updateGameOptions(element);
+        	case "updateMapGeneratorOptions":
+        		return updateMapGeneratorOptions(element);
+        	case "updateNation":
+        		return updateNation(element);
+        	case "updateNationType":
+        		return updateNationType(element);
+    		
+        }
+            
+        return unknown(element);
     }
 
     /**
