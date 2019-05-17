@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.io.StringWriter;
 import java.io.Writer;
 import net.sf.freecol.common.io.FreeColXMLWriter;
+import net.sf.freecol.common.model.DiplomaticTrade.TradeContext;
+
 import java.util.ArrayList;
 import net.sf.freecol.common.io.FreeColXMLReader;
 import java.util.Iterator;
@@ -22,16 +24,61 @@ import org.w3c.dom.Element;
  * @version $Revision: 1.0 $
  */
 public class DiplomaticTradeTest extends FreeColTestCase{
+	
+	
+	/**NEED TESTS FOR:
+	 * 
+	 * DiplomaticTrade(Game game, TradeContext context,
+                           Player sender, Player recipient,
+                           List<TradeItem> items, int version)
+	 * Constructor(Game game, Element element)
+	 * getContext
+	 * getStatus
+	 * setStatus
+	 * getSender
+	 * setSender
+	 * getRecipient
+	 * setRecipient
+	 * getOtherPlayer
+	 * getSendMessage
+	 * getReceiveMessage
+	 * add
+	 * remove(TradeItem newItem)
+	 * remove(int index)
+	 * removeType
+	 * clear
+	 * getTradeItems
+	 * isEmpty
+	 * iterator
+	 * getItemsGivenBy
+	 * getStance
+	 * getColoniesGivenBy
+	 * getGoldGivenBy
+	 * getGoodGivenBy
+	 * getVictim
+	 * getUnitsGivenBy
+	 * getVersion
+	 * incrementVersion
+	 * writeAttributes?
+	 * writeChildren?
+	 * readAttributes?
+	 * readChildren?
+	 * readChild
+	 * toString
+	 * getXMLTagName
+	 * getXMLElementTagName
+	 */
+	
 	/**
 	 * Run the DiplomaticTrade(Game,Element) constructor test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testDiplomaticTrade_1()
-		throws Exception {
+		throws FreeColException {
 		Game game = getGame();
 		Element element = new IIOMetadataNode();
 
@@ -48,17 +95,17 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the DiplomaticTrade(Game,TradeContext,Player,Player,List<TradeItem>,int) constructor test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testDiplomaticTrade_2()
-		throws Exception {
+		throws FreeColException {
 		Game game = getGame();
 		DiplomaticTrade.TradeContext context = DiplomaticTrade.TradeContext.CONTACT;
-		Player sender = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
-		Player recipient = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
+		Player sender = new Player(getGame(), new IIOMetadataNode());
+		Player recipient = new Player(getGame(), new IIOMetadataNode());
 		List<TradeItem> items = new ArrayList<TradeItem>();
 		int version = 1;
 
@@ -75,17 +122,17 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the DiplomaticTrade(Game,TradeContext,Player,Player,List<TradeItem>,int) constructor test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testDiplomaticTrade_3()
-		throws Exception {
+		throws FreeColException {
 		Game game = getGame();
 		DiplomaticTrade.TradeContext context = DiplomaticTrade.TradeContext.CONTACT;
-		Player sender = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
-		Player recipient = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
+		Player sender = new Player(getGame(), new IIOMetadataNode());
+		Player recipient = new Player(getGame(), new IIOMetadataNode());
 		List<TradeItem> items = null;
 		int version = 1;
 
@@ -102,17 +149,17 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void add(TradeItem) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testAdd_1()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
-		TradeItem newItem = new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes())));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		TradeItem newItem = new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes())));
 
 		fixture.add(newItem);
 
@@ -126,17 +173,17 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void add(TradeItem) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testAdd_2()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
-		TradeItem newItem = new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes())));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		TradeItem newItem = new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes())));
 
 		fixture.add(newItem);
 
@@ -150,14 +197,14 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void clear() method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testClear_1()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
 
 		fixture.clear();
@@ -172,17 +219,17 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the List<Colony> getColoniesGivenBy(Player) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testGetColoniesGivenBy_1()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
-		Player player = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		Player player = new Player(getGame(), new IIOMetadataNode());
 
 		List<Colony> result = fixture.getColoniesGivenBy(player);
 
@@ -197,17 +244,17 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the List<Colony> getColoniesGivenBy(Player) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testGetColoniesGivenBy_2()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
-		Player player = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		Player player = new Player(getGame(), new IIOMetadataNode());
 
 		List<Colony> result = fixture.getColoniesGivenBy(player);
 
@@ -222,17 +269,17 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the List<Colony> getColoniesGivenBy(Player) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testGetColoniesGivenBy_3()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
-		Player player = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		Player player = new Player(getGame(), new IIOMetadataNode());
 
 		List<Colony> result = fixture.getColoniesGivenBy(player);
 
@@ -247,17 +294,17 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the List<Colony> getColoniesGivenBy(Player) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testGetColoniesGivenBy_4()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
-		Player player = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		Player player = new Player(getGame(), new IIOMetadataNode());
 
 		List<Colony> result = fixture.getColoniesGivenBy(player);
 
@@ -272,16 +319,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the DiplomaticTrade.TradeContext getContext() method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testGetContext_1()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 
 		DiplomaticTrade.TradeContext result = fixture.getContext();
 
@@ -296,17 +343,17 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the int getGoldGivenBy(Player) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testGetGoldGivenBy_1()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
-		Player player = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		Player player = new Player(getGame(), new IIOMetadataNode());
 
 		int result = fixture.getGoldGivenBy(player);
 
@@ -321,17 +368,17 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the int getGoldGivenBy(Player) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testGetGoldGivenBy_2()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
-		Player player = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		Player player = new Player(getGame(), new IIOMetadataNode());
 
 		int result = fixture.getGoldGivenBy(player);
 
@@ -346,17 +393,17 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the List<Goods> getGoodsGivenBy(Player) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testGetGoodsGivenBy_1()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
-		Player player = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		Player player = new Player(getGame(), new IIOMetadataNode());
 
 		List<Goods> result = fixture.getGoodsGivenBy(player);
 
@@ -371,17 +418,17 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the List<Goods> getGoodsGivenBy(Player) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testGetGoodsGivenBy_2()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
-		Player player = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		Player player = new Player(getGame(), new IIOMetadataNode());
 
 		List<Goods> result = fixture.getGoodsGivenBy(player);
 
@@ -396,17 +443,17 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the List<Goods> getGoodsGivenBy(Player) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testGetGoodsGivenBy_3()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
-		Player player = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		Player player = new Player(getGame(), new IIOMetadataNode());
 
 		List<Goods> result = fixture.getGoodsGivenBy(player);
 
@@ -421,17 +468,17 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the List<Goods> getGoodsGivenBy(Player) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testGetGoodsGivenBy_4()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
-		Player player = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		Player player = new Player(getGame(), new IIOMetadataNode());
 
 		List<Goods> result = fixture.getGoodsGivenBy(player);
 
@@ -446,17 +493,17 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the List<TradeItem> getItemsGivenBy(Player) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testGetItemsGivenBy_1()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
-		Player player = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		Player player = new Player(getGame(), new IIOMetadataNode());
 
 		List<TradeItem> result = fixture.getItemsGivenBy(player);
 
@@ -471,17 +518,17 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the Player getOtherPlayer(Player) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testGetOtherPlayer_1()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
-		Player player = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		Player player = new Player(getGame(), new IIOMetadataNode());
 
 		Player result = fixture.getOtherPlayer(player);
 
@@ -496,17 +543,17 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the Player getOtherPlayer(Player) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testGetOtherPlayer_2()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
-		Player player = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		Player player = new Player(getGame(), new IIOMetadataNode());
 
 		Player result = fixture.getOtherPlayer(player);
 
@@ -521,17 +568,17 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the StringTemplate getReceiveMessage(Player) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testGetReceiveMessage_1()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
-		Player player = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		Player player = new Player(getGame(), new IIOMetadataNode());
 
 		StringTemplate result = fixture.getReceiveMessage(player);
 
@@ -546,16 +593,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the Player getRecipient() method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testGetRecipient_1()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 
 		Player result = fixture.getRecipient();
 
@@ -570,19 +617,19 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the StringTemplate getSendMessage(Player,Settlement) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testGetSendMessage_1()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
-		Player player = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
-		Colony settlement = new Colony(new Game(new IIOMetadataNode(), ""), "");
-		settlement.owner = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		Player player = new Player(getGame(), new IIOMetadataNode());
+		Colony settlement = new Colony(getGame(), "");
+		settlement.owner = new Player(getGame(), new IIOMetadataNode());
 
 		StringTemplate result = fixture.getSendMessage(player, settlement);
 
@@ -597,16 +644,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the Player getSender() method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testGetSender_1()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 
 		Player result = fixture.getSender();
 
@@ -621,16 +668,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the Stance getStance() method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testGetStance_1()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 
 		Stance result = fixture.getStance();
 
@@ -645,16 +692,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the Stance getStance() method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testGetStance_2()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 
 		Stance result = fixture.getStance();
 
@@ -669,16 +716,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the DiplomaticTrade.TradeStatus getStatus() method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testGetStatus_1()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 
 		DiplomaticTrade.TradeStatus result = fixture.getStatus();
 
@@ -693,16 +740,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the List<TradeItem> getTradeItems() method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testGetTradeItems_1()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 
 		List<TradeItem> result = fixture.getTradeItems();
 
@@ -717,17 +764,17 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the List<Unit> getUnitsGivenBy(Player) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testGetUnitsGivenBy_1()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
-		Player player = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		Player player = new Player(getGame(), new IIOMetadataNode());
 
 		List<Unit> result = fixture.getUnitsGivenBy(player);
 
@@ -742,17 +789,17 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the List<Unit> getUnitsGivenBy(Player) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testGetUnitsGivenBy_2()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
-		Player player = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		Player player = new Player(getGame(), new IIOMetadataNode());
 
 		List<Unit> result = fixture.getUnitsGivenBy(player);
 
@@ -767,17 +814,17 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the List<Unit> getUnitsGivenBy(Player) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testGetUnitsGivenBy_3()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
-		Player player = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		Player player = new Player(getGame(), new IIOMetadataNode());
 
 		List<Unit> result = fixture.getUnitsGivenBy(player);
 
@@ -792,17 +839,17 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the List<Unit> getUnitsGivenBy(Player) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testGetUnitsGivenBy_4()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
-		Player player = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		Player player = new Player(getGame(), new IIOMetadataNode());
 
 		List<Unit> result = fixture.getUnitsGivenBy(player);
 
@@ -817,16 +864,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the int getVersion() method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testGetVersion_1()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 
 		int result = fixture.getVersion();
 
@@ -841,16 +888,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the Player getVictim() method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testGetVictim_1()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 
 		Player result = fixture.getVictim();
 
@@ -865,16 +912,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the Player getVictim() method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testGetVictim_2()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 
 		Player result = fixture.getVictim();
 
@@ -889,13 +936,13 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the String getXMLElementTagName() method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testGetXMLElementTagName_1()
-		throws Exception {
+		throws FreeColException {
 
 		String result = DiplomaticTrade.getXMLElementTagName();
 
@@ -906,16 +953,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the String getXMLTagName() method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testGetXMLTagName_1()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 
 		String result = fixture.getXMLTagName();
 
@@ -930,16 +977,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void incrementVersion() method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testIncrementVersion_1()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 
 		fixture.incrementVersion();
 
@@ -953,14 +1000,14 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the boolean isEmpty() method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testIsEmpty_1()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
 
 		boolean result = fixture.isEmpty();
@@ -976,16 +1023,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the boolean isEmpty() method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testIsEmpty_2()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 
 		boolean result = fixture.isEmpty();
 
@@ -1000,16 +1047,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the Iterator<TradeItem> iterator() method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testIterator_1()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 
 		Iterator<TradeItem> result = fixture.iterator();
 
@@ -1024,16 +1071,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void readAttributes(FreeColXMLReader) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testReadAttributes_1()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 		FreeColXMLReader xr = new FreeColXMLReader(new ByteArrayInputStream("".getBytes()));
 
 		fixture.readAttributes(xr);
@@ -1048,16 +1095,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void readAttributes(FreeColXMLReader) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testReadAttributes_2()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 		FreeColXMLReader xr = new FreeColXMLReader(new ByteArrayInputStream("".getBytes()));
 
 		fixture.readAttributes(xr);
@@ -1072,16 +1119,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void readAttributes(FreeColXMLReader) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testReadAttributes_3()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 		FreeColXMLReader xr = new FreeColXMLReader(new ByteArrayInputStream("".getBytes()));
 
 		fixture.readAttributes(xr);
@@ -1096,16 +1143,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void readAttributes(FreeColXMLReader) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testReadAttributes_4()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 		FreeColXMLReader xr = new FreeColXMLReader(new ByteArrayInputStream("".getBytes()));
 
 		fixture.readAttributes(xr);
@@ -1120,16 +1167,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void readChild(FreeColXMLReader) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testReadChild_1()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 		FreeColXMLReader xr = new FreeColXMLReader(new ByteArrayInputStream("".getBytes()));
 
 		fixture.readChild(xr);
@@ -1144,16 +1191,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void readChild(FreeColXMLReader) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testReadChild_2()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 		FreeColXMLReader xr = new FreeColXMLReader(new ByteArrayInputStream("".getBytes()));
 
 		fixture.readChild(xr);
@@ -1168,16 +1215,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void readChild(FreeColXMLReader) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testReadChild_3()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 		FreeColXMLReader xr = new FreeColXMLReader(new ByteArrayInputStream("".getBytes()));
 
 		fixture.readChild(xr);
@@ -1192,16 +1239,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void readChild(FreeColXMLReader) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testReadChild_4()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 		FreeColXMLReader xr = new FreeColXMLReader(new ByteArrayInputStream("".getBytes()));
 
 		fixture.readChild(xr);
@@ -1216,16 +1263,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void readChild(FreeColXMLReader) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testReadChild_5()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 		FreeColXMLReader xr = new FreeColXMLReader(new ByteArrayInputStream("".getBytes()));
 
 		fixture.readChild(xr);
@@ -1240,16 +1287,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void readChild(FreeColXMLReader) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testReadChild_6()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 		FreeColXMLReader xr = new FreeColXMLReader(new ByteArrayInputStream("".getBytes()));
 
 		fixture.readChild(xr);
@@ -1264,16 +1311,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void readChild(FreeColXMLReader) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testReadChild_7()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 		FreeColXMLReader xr = new FreeColXMLReader(new ByteArrayInputStream("".getBytes()));
 
 		fixture.readChild(xr);
@@ -1288,16 +1335,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void readChild(FreeColXMLReader) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testReadChild_8()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 		FreeColXMLReader xr = new FreeColXMLReader(new ByteArrayInputStream("".getBytes()));
 
 		fixture.readChild(xr);
@@ -1312,16 +1359,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void readChild(FreeColXMLReader) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testReadChild_9()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 		FreeColXMLReader xr = new FreeColXMLReader(new ByteArrayInputStream("".getBytes()));
 
 		fixture.readChild(xr);
@@ -1336,16 +1383,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void readChild(FreeColXMLReader) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testReadChild_10()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 		FreeColXMLReader xr = new FreeColXMLReader(new ByteArrayInputStream("".getBytes()));
 
 		fixture.readChild(xr);
@@ -1360,16 +1407,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void readChild(FreeColXMLReader) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testReadChild_11()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 		FreeColXMLReader xr = new FreeColXMLReader(new ByteArrayInputStream("".getBytes()));
 
 		fixture.readChild(xr);
@@ -1384,16 +1431,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void readChild(FreeColXMLReader) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testReadChild_12()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 		FreeColXMLReader xr = new FreeColXMLReader(new ByteArrayInputStream("".getBytes()));
 
 		fixture.readChild(xr);
@@ -1408,16 +1455,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void readChild(FreeColXMLReader) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testReadChild_13()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 		FreeColXMLReader xr = new FreeColXMLReader(new ByteArrayInputStream("".getBytes()));
 
 		fixture.readChild(xr);
@@ -1432,16 +1479,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void readChild(FreeColXMLReader) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testReadChild_14()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 		FreeColXMLReader xr = new FreeColXMLReader(new ByteArrayInputStream("".getBytes()));
 
 		fixture.readChild(xr);
@@ -1456,14 +1503,14 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void readChildren(FreeColXMLReader) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testReadChildren_1()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
 		FreeColXMLReader xr = new FreeColXMLReader(new ByteArrayInputStream("".getBytes()));
 
@@ -1479,14 +1526,14 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void readChildren(FreeColXMLReader) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testReadChildren_2()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
 		FreeColXMLReader xr = new FreeColXMLReader(new ByteArrayInputStream("".getBytes()));
 
@@ -1502,16 +1549,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void remove(int) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testRemove_1()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 		int index = 1;
 
 		fixture.remove(index);
@@ -1526,17 +1573,17 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void remove(TradeItem) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testRemove_2()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
-		TradeItem newItem = new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes())));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		TradeItem newItem = new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes())));
 
 		fixture.remove(newItem);
 
@@ -1550,16 +1597,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void removeType(Class<? extends TradeItem>) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testRemoveType_1()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 		Class<? extends TradeItem> itemClass = TradeItem.class;
 
 		fixture.removeType(itemClass);
@@ -1574,14 +1621,14 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void removeType(Class<? extends TradeItem>) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testRemoveType_2()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
 		Class<? extends TradeItem> itemClass = TradeItem.class;
 
@@ -1597,14 +1644,14 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void removeType(Class<? extends TradeItem>) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testRemoveType_3()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
 		Class<? extends TradeItem> itemClass = TradeItem.class;
 
@@ -1620,17 +1667,17 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void setRecipient(Player) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testSetRecipient_1()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
-		Player newRecipient = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		Player newRecipient = new Player(getGame(), new IIOMetadataNode());
 
 		fixture.setRecipient(newRecipient);
 
@@ -1644,17 +1691,17 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void setSender(Player) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testSetSender_1()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
-		Player newSender = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		Player newSender = new Player(getGame(), new IIOMetadataNode());
 
 		fixture.setSender(newSender);
 
@@ -1668,16 +1715,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void setStatus(TradeStatus) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testSetStatus_1()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 		DiplomaticTrade.TradeStatus status = DiplomaticTrade.TradeStatus.ACCEPT_TRADE;
 
 		fixture.setStatus(status);
@@ -1692,16 +1739,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the String toString() method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testToString_1()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 
 		String result = fixture.toString();
 
@@ -1716,16 +1763,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the String toString() method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testToString_2()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 
 		String result = fixture.toString();
 
@@ -1740,16 +1787,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void writeAttributes(FreeColXMLWriter) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testWriteAttributes_1()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 		FreeColXMLWriter xw = new FreeColXMLWriter(new StringWriter(), net.sf.freecol.common.io.FreeColXMLWriter.WriteScope.CLIENT);
 
 		fixture.writeAttributes(xw);
@@ -1764,16 +1811,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void writeAttributes(FreeColXMLWriter) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testWriteAttributes_2()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 		FreeColXMLWriter xw = new FreeColXMLWriter(new StringWriter(), net.sf.freecol.common.io.FreeColXMLWriter.WriteScope.CLIENT);
 
 		fixture.writeAttributes(xw);
@@ -1788,16 +1835,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void writeAttributes(FreeColXMLWriter) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testWriteAttributes_3()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 		FreeColXMLWriter xw = new FreeColXMLWriter(new StringWriter(), net.sf.freecol.common.io.FreeColXMLWriter.WriteScope.CLIENT);
 
 		fixture.writeAttributes(xw);
@@ -1812,16 +1859,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void writeAttributes(FreeColXMLWriter) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testWriteAttributes_4()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 		FreeColXMLWriter xw = new FreeColXMLWriter(new StringWriter(), net.sf.freecol.common.io.FreeColXMLWriter.WriteScope.CLIENT);
 
 		fixture.writeAttributes(xw);
@@ -1836,16 +1883,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void writeAttributes(FreeColXMLWriter) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testWriteAttributes_5()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 		FreeColXMLWriter xw = new FreeColXMLWriter(new StringWriter(), net.sf.freecol.common.io.FreeColXMLWriter.WriteScope.CLIENT);
 
 		fixture.writeAttributes(xw);
@@ -1860,16 +1907,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void writeAttributes(FreeColXMLWriter) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testWriteAttributes_6()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 		FreeColXMLWriter xw = new FreeColXMLWriter(new StringWriter(), net.sf.freecol.common.io.FreeColXMLWriter.WriteScope.CLIENT);
 
 		fixture.writeAttributes(xw);
@@ -1884,16 +1931,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void writeAttributes(FreeColXMLWriter) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testWriteAttributes_7()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 		FreeColXMLWriter xw = new FreeColXMLWriter(new StringWriter(), net.sf.freecol.common.io.FreeColXMLWriter.WriteScope.CLIENT);
 
 		fixture.writeAttributes(xw);
@@ -1908,16 +1955,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void writeChildren(FreeColXMLWriter) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testWriteChildren_1()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 		FreeColXMLWriter xw = new FreeColXMLWriter(new StringWriter(), net.sf.freecol.common.io.FreeColXMLWriter.WriteScope.CLIENT);
 
 		fixture.writeChildren(xw);
@@ -1932,16 +1979,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void writeChildren(FreeColXMLWriter) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testWriteChildren_2()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 		FreeColXMLWriter xw = new FreeColXMLWriter(new StringWriter(), net.sf.freecol.common.io.FreeColXMLWriter.WriteScope.CLIENT);
 
 		fixture.writeChildren(xw);
@@ -1956,16 +2003,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void writeChildren(FreeColXMLWriter) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testWriteChildren_3()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 		FreeColXMLWriter xw = new FreeColXMLWriter(new StringWriter(), net.sf.freecol.common.io.FreeColXMLWriter.WriteScope.CLIENT);
 
 		fixture.writeChildren(xw);
@@ -1980,16 +2027,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void writeChildren(FreeColXMLWriter) method test.
 	 *
-	 * @throws Exception
+	 * @throws FreeColException
 	 *
 	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testWriteChildren_4()
-		throws Exception {
-		DiplomaticTrade fixture = new DiplomaticTrade(new Game(new IIOMetadataNode(), ""), DiplomaticTrade.TradeContext.CONTACT, new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		throws FreeColException {
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(new Game(new IIOMetadataNode(), ""), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 		FreeColXMLWriter xw = new FreeColXMLWriter(new StringWriter(), net.sf.freecol.common.io.FreeColXMLWriter.WriteScope.CLIENT);
 
 		fixture.writeChildren(xw);
@@ -1999,34 +2046,6 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 		//    java.lang.RuntimeException: Read failure
 		//       at net.sf.freecol.common.model.FreeColObject.readFromXMLElement(FreeColObject.java:912)
 		//       at net.sf.freecol.common.model.Game.<init>(Game.java:216)
-	}
-
-	/**
-	 * Perform pre-test initialization.
-	 *
-	 * @throws Exception
-	 *         if the initialization fails for some reason
-	 *
-	 * @generatedBy CodePro at 5/7/19 4:37 PM
-	 */
-	@Before
-	public void setUp()
-		throws Exception {
-		// add additional set up code here
-	}
-
-	/**
-	 * Perform post-test clean-up.
-	 *
-	 * @throws Exception
-	 *         if the clean-up fails for some reason
-	 *
-	 * @generatedBy CodePro at 5/7/19 4:37 PM
-	 */
-	@After
-	public void tearDown()
-		throws Exception {
-		// Add additional tear down code here
 	}
 
 	/**
