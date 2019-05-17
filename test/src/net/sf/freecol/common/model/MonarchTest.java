@@ -203,4 +203,14 @@ public class MonarchTest extends FreeColTestCase {
     	assertNotNull(monarch.getSupport(rand, true));
     	assertNotNull(monarch.getSupport(rand, false));
     }
+    
+    public void testGetMercenaries() {
+    	Random rand = new Random();
+    	Player player = mock(Player.class);
+    	when(player.getPrice(anyObject())).thenReturn(20);
+    	when(player.checkGold(anyInt())).thenReturn(true);
+    	Monarch monarch = new Monarch(getStandardGame(), player);
+    	
+    	assertNotNull(monarch.getMercenaries(rand));
+    }
 }
