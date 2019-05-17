@@ -1,3 +1,4 @@
+FreeCol.jar
 *.ipr
 *.el
 *.ipr
@@ -13,6 +14,7 @@ bin/
 apache-ant-1.*
 bootstrap
 build
+build/
 dist
 distribution
 java-repository

@@ -2967,7 +2967,8 @@
     <nation id="model.nation.unknownEnemy" color="0x000000"
             nation-type="model.nationType.default" selectable="false"/>
 
-    <nation id="model.nation.dutch" color="0xff9d3c"
+    <!--below is bigchungus--><nation id="model.nation.bigchungus" color="0x706166" nation-type="model.nationType.conquest" selectable="true" preferred-latitude="-67">
+    </nation><nation id="model.nation.dutch" color="0xff9d3c"
             nation-type="model.nationType.trade" selectable="true"
             preferred-latitude="-40" ref="model.nation.dutchREF"/>
     <nation id="model.nation.french" color="0x0000ff"
@@ -2978,17 +2979,21 @@
             preferred-latitude="-37" ref="model.nation.englishREF"/>
     <nation id="model.nation.spanish" color="0xffff00"
             nation-type="model.nationType.conquest" selectable="true"
-            preferred-latitude="-19" ref="model.nation.spanishREF"/>
+            preferred-latitude="-19" ref="model.nation.spanishREF"></nation>
+    
+    <nation id="model.nation.bigchungusREF" color="0x706166"
+    	nation-type="model.nationType.ref">
+    </nation>
     <nation id="model.nation.inca" color="0xf4f0c4"
             nation-type="model.nationType.inca"/>
-    <nation id="model.nation.aztec" color="0xc4a020"
+  	<nation id="model.nation.aztec" color="0xc4a020"
             nation-type="model.nationType.aztec"/>
     <nation id="model.nation.arawak" color="0x6888c0"
             nation-type="model.nationType.arawak"/>
     <nation id="model.nation.cherokee" color="0x6c3c18"
             nation-type="model.nationType.cherokee"/>
     <nation id="model.nation.iroquois" color="0x74a44c"
-            nation-type="model.nationType.iroquois"/>
+            nation-type="model.nationType.iroquois"></nation>
     <nation id="model.nation.sioux" color="0xc0ac84"
             nation-type="model.nationType.sioux"/>
     <nation id="model.nation.apache" color="0x900000"
@@ -2996,13 +3001,14 @@
     <nation id="model.nation.tupi" color="0x045c04"
             nation-type="model.nationType.tupi"/>
     <nation id="model.nation.dutchREF" color="0xcc5500"
-            nation-type="model.nationType.ref"/>
+            nation-type="model.nationType.ref"></nation>
     <nation id="model.nation.frenchREF" color="0x6050dc"
             nation-type="model.nationType.ref"/>
     <nation id="model.nation.englishREF" color="0xde3163"
             nation-type="model.nationType.ref"/>
     <nation id="model.nation.spanishREF" color="0xffdf00"
-            nation-type="model.nationType.ref"/>
+            nation-type="model.nationType.ref"></nation>
+    
   </nations>
 
   <options>
