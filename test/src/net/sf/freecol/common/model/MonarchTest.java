@@ -194,4 +194,13 @@ public class MonarchTest extends FreeColTestCase {
     	assertTrue(trueMonarch.actionIsValid(MonarchAction.HESSIAN_MERCENARIES));
     	assertFalse(falseMonarch.actionIsValid(MonarchAction.HESSIAN_MERCENARIES));
     }
+    
+    public void testGetSupport() {
+    	Random rand = new Random();
+    	Player player = mock(Player.class);
+    	Monarch monarch = new Monarch(getStandardGame(), player);
+    	
+    	assertNotNull(monarch.getSupport(rand, true));
+    	assertNotNull(monarch.getSupport(rand, false));
+    }
 }
