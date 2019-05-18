@@ -294,4 +294,17 @@ public class PlayerTest extends FreeColTestCase {
         }
 
     }
+    
+    public void testAllColonyValues() {
+    	Game game = getStandardGame();
+        Player dutch = game.getPlayerByNationId("model.nation.dutch");
+        Map map = getTestMap(spec().getTileType("model.tile.plains"));
+        game.setMap(map);
+        map.getTile(4, 7).setExplored(dutch, true);
+        map.getTile(4, 8).setExplored(dutch, true);
+        map.getTile(5, 7).setExplored(dutch, true);
+        map.getTile(5, 8).setExplored(dutch, true);
+
+        assertNotNull(dutch.getAllColonyValues(map.getTile(4,7)));
+    }
 }
