@@ -68,54 +68,27 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 * getXMLTagName
 	 * getXMLElementTagName
 	 */
-	
-	/**
-	 * Run the DiplomaticTrade(Game,Element) constructor test.
-	 *
-	 * @throws FreeColException
-	 *
-	 * @generatedBy CodePro at 5/7/19 4:37 PM
-	 */
-	@Test
-	public void testDiplomaticTrade_1()
-		throws FreeColException {
-		Game game = getGame();
-		Element element = new IIOMetadataNode();
-
-		DiplomaticTrade result = new DiplomaticTrade(game, element);
-
-		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.RuntimeException: Read failure
-		//       at net.sf.freecol.common.model.FreeColObject.readFromXMLElement(FreeColObject.java:912)
-		//       at net.sf.freecol.common.model.Game.<init>(Game.java:216)
-		assertNotNull(result);
-	}
 
 	/**
 	 * Run the DiplomaticTrade(Game,TradeContext,Player,Player,List<TradeItem>,int) constructor test.
 	 *
 	 * @throws FreeColException
 	 *
-	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
-	public void testDiplomaticTrade_2()
+	public void testDiplomaticTrade_Contact()
 		throws FreeColException {
 		Game game = getGame();
 		DiplomaticTrade.TradeContext context = DiplomaticTrade.TradeContext.CONTACT;
-		Player sender = new Player(getGame(), new IIOMetadataNode());
-		Player recipient = new Player(getGame(), new IIOMetadataNode());
+		Colony senderColony = getStandardColony(1,3,3);
+		Player sender = senderColony.getOwner();
+		Colony recipientColony = getStandardColony(1,4,4); 
+		Player recipient = recipientColony.getOwner();
 		List<TradeItem> items = new ArrayList<TradeItem>();
 		int version = 1;
 
 		DiplomaticTrade result = new DiplomaticTrade(game, context, sender, recipient, items, version);
 
-		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.RuntimeException: Read failure
-		//       at net.sf.freecol.common.model.FreeColObject.readFromXMLElement(FreeColObject.java:912)
-		//       at net.sf.freecol.common.model.Game.<init>(Game.java:216)
 		assertNotNull(result);
 	}
 
@@ -124,25 +97,60 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 *
 	 * @throws FreeColException
 	 *
-	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
-	public void testDiplomaticTrade_3()
+	public void testDiplomaticTrade_Diplomatic()
 		throws FreeColException {
 		Game game = getGame();
-		DiplomaticTrade.TradeContext context = DiplomaticTrade.TradeContext.CONTACT;
-		Player sender = new Player(getGame(), new IIOMetadataNode());
-		Player recipient = new Player(getGame(), new IIOMetadataNode());
+		DiplomaticTrade.TradeContext context = DiplomaticTrade.TradeContext.DIPLOMATIC;
+		Colony senderColony = getStandardColony(1,3,3);
+		Player sender = senderColony.getOwner();
+		Colony recipientColony = getStandardColony(1,4,4);
+		Player recipient = recipientColony.getOwner();
 		List<TradeItem> items = null;
 		int version = 1;
 
 		DiplomaticTrade result = new DiplomaticTrade(game, context, sender, recipient, items, version);
 
-		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.RuntimeException: Read failure
-		//       at net.sf.freecol.common.model.FreeColObject.readFromXMLElement(FreeColObject.java:912)
-		//       at net.sf.freecol.common.model.Game.<init>(Game.java:216)
+		assertNotNull(result);
+	}
+	
+	@Test
+	public void testDiplomaticTrade_Trade()
+		throws FreeColException {
+		Game game = getGame();
+		DiplomaticTrade.TradeContext context = DiplomaticTrade.TradeContext.TRADE;
+		Colony senderColony = getStandardColony(1,3,3);
+		Player sender = senderColony.getOwner();
+		Colony recipientColony = getStandardColony(1,4,4);
+		Player recipient = recipientColony.getOwner();
+		List<TradeItem> items = null;
+		int version = 1;
+
+		DiplomaticTrade result = new DiplomaticTrade(game, context, sender, recipient, items, version);
+
+		assertNotNull(result);
+	}
+	
+	@Test
+	public void testDiplomaticTrade_Tribute()
+		throws FreeColException {
+		Game game = getGame();
+		DiplomaticTrade.TradeContext context = DiplomaticTrade.TradeContext.TRIBUTE;
+		Colony senderColony = getStandardColony(1,3,3);
+		Player sender = senderColony.getOwner();
+		Colony recipientColony = getStandardColony(1,4,4);
+		Player recipient = recipientColony.getOwner();
+		List<TradeItem> items = null;
+		int version = 1;
+
+		DiplomaticTrade result = new DiplomaticTrade(game, 
+				context, 
+				sender, 
+				recipient, 
+				items, 
+				version);
+
 		assertNotNull(result);
 	}
 
@@ -151,23 +159,26 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 *
 	 * @throws FreeColException
 	 *
-	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testAdd_1()
 		throws FreeColException {
-		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		Colony senderColony = getStandardColony(1,3,3);
+		Player sender = senderColony.getOwner();
+		Colony recipientColony = getStandardColony(1,4,4);
+		Player recipient = recipientColony.getOwner();
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), 
+				DiplomaticTrade.
+				TradeContext.CONTACT, 
+				sender, 
+				recipient, 
+				new ArrayList<TradeItem>(), 
+				1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
 		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 		TradeItem newItem = new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes())));
 
 		fixture.add(newItem);
-
-		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.RuntimeException: Read failure
-		//       at net.sf.freecol.common.model.FreeColObject.readFromXMLElement(FreeColObject.java:912)
-		//       at net.sf.freecol.common.model.Game.<init>(Game.java:216)
 	}
 
 	/**
