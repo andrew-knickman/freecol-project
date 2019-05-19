@@ -4,7 +4,6 @@ import net.sf.freecol.common.model.DiplomaticTrade.TradeContext;
 import net.sf.freecol.server.model.ServerUnit;
 import net.sf.freecol.util.test.FreeColTestCase;
 import net.sf.freecol.common.model.*;
-import net.sf.freecol.server.model.ServerUnit;
 
 import java.io.InputStream;
 import java.io.StringWriter;
@@ -13,6 +12,9 @@ import java.lang.StringBuilder;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import org.junit.*;
+import static org.junit.Assert.*;
+
 
 /**
  * The class <code>DiplomaticTradeTest</code> contains tests for the class <code>{@link DiplomaticTrade}</code>.
@@ -892,4 +894,3 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	public static void main(String[] args) {
 		new org.junit.runner.JUnitCore().run(DiplomaticTradeTest.class);
 	}
-}
