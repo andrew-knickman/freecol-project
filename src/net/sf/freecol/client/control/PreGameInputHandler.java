@@ -20,10 +20,6 @@
 package net.sf.freecol.client.control;
 
 import java.awt.Color;
-import java.awt.List;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.logging.Logger;
 
 import javax.swing.SwingUtilities;
@@ -78,30 +74,43 @@ public final class PreGameInputHandler extends InputHandler {
     public synchronized Element handle(Connection connection, Element element) {
         String type = (element == null) ? "(null)" : element.getTagName();
         
-        ArrayList<String> validMethods = (ArrayList<String>) Arrays.asList(new String[] {
-    		"addPlayer", "chat", "disconnect", "error", "logout", "multiple", "playerReady",
-    		"removePlayer", "setAvailable", "startGame", "updateColor", "updateGame", "updateGameOptions",
-    		"updateMapGeneratorOptions", "updateNation", "updateNationType"
-        });
-        
-        Element ret = null;
-        
-        
-        if(validMethods.contains(type)) {
-        	try {
-	        	if(type.equals("multiple")) {
-	        		Method method = PreGameInputHandler.class.getMethod(type, Connection.class, Element.class);
-	        		ret = (Element) method.invoke(this, connection, element);
-	        	} else {
-	        		Method method = PreGameInputHandler.class.getMethod(type, Element.class);
-	        		ret = (Element) method.invoke(this, element);
-	        	}
-        	} catch(Exception e) {
-        		ret = unknown(element);
-        	}
+        switch(type) {
+        	case "addPlayer":
+        		return addPlayer(element);
+        	case "chat":
+        		return chat(element);
+        	case "disconnect":
+        		return disconnect(element);
+        	case "error":
+        		return error(element);
+        	case "logout":
+        		return logout(element);
+        	case "multiple":
+        		return multiple(connection, element);
+        	case "playerReady":
+    			return playerReady(element);
+        	case "removePlayer":
+        		return removePlayer(element);
+        	case "setAvailable":
+        		return setAvailable(element);
+        	case "startGame":
+        		return startGame(element);
+        	case "updateColor":
+    			return updateColor(element);
+        	case "updateGame":
+        		return updateGame(element);
+        	case "updateGameOptions":
+        		return updateGameOptions(element);
+        	case "updateMapGeneratorOptions":
+        		return updateMapGeneratorOptions(element);
+        	case "updateNation":
+        		return updateNation(element);
+        	case "updateNationType":
+        		return updateNationType(element);
+    		
         }
-        
-        return ret;
+            
+        return unknown(element);
     }
 
     /**

@@ -182,6 +182,15 @@ public class ConfirmDeclarationDialog extends FreeColDialog<List<String>>
                              new Color(0, 0x39, 0xa6),
                              new Color(0xd5, 0x2b, 0x1e));
 
+ // Big Chungus flag
+    public static final Flag BIGCHUNGUS_FLAG
+        = new Flag(Background.FESSES, Decoration.NONE, UnionPosition.MIDDLE)
+        .setStripes(3)
+        .setUnionColor(null)
+        .setBackgroundColors(Color.WHITE,
+                             new Color(0, 0x39, 0xa6),
+                             new Color(0xd5, 0x2b, 0x1e));
+    
     /** A map of default nation flags. */
     private static final Map<String, Flag> defaultFlags = new HashMap<>();
     static {
@@ -193,6 +202,7 @@ public class ConfirmDeclarationDialog extends FreeColDialog<List<String>>
         defaultFlags.put("model.nation.portuguese", PORTUGUESE_FLAG);
         defaultFlags.put("model.nation.russian",    RUSSIAN_FLAG);
         defaultFlags.put("model.nation.swedish",    SWEDISH_FLAG);
+        defaultFlags.put("model.nation.bigchungus", BIGCHUNGUS_FLAG);
     }
 
     /** Independent country name. */
