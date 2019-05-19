@@ -19,12 +19,20 @@
 
 package net.sf.freecol.common.model;
 
+import static org.mockito.Mockito.*;
+
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
 import java.io.StringWriter;
 import java.util.List;
+import java.util.Random;
 
 import net.sf.freecol.common.io.FreeColXMLWriter;
 import net.sf.freecol.common.model.Colony;
+import net.sf.freecol.common.model.Monarch.Force;
 import net.sf.freecol.common.model.Monarch.MonarchAction;
+import net.sf.freecol.common.option.UnitListOption;
 import net.sf.freecol.common.util.RandomChoice;
 import net.sf.freecol.util.test.FreeColTestCase;
 
@@ -99,4 +107,110 @@ public class MonarchTest extends FreeColTestCase {
         return false;
     }
 
+    public void testRaiseTax() {
+    	Player player = mock(Player.class);
+    	when(player.getTax()).thenReturn(1);
+    	//Specification spec = mock(Specification.class);
+    	//when(spec.get)
+    	Monarch monarch = new Monarch(getStandardGame(), player);
+    	Random rand = new Random();
+    	
+    	assertTrue(monarch.raiseTax(rand) > 1);
+    }
+    
+    public void testLowerTax() {
+    	Player player = mock(Player.class);
+    	when(player.getTax()).thenReturn(30);
+    	//Specification spec = mock(Specification.class);
+    	//when(spec.get)
+    	Monarch monarch = new Monarch(getStandardGame(), player);
+    	Random rand = new Random();
+    	
+    	assertTrue(monarch.lowerTax(rand) <= 30);
+    }
+    
+    public void testGetExpeditionaryForce() {
+    	Player player = mock(Player.class);
+
+        Monarch monarch = new Monarch(getStandardGame(), player);
+        
+        assertNotNull(monarch.getExpeditionaryForce());
+        assertNotNull(monarch.getExpeditionaryForce());
+    }
+    
+    public void testGetInterventionForce() {
+    	Player player = mock(Player.class);
+    	Monarch monarch = new Monarch(getStandardGame(), player);
+    	
+    	assertNotNull(monarch.getInterventionForce());
+    	assertNotNull(monarch.getInterventionForce());
+    }
+    
+    public void testActionIsValid() {
+    	Player player = mock(Player.class);
+    	when(player.getTax()).thenReturn(1);
+    	when(player.getAttackedByPrivateers()).thenReturn(true);
+    	when(player.isAtWar()).thenReturn(true);
+    	when(player.checkGold(anyInt())).thenReturn(true);
+    	
+       	Player falsePlayer = mock(Player.class);
+    	when(falsePlayer.getTax()).thenReturn((int) (spec().getInteger(GameOptions.MAXIMUM_TAX) + 2));
+    	when(falsePlayer.getAttackedByPrivateers()).thenReturn(false);
+    	when(falsePlayer.isAtWar()).thenReturn(false);
+    	when(falsePlayer.checkGold(anyInt())).thenReturn(false);
+    	
+    	Monarch trueMonarch = new Monarch(getStandardGame(), player);
+    	trueMonarch.setSupportSea(false);
+    	trueMonarch.setDispleasure(false);
+    	Monarch falseMonarch = new Monarch(getStandardGame(), falsePlayer);
+    	falseMonarch.setSupportSea(false);
+    	falseMonarch.setDispleasure(false);
+    	
+    	assertTrue(trueMonarch.actionIsValid(MonarchAction.NO_ACTION));
+    	assertTrue(trueMonarch.actionIsValid(MonarchAction.RAISE_TAX_ACT));
+    	assertTrue(trueMonarch.actionIsValid(MonarchAction.RAISE_TAX_WAR));
+    	assertFalse(falseMonarch.actionIsValid(MonarchAction.RAISE_TAX_ACT));
+    	assertFalse(falseMonarch.actionIsValid(MonarchAction.RAISE_TAX_WAR));
+    	assertTrue(falseMonarch.actionIsValid(MonarchAction.LOWER_TAX_OTHER));
+    	assertTrue(falseMonarch.actionIsValid(MonarchAction.LOWER_TAX_WAR));
+    	assertFalse(trueMonarch.actionIsValid(MonarchAction.LOWER_TAX_OTHER));
+    	assertFalse(trueMonarch.actionIsValid(MonarchAction.LOWER_TAX_WAR));
+    	assertFalse(falseMonarch.actionIsValid(MonarchAction.FORCE_TAX));
+    	assertTrue(trueMonarch.actionIsValid(MonarchAction.WAIVE_TAX));
+    	assertTrue(trueMonarch.actionIsValid(MonarchAction.SUPPORT_LAND));
+    	assertFalse(falseMonarch.actionIsValid(MonarchAction.SUPPORT_LAND));
+    	assertFalse(falseMonarch.actionIsValid(MonarchAction.MONARCH_MERCENARIES));
+    	assertTrue(trueMonarch.actionIsValid(MonarchAction.MONARCH_MERCENARIES));
+    	assertTrue(trueMonarch.actionIsValid(MonarchAction.SUPPORT_SEA));
+    	assertFalse(falseMonarch.actionIsValid(MonarchAction.SUPPORT_SEA));
+    	trueMonarch.setSupportSea(true);
+    	assertFalse(trueMonarch.actionIsValid(MonarchAction.SUPPORT_SEA));
+    	trueMonarch.setDispleasure(true);
+    	assertFalse(trueMonarch.actionIsValid(MonarchAction.SUPPORT_SEA));
+    	assertFalse(trueMonarch.actionIsValid(MonarchAction.SUPPORT_LAND));
+    	assertFalse(trueMonarch.actionIsValid(MonarchAction.MONARCH_MERCENARIES));
+    	trueMonarch.setSupportSea(false);
+    	assertFalse(trueMonarch.actionIsValid(MonarchAction.SUPPORT_SEA));
+    	assertTrue(trueMonarch.actionIsValid(MonarchAction.HESSIAN_MERCENARIES));
+    	assertFalse(falseMonarch.actionIsValid(MonarchAction.HESSIAN_MERCENARIES));
+    }
+    
+    public void testGetSupport() {
+    	Random rand = new Random();
+    	Player player = mock(Player.class);
+    	Monarch monarch = new Monarch(getStandardGame(), player);
+    	
+    	assertNotNull(monarch.getSupport(rand, true));
+    	assertNotNull(monarch.getSupport(rand, false));
+    }
+    
+    public void testGetMercenaries() {
+    	Random rand = new Random();
+    	Player player = mock(Player.class);
+    	when(player.getPrice(anyObject())).thenReturn(20);
+    	when(player.checkGold(anyInt())).thenReturn(true);
+    	Monarch monarch = new Monarch(getStandardGame(), player);
+    	
+    	assertNotNull(monarch.getMercenaries(rand));
+    }
 }
