@@ -7,6 +7,8 @@ import java.io.StringWriter;
 import java.io.Writer;
 import net.sf.freecol.common.io.FreeColXMLWriter;
 import net.sf.freecol.common.model.HighScore.ScoreLevel;
+import net.sf.freecol.util.test.FreeColTestCase;
+
 
 import java.util.ArrayList;
 import net.sf.freecol.common.io.FreeColXMLReader;
@@ -24,7 +26,7 @@ import org.w3c.dom.Element;
  *
  * @author Andrew Knickman
  */
-public class HighScoreTest {
+public class HighScoreTest extends FreeColTestCase{
 	/**
 	 * Run the HighScore(Player,Date) constructor test.
 	 */
@@ -212,8 +214,8 @@ public class HighScoreTest {
 		HighScore fixture = new HighScore(player, new Date());
 
         Game game = player.getGame();
-        player.changePlayerType(Player.PlayerType.INDEPENDENT);;
-        independenceTurn = game.getTurn().getNumber();
+        player.changePlayerType(Player.PlayerType.INDEPENDENT);
+        int independenceTurn = game.getTurn().getNumber();
         
 		int result = fixture.getIndependenceTurn();
 		
@@ -266,7 +268,7 @@ public class HighScoreTest {
 	 * Run the String getNationLabel() method test.
 	 */
 	@Test
-	public void testGetNationLabel_1()
+	public void testGetNationLabel()
 		{
 		Colony colony = getStandardColony(3, 1, 8); 
 		Player player = colony.getOwner();
@@ -274,20 +276,22 @@ public class HighScoreTest {
 		player.setScore(1);
 		player.setNationType(new EuropeanNationType("model.nationType.cooperation", new Specification()));
 		player.setNewLandName("Test Land");
+		player.setIndependentNationName("Test Rebels");
 		player.nationId = "model.nation.french";
-		player.playerType = Player.PlayerType.COLONIAL;
+		player.playerType = Player.PlayerType.INDEPENDENT;
+
 		HighScore fixture = new HighScore(player, new Date());
 
 		String result = fixture.getNationLabel();
 
-		assertNotNull(result);
+		assertTrue(result.equals("Test Rebels"));
 	}
 
 	/**
 	 * Run the String getNationTypeId() method test.
 	 */
 	@Test
-	public void testGetNationTypeId_1()
+	public void testGetNationTypeId()
 		{
 		Colony colony = getStandardColony(3, 1, 8); 
 		Player player = colony.getOwner();
@@ -301,14 +305,14 @@ public class HighScoreTest {
 
 		String result = fixture.getNationTypeId();
 
-		assertNotNull(result);
+		assertTrue(result.equals("model.nationType.cooperation"));
 	}
 
 	/**
 	 * Run the String getNewLandName() method test.
 	 */
 	@Test
-	public void testGetNewLandName_1()
+	public void testGetNewLandName()
 		{
 		Colony colony = getStandardColony(3, 1, 8); 
 		Player player = colony.getOwner();
@@ -322,7 +326,7 @@ public class HighScoreTest {
 
 		String result = fixture.getNewLandName();
 
-		assertNotNull(result);
+		assertTrue(result.contentEquals("Test Land"));
 	}
 
 	/**
