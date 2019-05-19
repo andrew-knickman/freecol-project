@@ -884,6 +884,31 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 		
 		assertTrue(result == fixture.toString())
 	}
+	
+	/**
+	 * Perform pre-test initialization.
+	 *
+	 * @throws FreeColException
+	 *         if the initialization fails for some reason
+	 *
+	 */
+	@Before
+	public void setUp()
+		throws FreeColException {
+	}
+
+	/**
+	 * Perform post-test clean-up.
+	 *
+	 * @throws FreeColException
+	 *         if the clean-up fails for some reason
+	 *
+	 */
+	@After
+	public void tearDown()
+		throws FreeColException {
+		fixture = null;
+	}
 
 	/**
 	 * Launch the test.
