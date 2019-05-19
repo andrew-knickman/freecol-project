@@ -27,13 +27,14 @@ public class HighScoreTest {
 	 * Run the HighScore(Player,Date) constructor test.
 	 */
 	@Test
-	public void testHighScore_1()
+	public void testHighScore_1
+()
 		{
 		Colony colony = getStandardColony(3, 1, 8); 
 		Player player = colony.getOwner();
         player.setName("Test Player");
 		player.setScore(1);
-		player.setNationType(new EuropeanNationType("", new Specification()));
+		player.setNationType(new EuropeanNationType("model.nationType.cooperation", new Specification()));
 		player.setNewLandName("Test Land");
 		player.nationId = "model.nation.french";
 		player.playerType = Player.PlayerType.COLONIAL;
@@ -41,6 +42,7 @@ public class HighScoreTest {
 
 		HighScore result = new HighScore(player, theDate);
 
+		assertEquals(1,player.getScore());
 		assertNotNull(result);
 	}
 
@@ -54,15 +56,16 @@ public class HighScoreTest {
 		Player player = colony.getOwner();
 		player.setName("Test Player");
 		player.setScore(1);
-		player.setNationType(new EuropeanNationType("", new Specification()));
+		player.setNationType(new EuropeanNationType("model.nationType.cooperation", new Specification()));
 		player.setNewLandName("Test Land");
-		player.setIndependentNationName("");
+		player.setIndependentNationName("Test Rebels");
 		player.nationId = "model.nation.french";
 		player.playerType = Player.PlayerType.COLONIAL;
 		Date theDate = new Date();
 
 		HighScore result = new HighScore(player, theDate);
-
+		
+		assertEquals(1,player.getScore());
 		assertNotNull(result);
 	}
 
@@ -70,115 +73,72 @@ public class HighScoreTest {
 	 * Run the boolean checkHighScore(int,List<HighScore>) method test.
 	 */
 	@Test
-	public void testCheckHighScore_1()
+	public void testCheckHighScore()
 		{
-		int score = 1;
+		Colony colony = getStandardColony(3, 1, 8); 
+		Player player = colony.getOwner();
+		player.setName("Test Player");
+		player.setScore(1);
+		player.setNationType(new EuropeanNationType("model.nationType.cooperation", new Specification()));
+		player.setNewLandName("Test Land");
+		player.setIndependentNationName("Test Rebels");
+		player.nationId = "model.nation.french";
+		player.playerType = Player.PlayerType.COLONIAL;
+		Date theDate = new Date();
+		
+		HighScore score = new HighScore(player, theDate);
+		
 		List<HighScore> scores = new ArrayList<HighScore>();
+		
+		scores.add(score);
 
-		boolean result = HighScore.checkHighScore(score, scores);
+		boolean result = HighScore.checkHighScore(score.getScore(), scores);
 
-		assertEquals(true, result);
-	}
-
-	/**
-	 * Run the boolean checkHighScore(int,List<HighScore>) method test.
-	 */
-	@Test
-	public void testCheckHighScore_2()
-		{
-		int score = 1;
-		List<HighScore> scores = new ArrayList<HighScore>();
-
-		boolean result = HighScore.checkHighScore(score, scores);
-
-		assertEquals(true, result);
-	}
-
-	/**
-	 * Run the boolean checkHighScore(int,List<HighScore>) method test.
-	 */
-	@Test
-	public void testCheckHighScore_3()
-		{
-		int score = -1;
-		List<HighScore> scores = new ArrayList<HighScore>();
-
-		boolean result = HighScore.checkHighScore(score, scores);
-
-		assertEquals(false, result);
-	}
-
-	/**
-	 * Run the boolean checkHighScore(int,List<HighScore>) method test.
-	 */
-	@Test
-	public void testCheckHighScore_4()
-		{
-		int score = 1;
-		List<HighScore> scores = new ArrayList<HighScore>();
-
-		boolean result = HighScore.checkHighScore(score, scores);
-
-		assertEquals(true, result);
+		assertTrue(result);
 	}
 
 	/**
 	 * Run the int compareTo(FreeColObject) method test.
 	 */
 	@Test
-	public void testCompareTo_1()
+	public void testCompareTo()
 		{
 		Colony colony = getStandardColony(3, 1, 8); 
 		Player player = colony.getOwner();
-		player.setName("Test Player");
+		player.setName("Test Player 1");
 		player.setScore(1);
-		player.setNationType(new EuropeanNationType("", new Specification()));
-		player.setNewLandName("Test Land");
+		player.setNationType(new EuropeanNationType("model.nationType.cooperation", new Specification()));
+		player.setNewLandName("Test Land 1");
 		player.nationId = "model.nation.french";
 		player.playerType = Player.PlayerType.COLONIAL;
 		HighScore fixture = new HighScore(player, new Date());
-		FreeColObject other = new AbstractGoods();
-
+		
+		Colony colony = getStandardColony(3, 2, 2); 
+		Player otherPlayer = colony.getOwner();
+		otherPlayer.setName("Test Player 2");
+		otherPlayer.setScore(2);
+		otherPlayer.setNationType(new EuropeanNationType("model.nationType.cooperation", new Specification()));
+		otherPlayer.setNewLandName("Test Land 2");
+		otherPlayer.nationId = "model.nation.dutch";
+		otherPlayer.playerType = Player.PlayerType.COLONIAL;
+		HighScore other = new HighScore(player, new Date());
+		
 		int result = fixture.compareTo(other);
 
-		assertEquals(0, result);
-	}
-
-	/**
-	 * Run the int compareTo(FreeColObject) method test.
-	 * @throws IOException 
-	 * @throws XMLStreamException 
-	 */
-	@Test
-	public void testCompareTo_2() throws XMLStreamException, IOException
-		{
-		Colony colony = getStandardColony(3, 1, 8); 
-		Player player = colony.getOwner();
-		player.setName("Test Player");
-		player.setScore(1);
-		player.setNationType(new EuropeanNationType("", new Specification()));
-		player.setNewLandName("Test Land");
-		player.nationId = "model.nation.french";
-		player.playerType = Player.PlayerType.COLONIAL;
-		HighScore fixture = new HighScore(player, new Date());
-		FreeColObject other = new HighScore(new FreeColXMLReader(new ByteArrayInputStream("".getBytes())));
-
-		int result = fixture.compareTo(other);
-
-		assertEquals(0, result);
+		assertEquals(1, result);
 	}
 
 	/**
 	 * Run the int getColonies() method test.
 	 */
 	@Test
-	public void testGetColonies_1()
+	public void testGetColonies()
 		{
 		Colony colony = getStandardColony(3, 1, 8); 
 		Player player = colony.getOwner();
 		player.setName("Test Player");
 		player.setScore(1);
-		player.setNationType(new EuropeanNationType("", new Specification()));
+		player.setNationType(new EuropeanNationType("model.nationType.cooperation", new Specification()));
 		player.setNewLandName("Test Land");
 		player.nationId = "model.nation.french";
 		player.playerType = Player.PlayerType.COLONIAL;
@@ -186,49 +146,52 @@ public class HighScoreTest {
 
 		int result = fixture.getColonies();
 
-		assertEquals(0, result);
+		assertEquals(1, result);
 	}
 
 	/**
 	 * Run the Date getDate() method test.
 	 */
 	@Test
-	public void testGetDate_1()
+	public void testGetDate()
 		{
 		Colony colony = getStandardColony(3, 1, 8); 
 		Player player = colony.getOwner();
 		player.setName("Test Player");
 		player.setScore(1);
-		player.setNationType(new EuropeanNationType("", new Specification()));
+		player.setNationType(new EuropeanNationType("model.nationType.cooperation", new Specification()));
 		player.setNewLandName("Test Land");
 		player.nationId = "model.nation.french";
 		player.playerType = Player.PlayerType.COLONIAL;
-		HighScore fixture = new HighScore(player, new Date());
+		Date now = new Date();
+		HighScore fixture = new HighScore(player, now);
 
 		Date result = fixture.getDate();
 
-		assertNotNull(result);
+		assertTrue(result == now);
 	}
 
 	/**
 	 * Run the String getDifficulty() method test.
 	 */
 	@Test
-	public void testGetDifficulty_1()
+	public void testGetDifficulty()
 		{
 		Colony colony = getStandardColony(3, 1, 8); 
 		Player player = colony.getOwner();
 		player.setName("Test Player");
 		player.setScore(1);
-		player.setNationType(new EuropeanNationType("", new Specification()));
+		player.setNationType(new EuropeanNationType("model.nationType.cooperation", new Specification()));
 		player.setNewLandName("Test Land");
 		player.nationId = "model.nation.french";
 		player.playerType = Player.PlayerType.COLONIAL;
 		HighScore fixture = new HighScore(player, new Date());
 
+		String difficulty = player.getGame().getSpecification().getDifficultyLevel();
+		
 		String result = fixture.getDifficulty();
-
-		assertNotNull(result);
+		
+		assertTrue(result.equals(difficulty));
 	}
 
 	/**
@@ -241,7 +204,7 @@ public class HighScoreTest {
 		Player player = colony.getOwner();
 		player.setName("Test Player");
 		player.setScore(1);
-		player.setNationType(new EuropeanNationType("", new Specification()));
+		player.setNationType(new EuropeanNationType("model.nationType.cooperation", new Specification()));
 		player.setNewLandName("Test Land");
 		player.nationId = "model.nation.french";
 		player.playerType = Player.PlayerType.COLONIAL;
@@ -262,7 +225,7 @@ public class HighScoreTest {
 		Player player = colony.getOwner();
 		player.setName("Test Player");
 		player.setScore(1);
-		player.setNationType(new EuropeanNationType("", new Specification()));
+		player.setNationType(new EuropeanNationType("model.nationType.cooperation", new Specification()));
 		player.setNewLandName("Test Land");
 		player.nationId = "model.nation.french";
 		player.playerType = Player.PlayerType.COLONIAL;
@@ -283,7 +246,7 @@ public class HighScoreTest {
 		Player player = colony.getOwner();
 		player.setName("Test Player");
 		player.setScore(1);
-		player.setNationType(new EuropeanNationType("", new Specification()));
+		player.setNationType(new EuropeanNationType("model.nationType.cooperation", new Specification()));
 		player.setNewLandName("Test Land");
 		player.nationId = "model.nation.french";
 		player.playerType = Player.PlayerType.COLONIAL;
@@ -304,7 +267,7 @@ public class HighScoreTest {
 		Player player = colony.getOwner();
 		player.setName("Test Player");
 		player.setScore(1);
-		player.setNationType(new EuropeanNationType("", new Specification()));
+		player.setNationType(new EuropeanNationType("model.nationType.cooperation", new Specification()));
 		player.setNewLandName("Test Land");
 		player.nationId = "model.nation.french";
 		player.playerType = Player.PlayerType.COLONIAL;
@@ -325,7 +288,7 @@ public class HighScoreTest {
 		Player player = colony.getOwner();
 		player.setName("Test Player");
 		player.setScore(1);
-		player.setNationType(new EuropeanNationType("", new Specification()));
+		player.setNationType(new EuropeanNationType("model.nationType.cooperation", new Specification()));
 		player.setNewLandName("Test Land");
 		player.nationId = "model.nation.french";
 		player.playerType = Player.PlayerType.COLONIAL;
@@ -346,7 +309,7 @@ public class HighScoreTest {
 		Player player = colony.getOwner();
 		player.setName("Test Player");
 		player.setScore(1);
-		player.setNationType(new EuropeanNationType("", new Specification()));
+		player.setNationType(new EuropeanNationType("model.nationType.cooperation", new Specification()));
 		player.setNewLandName("Test Land");
 		player.nationId = "model.nation.french";
 		player.playerType = Player.PlayerType.COLONIAL;
@@ -367,7 +330,7 @@ public class HighScoreTest {
 		Player player = colony.getOwner();
 		player.setName("Test Player");
 		player.setScore(1);
-		player.setNationType(new EuropeanNationType("", new Specification()));
+		player.setNationType(new EuropeanNationType("model.nationType.cooperation", new Specification()));
 		player.setNewLandName("Test Land");
 		player.nationId = "model.nation.french";
 		player.playerType = Player.PlayerType.COLONIAL;
@@ -382,13 +345,13 @@ public class HighScoreTest {
 	 * Run the String getPlayerName() method test.
 	 */
 	@Test
-	public void testGetPlayerName_1()
+	public void testGetPlayerName()
 		{
 		Colony colony = getStandardColony(3, 1, 8); 
 		Player player = colony.getOwner();
 		player.setName("Test Player");
 		player.setScore(1);
-		player.setNationType(new EuropeanNationType("", new Specification()));
+		player.setNationType(new EuropeanNationType("model.nationType.cooperation", new Specification()));
 		player.setNewLandName("Test Land");
 		player.nationId = "model.nation.french";
 		player.playerType = Player.PlayerType.COLONIAL;
@@ -396,7 +359,7 @@ public class HighScoreTest {
 
 		String result = fixture.getPlayerName();
 
-		assertNotNull(result);
+		assertTrue(result.contentEquals("Test Player")));
 	}
 
 	/**
@@ -409,7 +372,7 @@ public class HighScoreTest {
 		Player player = colony.getOwner();
 		player.setName("Test Player");
 		player.setScore(1);
-		player.setNationType(new EuropeanNationType("", new Specification()));
+		player.setNationType(new EuropeanNationType("model.nationType.cooperation", new Specification()));
 		player.setNewLandName("Test Land");
 		player.nationId = "model.nation.french";
 		player.playerType = Player.PlayerType.COLONIAL;
@@ -430,7 +393,7 @@ public class HighScoreTest {
 		Player player = colony.getOwner();
 		player.setName("Test Player");
 		player.setScore(1);
-		player.setNationType(new EuropeanNationType("", new Specification()));
+		player.setNationType(new EuropeanNationType("model.nationType.cooperation", new Specification()));
 		player.setNewLandName("Test Land");
 		player.nationId = "model.nation.french";
 		player.playerType = Player.PlayerType.COLONIAL;
@@ -451,7 +414,7 @@ public class HighScoreTest {
 		Player player = colony.getOwner();
 		player.setName("Test Player");
 		player.setScore(1);
-		player.setNationType(new EuropeanNationType("", new Specification()));
+		player.setNationType(new EuropeanNationType("model.nationType.cooperation", new Specification()));
 		player.setNewLandName("Test Land");
 		player.nationId = "model.nation.french";
 		player.playerType = Player.PlayerType.COLONIAL;
