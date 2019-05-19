@@ -7,10 +7,13 @@ import java.io.StringWriter;
 import java.io.Writer;
 import net.sf.freecol.common.io.FreeColXMLWriter;
 import net.sf.freecol.common.model.HighScore.ScoreLevel;
+import net.sf.freecol.server.model.ServerUnit;
 import net.sf.freecol.util.test.FreeColTestCase;
 
 
 import java.util.ArrayList;
+
+import net.sf.freecol.common.i18n.Messages;
 import net.sf.freecol.common.io.FreeColXMLReader;
 import java.util.Date;
 import java.util.List;
@@ -333,7 +336,7 @@ public class HighScoreTest extends FreeColTestCase{
 	 * Run the String getOldNationNameKey() method test.
 	 */
 	@Test
-	public void testGetOldNationNameKey_1()
+	public void testGetOldNationNameKey()
 		{
 		Colony colony = getStandardColony(3, 1, 8); 
 		Player player = colony.getOwner();
@@ -344,10 +347,12 @@ public class HighScoreTest extends FreeColTestCase{
 		player.nationId = "model.nation.french";
 		player.playerType = Player.PlayerType.COLONIAL;
 		HighScore fixture = new HighScore(player, new Date());
-
+		
+		player.nationId() = "model.nation.dutch";
+		
 		String result = fixture.getOldNationNameKey();
 
-		assertNotNull(result);
+		assertTrue(result.equals( Messages.nameKey("model.nation.french"));
 	}
 
 	/**
@@ -375,7 +380,7 @@ public class HighScoreTest extends FreeColTestCase{
 	 * Run the int getRetirementTurn() method test.
 	 */
 	@Test
-	public void testGetRetirementTurn_1()
+	public void testGetRetirementTurn()
 		{
 		Colony colony = getStandardColony(3, 1, 8); 
 		Player player = colony.getOwner();
@@ -386,22 +391,25 @@ public class HighScoreTest extends FreeColTestCase{
 		player.nationId = "model.nation.french";
 		player.playerType = Player.PlayerType.COLONIAL;
 		HighScore fixture = new HighScore(player, new Date());
-
+		
+		Game game = player.getGame();
+		int retirementTurn = game.getTurn().getNumber();
+		
 		int result = fixture.getRetirementTurn();
 
-		assertEquals(0, result);
+		assertEquals(retirementTurn, result);
 	}
 
 	/**
 	 * Run the int getScore() method test.
 	 */
 	@Test
-	public void testGetScore_1()
+	public void testGetScore()
 		{
 		Colony colony = getStandardColony(3, 1, 8);
 		Player player = colony.getOwner();
 		player.setName("Test Player");
-		player.setScore(1);
+		player.setScore(30000);
 		player.setNationType(new EuropeanNationType("model.nationType.cooperation", new Specification()));
 		player.setNewLandName("Test Land");
 		player.nationId = "model.nation.french";
@@ -410,14 +418,14 @@ public class HighScoreTest extends FreeColTestCase{
 
 		int result = fixture.getScore();
 		
-		assertEquals(0, result);
+		assertEquals(30000, result);
 	}
 
 	/**
 	 * Run the int getUnits() method test.
 	 */
 	@Test
-	public void testGetUnits_1()
+	public void testGetUnits()
 		{
 		Colony colony = getStandardColony(3, 1, 8);
 		Player player = colony.getOwner();
@@ -428,10 +436,14 @@ public class HighScoreTest extends FreeColTestCase{
 		player.nationId = "model.nation.french";
 		player.playerType = Player.PlayerType.COLONIAL;
 		HighScore fixture = new HighScore(player, new Date());
+		
+		Map map = getTestMap(spec().getTileType("model.tile.plains"));
+        Unit wagon = new ServerUnit(getGame(), map.getTile(9, 10), player, spec().getUnitType("model.unit.wagonTrain"));
+		player.addUnit(wagon)
 
 		int result = fixture.getUnits();
 
-		assertEquals(0, result);
+		assertEquals(1, result);
 	}
 
 	/**
@@ -440,10 +452,21 @@ public class HighScoreTest extends FreeColTestCase{
 	@Test
 	public void testLoadHighScores()
 		{
-
-		List<HighScore> result = HighScore.loadHighScores();
-
-		assertNotNull(result);
+		Colony colony = getStandardColony(3, 1, 8);
+		Player player = colony.getOwner();
+		player.setName("Test Player");
+		player.setScore(200);
+		player.setNationType(new EuropeanNationType("model.nationType.cooperation", new Specification()));
+		player.setNewLandName("Test Land");
+		player.nationId = "model.nation.french";
+		player.playerType = Player.PlayerType.COLONIAL;
+		HighScore fixture = new HighScore(player, new Date());
+		fixture.newHighScore(player);
+		
+		List<HighScore> result = fixture.loadHighScores();
+		
+		assertTrue(result.contains(fixture));
+		assertFalse(result.isEmpty());
 	}
 
 	/**
@@ -452,10 +475,17 @@ public class HighScoreTest extends FreeColTestCase{
 	@Test
 	public void testNewHighScore()
 		{
-		Colony colony = getStandardColony(3, 1, 8); Player player = colony.getOwner();
-		player.setScore(1);
+		Colony colony = getStandardColony(3, 1, 8);
+		Player player = colony.getOwner();
+		player.setName("Test Player");
+		player.setScore(200);
+		player.setNationType(new EuropeanNationType("model.nationType.cooperation", new Specification()));
+		player.setNewLandName("Test Land");
+		player.nationId = "model.nation.french";
+		player.playerType = Player.PlayerType.COLONIAL;
+		HighScore fixture = new HighScore(player, new Date());
 
-		boolean result = HighScore.newHighScore(player);
+		boolean result = fixture.newHighScore(player);
 
 		assertTrue(result);
 	}
@@ -466,11 +496,22 @@ public class HighScoreTest extends FreeColTestCase{
 	@Test
 	public void testSaveHighScores()
 		{
-		List<HighScore> scores = null;
+		Colony colony = getStandardColony(3, 1, 8);
+		Player player = colony.getOwner();
+		player.setName("Test Player");
+		player.setScore(200);
+		player.setNationType(new EuropeanNationType("model.nationType.cooperation", new Specification()));
+		player.setNewLandName("Test Land");
+		player.nationId = "model.nation.french";
+		player.playerType = Player.PlayerType.COLONIAL;
+		HighScore fixture = new HighScore(player, new Date());
+		fixture.newHighScore(player);
+		
+		List<HighScore> scores = fixture.loadHighScores();
 
 		boolean result = HighScore.saveHighScores(scores);
 
-		assertEquals(false, result);
+		assertTrue(result);
 	}
 
 	/**
