@@ -9,6 +9,7 @@ import net.sf.freecol.server.model.ServerUnit;
 import java.io.InputStream;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.lang.StringBuilder;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -482,9 +483,8 @@ public class DiplomaticTradeTest extends FreeColTestCase{
         Goods newGoods = new Goods(getGame(), wagon, spec().getGoodsType("model.goods.cotton"), 75);
 	
 		fixture.add(new GoodsTradeItem(getGame(), sender, recipient, newGoods));
-		Player player = new Player(getGame(), new IIOMetadataNode());
 
-		List<Goods> result = fixture.getGoodsGivenBy(player);
+		List<Goods> result = fixture.getGoodsGivenBy(sender);
 		
 		assertTrue(result.contains(newGoods));
 	}
@@ -494,24 +494,31 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 *
 	 * @throws FreeColException
 	 *
-	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
-	public void testGetUnitsGivenBy_1()
+	public void testGetUnitsGivenBy()
 		throws FreeColException {
-		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		Colony senderColony = getStandardColony(1,3,3);
+		Player sender = senderColony.getOwner();
+		Colony recipientColony = getStandardColony(1,4,4);
+		Player recipient = recipientColony.getOwner();
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), 
+				DiplomaticTrade.
+				TradeContext.CONTACT, 
+				sender, 
+				recipient, 
+				new ArrayList<TradeItem>(), 
+				1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
-		Player player = new Player(getGame(), new IIOMetadataNode());
+		
+        Unit wagon = new ServerUnit(getGame(), map.getTile(9, 10), sender, spec().getUnitType("model.unit.wagonTrain"));
+        UnitTradeItem newUnitItem = new UnitTradeItem(getGame(), sender, recipient, wagon);
+        
+		fixture.add(newUnitItem);
 
-		List<Unit> result = fixture.getUnitsGivenBy(player);
+		List<Unit> result = fixture.getUnitsGivenBy(sender);
 
-		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.RuntimeException: Read failure
-		//       at net.sf.freecol.common.model.FreeColObject.readFromXMLElement(FreeColObject.java:912)
-		//       at net.sf.freecol.common.model.Game.<init>(Game.java:216)
-		assertNotNull(result);
+		assertTrue(result.contains(newUnitItem));
 	}
 
 	/**
@@ -519,24 +526,26 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 *
 	 * @throws FreeColException
 	 *
-	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
-	public void testGetOtherPlayer_1()
+	public void testGetOtherPlayer()
 		throws FreeColException {
-		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		Colony senderColony = getStandardColony(1,3,3);
+		Player sender = senderColony.getOwner();
+		Colony recipientColony = getStandardColony(1,4,4);
+		Player recipient = recipientColony.getOwner();
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), 
+				DiplomaticTrade.
+				TradeContext.CONTACT, 
+				sender, 
+				recipient, 
+				new ArrayList<TradeItem>(), 
+				1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
-		Player player = new Player(getGame(), new IIOMetadataNode());
 
-		Player result = fixture.getOtherPlayer(player);
+		Player result = fixture.getOtherPlayer(sender);
 
-		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.RuntimeException: Read failure
-		//       at net.sf.freecol.common.model.FreeColObject.readFromXMLElement(FreeColObject.java:912)
-		//       at net.sf.freecol.common.model.Game.<init>(Game.java:216)
-		assertNotNull(result);
+		assertEquals(result == recipient);
 	}
 
 	/**
@@ -544,24 +553,29 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 *
 	 * @throws FreeColException
 	 *
-	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
-	public void testGetReceiveMessage_1()
+	public void testGetReceiveMessage()
 		throws FreeColException {
-		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		Colony senderColony = getStandardColony(1,3,3);
+		Player sender = senderColony.getOwner();
+		Colony recipientColony = getStandardColony(1,4,4);
+		Player recipient = recipientColony.getOwner();
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), 
+				DiplomaticTrade.
+				TradeContext.CONTACT, 
+				sender, 
+				recipient, 
+				new ArrayList<TradeItem>(), 
+				1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
-		Player player = new Player(getGame(), new IIOMetadataNode());
+		fixture.add(new GoldTradeItem(getGame(), sender, recipient, 1);
 
-		StringTemplate result = fixture.getReceiveMessage(player);
+		StringTemplate result = fixture.getReceiveMessage(sender);
 
-		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.RuntimeException: Read failure
-		//       at net.sf.freecol.common.model.FreeColObject.readFromXMLElement(FreeColObject.java:912)
-		//       at net.sf.freecol.common.model.Game.<init>(Game.java:216)
-		assertNotNull(result);
+		assertTrue(result == StringTemplate.template("model.diplomaticTrade.receive."
+	            + fixture.getContext().getKey())
+	            .addStringTemplate("%nation%", player.getNationLabel()));
 	}
 
 	/**
@@ -569,26 +583,34 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 *
 	 * @throws FreeColException
 	 *
-	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
-	public void testGetSendMessage_1()
+	public void testGetSendMessage()
 		throws FreeColException {
-		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		Colony senderColony = getStandardColony(1,3,3);
+		Player sender = senderColony.getOwner();
+		Colony recipientColony = getStandardColony(1,4,4);
+		Player recipient = recipientColony.getOwner();
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), 
+				DiplomaticTrade.
+				TradeContext.CONTACT, 
+				sender, 
+				recipient, 
+				new ArrayList<TradeItem>(), 
+				1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
-		Player player = new Player(getGame(), new IIOMetadataNode());
-		Colony settlement = new Colony(getGame(), "");
-		settlement.owner = new Player(getGame(), new IIOMetadataNode());
+		fixture.add(new GoldTradeItem(getGame(), sender, recipient, 1);
+		Colony newColony = getStandardColony(1,5,5);
+		Player newPlayer = newColony.getOwner();
 
-		StringTemplate result = fixture.getSendMessage(player, settlement);
+		StringTemplate result = fixture.getSendMessage(sender, newColony);
 
-		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.RuntimeException: Read failure
-		//       at net.sf.freecol.common.model.FreeColObject.readFromXMLElement(FreeColObject.java:912)
-		//       at net.sf.freecol.common.model.Game.<init>(Game.java:216)
-		assertNotNull(result);
+		assertNotNull(result == StringTemplate.template("model.diplomaticTrade.send."
+	            + fixture.getContext().getKey())
+	            .addStringTemplate("%nation%",
+	                newColony.getOwner().getNationLabel())
+	            .addStringTemplate("%settlement%",
+	                newColony.getLocationLabelFor(sender)));
 	}
 
 
@@ -598,23 +620,27 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 *
 	 * @throws FreeColException
 	 *
-	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
-	public void testGetStance_1()
+	public void testGetStance()
 		throws FreeColException {
-		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		Colony senderColony = getStandardColony(1,3,3);
+		Player sender = senderColony.getOwner();
+		Colony recipientColony = getStandardColony(1,4,4);
+		Player recipient = recipientColony.getOwner();
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), 
+				DiplomaticTrade.
+				TradeContext.CONTACT, 
+				sender, 
+				recipient, 
+				new ArrayList<TradeItem>(), 
+				1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
+		fixture.add(new GoldTradeItem(getGame(), sender, recipient, 1);
 
 		Stance result = fixture.getStance();
 
-		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.RuntimeException: Read failure
-		//       at net.sf.freecol.common.model.FreeColObject.readFromXMLElement(FreeColObject.java:912)
-		//       at net.sf.freecol.common.model.Game.<init>(Game.java:216)
-		assertNotNull(result);
+		assertTrue(result == Stance.UNCONTACTED);
 	}
 
 	/**
@@ -622,23 +648,28 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 *
 	 * @throws FreeColException
 	 *
-	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
-	public void testGetTradeItems_1()
+	public void testGetTradeItems()
 		throws FreeColException {
-		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		Colony senderColony = getStandardColony(1,3,3);
+		Player sender = senderColony.getOwner();
+		Colony recipientColony = getStandardColony(1,4,4);
+		Player recipient = recipientColony.getOwner();
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), 
+				DiplomaticTrade.
+				TradeContext.CONTACT, 
+				sender, 
+				recipient, 
+				new ArrayList<TradeItem>(), 
+				1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
-
+		TradeItem newGoldItem = new GoldTradeItem(getGame(), sender, recipient, 1);
+		fixture.add(newGoldItem);
+		
 		List<TradeItem> result = fixture.getTradeItems();
 
-		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.RuntimeException: Read failure
-		//       at net.sf.freecol.common.model.FreeColObject.readFromXMLElement(FreeColObject.java:912)
-		//       at net.sf.freecol.common.model.Game.<init>(Game.java:216)
-		assertNotNull(result);
+		assertTrue(result.contains(newGoldItem));
 	}
 
 
@@ -648,23 +679,27 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 *
 	 * @throws FreeColException
 	 *
-	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
-	public void testGetVersion_1()
+	public void testGetVersion()
 		throws FreeColException {
-		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		Colony senderColony = getStandardColony(1,3,3);
+		Player sender = senderColony.getOwner();
+		Colony recipientColony = getStandardColony(1,4,4);
+		Player recipient = recipientColony.getOwner();
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), 
+				DiplomaticTrade.
+				TradeContext.CONTACT, 
+				sender, 
+				recipient, 
+				new ArrayList<TradeItem>(), 
+				1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
-
+		fixture.add(new GoldTradeItem(getGame(), sender, recipient, 1);
+		
 		int result = fixture.getVersion();
 
-		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.RuntimeException: Read failure
-		//       at net.sf.freecol.common.model.FreeColObject.readFromXMLElement(FreeColObject.java:912)
-		//       at net.sf.freecol.common.model.Game.<init>(Game.java:216)
-		assertEquals(0, result);
+		assertEquals(1, result);
 	}
 
 	/**
@@ -672,23 +707,27 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 *
 	 * @throws FreeColException
 	 *
-	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
-	public void testGetVictim_1()
+	public void testGetVictim()
 		throws FreeColException {
-		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		Colony senderColony = getStandardColony(1,3,3);
+		Player sender = senderColony.getOwner();
+		Colony recipientColony = getStandardColony(1,4,4);
+		Player recipient = recipientColony.getOwner();
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), 
+				DiplomaticTrade.
+				TradeContext.TRIBUTE, 
+				sender, 
+				recipient, 
+				new ArrayList<TradeItem>(), 
+				1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
-
+		fixture.add(new GoldTradeItem(getGame(), sender, recipient, 1);
+		
 		Player result = fixture.getVictim();
 
-		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.RuntimeException: Read failure
-		//       at net.sf.freecol.common.model.FreeColObject.readFromXMLElement(FreeColObject.java:912)
-		//       at net.sf.freecol.common.model.Game.<init>(Game.java:216)
-		assertNotNull(result);
+		assertTrue(result == recipient);
 	}
 
 	/**
@@ -696,22 +735,28 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 *
 	 * @throws FreeColException
 	 *
-	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
-	public void testIncrementVersion_1()
+	public void testIncrementVersion()
 		throws FreeColException {
-		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		Colony senderColony = getStandardColony(1,3,3);
+		Player sender = senderColony.getOwner();
+		Colony recipientColony = getStandardColony(1,4,4);
+		Player recipient = recipientColony.getOwner();
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), 
+				DiplomaticTrade.
+				TradeContext.CONTACT, 
+				sender, 
+				recipient, 
+				new ArrayList<TradeItem>(), 
+				1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
-
+		fixture.add(new GoldTradeItem(getGame(), sender, recipient, 1);
+		
 		fixture.incrementVersion();
+		
+		assertTrue(fixture.getVersion() == 2)
 
-		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.RuntimeException: Read failure
-		//       at net.sf.freecol.common.model.FreeColObject.readFromXMLElement(FreeColObject.java:912)
-		//       at net.sf.freecol.common.model.Game.<init>(Game.java:216)
 	}
 
 	/**
@@ -719,21 +764,25 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 *
 	 * @throws FreeColException
 	 *
-	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testIsEmpty_1()
 		throws FreeColException {
-		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		Colony senderColony = getStandardColony(1,3,3);
+		Player sender = senderColony.getOwner();
+		Colony recipientColony = getStandardColony(1,4,4);
+		Player recipient = recipientColony.getOwner();
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), 
+				DiplomaticTrade.
+				TradeContext.CONTACT, 
+				sender, 
+				recipient, 
+				new ArrayList<TradeItem>(), 
+				1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
 
 		boolean result = fixture.isEmpty();
 
-		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.RuntimeException: Read failure
-		//       at net.sf.freecol.common.model.FreeColObject.readFromXMLElement(FreeColObject.java:912)
-		//       at net.sf.freecol.common.model.Game.<init>(Game.java:216)
 		assertTrue(result);
 	}
 
@@ -742,71 +791,59 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 *
 	 * @throws FreeColException
 	 *
-	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
-	public void testIterator_1()
+	public void testIterator()
 		throws FreeColException {
-		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		Colony senderColony = getStandardColony(1,3,3);
+		Player sender = senderColony.getOwner();
+		Colony recipientColony = getStandardColony(1,4,4);
+		Player recipient = recipientColony.getOwner();
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), 
+				DiplomaticTrade.
+				TradeContext.CONTACT, 
+				sender, 
+				recipient, 
+				new ArrayList<TradeItem>(), 
+				1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
-
+		TradeItem colonyTradeItem = new ColonyTradeItem(getGame(), sender, recipient, getStandardColony(1,5,5));
+		fixture.add(colonyTradeItem);
+		
 		Iterator<TradeItem> result = fixture.iterator();
 
-		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.RuntimeException: Read failure
-		//       at net.sf.freecol.common.model.FreeColObject.readFromXMLElement(FreeColObject.java:912)
-		//       at net.sf.freecol.common.model.Game.<init>(Game.java:216)
-		assertNotNull(result);
+		assertTrue(result.next() == colonyTradeItem);
 	}
 	
 	/**
-	 * Run the void remove(int) method test.
+	 * Run the void remove(int) method by trade item test.
 	 *
 	 * @throws FreeColException
 	 *
-	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
-	public void testRemove_1()
+	public void testRemove_TradeItem()
 		throws FreeColException {
-		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		Colony senderColony = getStandardColony(1,3,3);
+		Player sender = senderColony.getOwner();
+		Colony recipientColony = getStandardColony(1,4,4);
+		Player recipient = recipientColony.getOwner();
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), 
+				DiplomaticTrade.
+				TradeContext.CONTACT, 
+				sender, 
+				recipient, 
+				new ArrayList<TradeItem>(), 
+				1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
-		int index = 1;
+		TradeItem colonyTradeItem = new ColonyTradeItem(getGame(), sender, recipient, getStandardColony(1,5,5));
+		fixture.add(colonyTradeItem);
 
-		fixture.remove(index);
-
-		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.RuntimeException: Read failure
-		//       at net.sf.freecol.common.model.FreeColObject.readFromXMLElement(FreeColObject.java:912)
-		//       at net.sf.freecol.common.model.Game.<init>(Game.java:216)
-	}
-
-	/**
-	 * Run the void remove(TradeItem) method test.
-	 *
-	 * @throws FreeColException
-	 *
-	 * @generatedBy CodePro at 5/7/19 4:37 PM
-	 */
-	@Test
-	public void testRemove_2()
-		throws FreeColException {
-		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
-		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
-		TradeItem newItem = new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes())));
-
-		fixture.remove(newItem);
-
-		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.RuntimeException: Read failure
-		//       at net.sf.freecol.common.model.FreeColObject.readFromXMLElement(FreeColObject.java:912)
-		//       at net.sf.freecol.common.model.Game.<init>(Game.java:216)
+		List<TradeItem> items = fixture.getTradeItems();
+		assertTrue(items.contains(colonyTradeItem));
+		
+		fixture.remove(colonyTradeItem);
+		assertTrue(!items.contains(colonyTradeItem));
 	}
 
 	/**
@@ -814,46 +851,31 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 *
 	 * @throws FreeColException
 	 *
-	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
-	public void testRemoveType_1()
+	public void testRemoveType()
 		throws FreeColException {
-		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		Colony senderColony = getStandardColony(1,3,3);
+		Player sender = senderColony.getOwner();
+		Colony recipientColony = getStandardColony(1,4,4);
+		Player recipient = recipientColony.getOwner();
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), 
+				DiplomaticTrade.
+				TradeContext.CONTACT, 
+				sender, 
+				recipient, 
+				new ArrayList<TradeItem>(), 
+				1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
-		Class<? extends TradeItem> itemClass = TradeItem.class;
+		TradeItem colonyTradeItem = new ColonyTradeItem(getGame(), sender, recipient, getStandardColony(1,5,5));
+		fixture.add(colonyTradeItem);
+		Class<? extends TradeItem> colonyItemClass = ColonyTradeItem.class;
 
-		fixture.removeType(itemClass);
-
-		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.RuntimeException: Read failure
-		//       at net.sf.freecol.common.model.FreeColObject.readFromXMLElement(FreeColObject.java:912)
-		//       at net.sf.freecol.common.model.Game.<init>(Game.java:216)
-	}
-
-	/**
-	 * Run the void removeType(Class<? extends TradeItem>) method test.
-	 *
-	 * @throws FreeColException
-	 *
-	 * @generatedBy CodePro at 5/7/19 4:37 PM
-	 */
-	@Test
-	public void testRemoveType_2()
-		throws FreeColException {
-		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
-		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		Class<? extends TradeItem> itemClass = TradeItem.class;
-
-		fixture.removeType(itemClass);
-
-		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.RuntimeException: Read failure
-		//       at net.sf.freecol.common.model.FreeColObject.readFromXMLElement(FreeColObject.java:912)
-		//       at net.sf.freecol.common.model.Game.<init>(Game.java:216)
+		List<TradeItem> items = fixture.getTradeItems();
+		assertTrue(items.contains(colonyTradeItem));
+		
+		fixture.removeType(colonyItemClass);
+		assertTrue(!items.contains(colonyTradeItem));
 	}
 
 	/**
@@ -861,23 +883,39 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 *
 	 * @throws FreeColException
 	 *
-	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
-	public void testToString_1()
+	public void testToString()
 		throws FreeColException {
-		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
+		Colony senderColony = getStandardColony(1,3,3);
+		Player sender = senderColony.getOwner();
+		Colony recipientColony = getStandardColony(1,4,4);
+		Player recipient = recipientColony.getOwner();
+		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), 
+				DiplomaticTrade.
+				TradeContext.CONTACT, 
+				sender, 
+				recipient, 
+				new ArrayList<TradeItem>(), 
+				1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
-
-		String result = fixture.toString();
-
-		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.RuntimeException: Read failure
-		//       at net.sf.freecol.common.model.FreeColObject.readFromXMLElement(FreeColObject.java:912)
-		//       at net.sf.freecol.common.model.Game.<init>(Game.java:216)
-		assertNotNull(result);
+		TradeItem colonyTradeItem = new ColonyTradeItem(getGame(), sender, recipient, getStandardColony(1,5,5));
+		fixture.add(colonyTradeItem);
+		
+		StringBuilder sb = new StringBuilder(128);
+        sb.append("[").append(getId())
+            .append(" ").append(fixture.getContext())
+            .append(" ").append(fixture.getStatus())
+            .append(" from=").append(sender.getId())
+            .append(" to=").append(recipient.getId())
+            .append(" version=").append(fixture.getVersion())
+            .append(" [");
+        for (TradeItem item : fixture.getTradeItems()) sb.append(" ").append(item);
+        sb.append(" ]]");
+		
+		String result = sb.toString();
+		
+		assertTrue(result == fixture.toString())
 	}
 
 	/**
@@ -885,10 +923,8 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 *
 	 * @param args the command line arguments
 	 *
-	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
-	/*
 	public static void main(String[] args) {
 		new org.junit.runner.JUnitCore().run(DiplomaticTradeTest.class);
-	}*/
+	}
 }
