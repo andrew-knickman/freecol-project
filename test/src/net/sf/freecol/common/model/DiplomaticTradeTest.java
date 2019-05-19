@@ -26,7 +26,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the DiplomaticTrade constructor test with contact context.
 	 *
-	 * @throws FreeColException
+
 	 *
 	 */
 	@Test
