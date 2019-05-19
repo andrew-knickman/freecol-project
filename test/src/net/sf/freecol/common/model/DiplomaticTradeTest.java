@@ -31,7 +31,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 */
 	@Test
 	public void testDiplomaticTrade_Contact()
-		throws FreeColException {
+		{
 		Game game = getGame();
 		DiplomaticTrade.TradeContext context = DiplomaticTrade.TradeContext.CONTACT;
 		Colony senderColony = getStandardColony(1,3,3);
@@ -54,7 +54,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 */
 	@Test
 	public void testDiplomaticTrade_Diplomatic()
-		throws FreeColException {
+		{
 		Game game = getGame();
 		DiplomaticTrade.TradeContext context = DiplomaticTrade.TradeContext.DIPLOMATIC;
 		Colony senderColony = getStandardColony(1,3,3);
@@ -77,7 +77,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 */
 	@Test
 	public void testDiplomaticTrade_Trade()
-		throws FreeColException {
+		{
 		Game game = getGame();
 		DiplomaticTrade.TradeContext context = DiplomaticTrade.TradeContext.TRADE;
 		Colony senderColony = getStandardColony(1,3,3);
@@ -100,7 +100,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 */
 	@Test
 	public void testDiplomaticTrade_Tribute()
-		throws FreeColException {
+		{
 		Game game = getGame();
 		DiplomaticTrade.TradeContext context = DiplomaticTrade.TradeContext.TRIBUTE;
 		Colony senderColony = getStandardColony(1,3,3);
@@ -128,7 +128,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 */
 	@Test
 	public void testGetContext()
-		throws FreeColException {
+		{
 		Colony senderColony = getStandardColony(1,3,3);
 		Player sender = senderColony.getOwner();
 		Colony recipientColony = getStandardColony(1,4,4);
@@ -142,7 +142,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 				1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
 		Colony newColony = getStandardColony(1,5,5);
-		fixture.add(newColony);
+		fixture.add(new ColonyTradeItem(getGame(), sender, recipient, newColony));
 		DiplomaticTrade.TradeContext result = fixture.getContext();
 		assertTrue(result == TradeContext.CONTACT);
 	}
@@ -155,7 +155,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 */
 	@Test
 	public void testGetStatus()
-		throws FreeColException {
+		{
 		Colony senderColony = getStandardColony(1,3,3);
 		Player sender = senderColony.getOwner();
 		Colony recipientColony = getStandardColony(1,4,4);
@@ -182,7 +182,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 */
 	@Test
 	public void testSetStatus()
-		throws FreeColException {
+		{
 		Colony senderColony = getStandardColony(1,3,3);
 		Player sender = senderColony.getOwner();
 		Colony recipientColony = getStandardColony(1,4,4);
@@ -210,7 +210,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 */
 	@Test
 	public void testGetSender()
-		throws FreeColException {
+		{
 		Colony senderColony = getStandardColony(1,3,3);
 		Player sender = senderColony.getOwner();
 		Colony recipientColony = getStandardColony(1,4,4);
@@ -226,7 +226,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 		TradeItem newItem = new GoldTradeItem(getGame(), sender, recipient, 1);
 		fixture.add(newItem);
 		Player result = fixture.getSender();
-		assertEquals(sender == result);
+		assertTrue(sender == result);
 	}
 	
 	/**
@@ -237,7 +237,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 */
 	@Test
 	public void testSetSender()
-		throws FreeColException {
+		{
 		Colony senderColony = getStandardColony(1,3,3);
 		Player sender = senderColony.getOwner();
 		Colony recipientColony = getStandardColony(1,4,4);
@@ -255,7 +255,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 		Colony newColony = getStandardColony(1,5,5);
 		Player newSender = newColony.getOwner();
 		fixture.setSender(newSender);
-		assertEquals(fixture.getSender() == newSender);
+		assertTrue(fixture.getSender() == newSender);
 	}
 	
 	/**
@@ -266,7 +266,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 */
 	@Test
 	public void testGetRecipient()
-		throws FreeColException {
+		{
 		Colony senderColony = getStandardColony(1,3,3);
 		Player sender = senderColony.getOwner();
 		Colony recipientColony = getStandardColony(1,4,4);
@@ -293,7 +293,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 */
 	@Test
 	public void testSetRecipient()
-		throws FreeColException {
+		{
 		Colony senderColony = getStandardColony(1,3,3);
 		Player sender = senderColony.getOwner();
 		Colony recipientColony = getStandardColony(1,4,4);
@@ -306,11 +306,10 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 				new ArrayList<TradeItem>(), 
 				1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
 		Colony newColony = getStandardColony(1,5,5);
 		Player newRecipient = newColony.getOwner();
 		fixture.setRecipient(newRecipient);
-		assertTrue(fixture.getRecipient == newRecipient);
+		assertTrue(fixture.getRecipient() == newRecipient);
 	}
 
 	
@@ -322,7 +321,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 */
 	@Test
 	public void testAdd_Gold()
-		throws FreeColException {
+		{
 		Colony senderColony = getStandardColony(1,3,3);
 		Player sender = senderColony.getOwner();
 		Colony recipientColony = getStandardColony(1,4,4);
@@ -349,7 +348,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 */
 	@Test
 	public void testClear()
-		throws FreeColException {
+		{
 		Colony senderColony = getStandardColony(1,3,3);
 		Player sender = senderColony.getOwner();
 		Colony recipientColony = getStandardColony(1,4,4);
@@ -374,7 +373,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 */
 	@Test
 	public void testGetColoniesGivenBy()
-		throws FreeColException {
+		{
 		Colony senderColony = getStandardColony(1,3,3);
 		Player sender = senderColony.getOwner();
 		Colony recipientColony = getStandardColony(1,4,4);
@@ -403,7 +402,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 */
 	@Test
 	public void testGetGoldGivenBy()
-		throws FreeColException {
+		{
 		Colony senderColony = getStandardColony(1,3,3);
 		Player sender = senderColony.getOwner();
 		Colony recipientColony = getStandardColony(1,4,4);
@@ -431,7 +430,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 */
 	@Test
 	public void testGetGoodsGivenBy()
-		throws FreeColException {
+		{
 		Colony senderColony = getStandardColony(1,3,3);
 		Player sender = senderColony.getOwner();
 		Colony recipientColony = getStandardColony(1,4,4);
@@ -464,7 +463,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 */
 	@Test
 	public void testGetUnitsGivenBy()
-		throws FreeColException {
+		{
 		Colony senderColony = getStandardColony(1,3,3);
 		Player sender = senderColony.getOwner();
 		Colony recipientColony = getStandardColony(1,4,4);
@@ -478,6 +477,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 				1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
 		
+		Map map = getTestMap(spec().getTileType("model.tile.plains"));
         Unit wagon = new ServerUnit(getGame(), map.getTile(9, 10), sender, spec().getUnitType("model.unit.wagonTrain"));
         UnitTradeItem newUnitItem = new UnitTradeItem(getGame(), sender, recipient, wagon);
         
@@ -496,7 +496,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 */
 	@Test
 	public void testGetOtherPlayer()
-		throws FreeColException {
+		{
 		Colony senderColony = getStandardColony(1,3,3);
 		Player sender = senderColony.getOwner();
 		Colony recipientColony = getStandardColony(1,4,4);
@@ -512,7 +512,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 
 		Player result = fixture.getOtherPlayer(sender);
 
-		assertEquals(result == recipient);
+		assertTrue(result == recipient);
 	}
 
 	/**
@@ -523,7 +523,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 */
 	@Test
 	public void testGetReceiveMessage()
-		throws FreeColException {
+		{
 		Colony senderColony = getStandardColony(1,3,3);
 		Player sender = senderColony.getOwner();
 		Colony recipientColony = getStandardColony(1,4,4);
@@ -542,7 +542,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 
 		assertTrue(result == StringTemplate.template("model.diplomaticTrade.receive."
 	            + fixture.getContext().getKey())
-	            .addStringTemplate("%nation%", player.getNationLabel()));
+	            .addStringTemplate("%nation%", sender.getNationLabel()));
 	}
 
 	/**
@@ -553,7 +553,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 */
 	@Test
 	public void testGetSendMessage()
-		throws FreeColException {
+		{
 		Colony senderColony = getStandardColony(1,3,3);
 		Player sender = senderColony.getOwner();
 		Colony recipientColony = getStandardColony(1,4,4);
@@ -590,7 +590,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 */
 	@Test
 	public void testGetStance()
-		throws FreeColException {
+		{
 		Colony senderColony = getStandardColony(1,3,3);
 		Player sender = senderColony.getOwner();
 		Colony recipientColony = getStandardColony(1,4,4);
@@ -618,7 +618,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 */
 	@Test
 	public void testGetTradeItems()
-		throws FreeColException {
+		{
 		Colony senderColony = getStandardColony(1,3,3);
 		Player sender = senderColony.getOwner();
 		Colony recipientColony = getStandardColony(1,4,4);
@@ -649,7 +649,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 */
 	@Test
 	public void testGetVersion()
-		throws FreeColException {
+		{
 		Colony senderColony = getStandardColony(1,3,3);
 		Player sender = senderColony.getOwner();
 		Colony recipientColony = getStandardColony(1,4,4);
@@ -677,7 +677,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 */
 	@Test
 	public void testGetVictim()
-		throws FreeColException {
+		{
 		Colony senderColony = getStandardColony(1,3,3);
 		Player sender = senderColony.getOwner();
 		Colony recipientColony = getStandardColony(1,4,4);
@@ -705,7 +705,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 */
 	@Test
 	public void testIncrementVersion()
-		throws FreeColException {
+		{
 		Colony senderColony = getStandardColony(1,3,3);
 		Player sender = senderColony.getOwner();
 		Colony recipientColony = getStandardColony(1,4,4);
@@ -734,7 +734,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 */
 	@Test
 	public void testIsEmpty()
-		throws FreeColException {
+		{
 		Colony senderColony = getStandardColony(1,3,3);
 		Player sender = senderColony.getOwner();
 		Colony recipientColony = getStandardColony(1,4,4);
@@ -761,7 +761,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 */
 	@Test
 	public void testIterator()
-		throws FreeColException {
+		{
 		Colony senderColony = getStandardColony(1,3,3);
 		Player sender = senderColony.getOwner();
 		Colony recipientColony = getStandardColony(1,4,4);
@@ -790,7 +790,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 */
 	@Test
 	public void testRemove_TradeItem()
-		throws FreeColException {
+		{
 		Colony senderColony = getStandardColony(1,3,3);
 		Player sender = senderColony.getOwner();
 		Colony recipientColony = getStandardColony(1,4,4);
@@ -821,7 +821,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 */
 	@Test
 	public void testRemoveType()
-		throws FreeColException {
+		{
 		Colony senderColony = getStandardColony(1,3,3);
 		Player sender = senderColony.getOwner();
 		Colony recipientColony = getStandardColony(1,4,4);
@@ -853,7 +853,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 */
 	@Test
 	public void testToString()
-		throws FreeColException {
+		{
 		Colony senderColony = getStandardColony(1,3,3);
 		Player sender = senderColony.getOwner();
 		Colony recipientColony = getStandardColony(1,4,4);
@@ -870,7 +870,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 		fixture.add(colonyTradeItem);
 		
 		StringBuilder sb = new StringBuilder(128);
-        sb.append("[").append(getId())
+        sb.append("[").append(fixture.getId())
             .append(" ").append(fixture.getContext())
             .append(" ").append(fixture.getStatus())
             .append(" from=").append(sender.getId())
@@ -894,7 +894,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 */
 	@Before
 	public void setUp()
-		throws FreeColException {
+		{
 	}
 
 	/**
@@ -906,8 +906,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 */
 	@After
 	public void tearDown()
-		throws FreeColException {
-		fixture = null;
+		{
 	}
 
 	/**
