@@ -352,7 +352,7 @@ public class HighScoreTest extends FreeColTestCase{
 		
 		String result = fixture.getOldNationNameKey();
 
-		assertTrue(result.equals( Messages.nameKey("model.nation.french"));
+		assertTrue(result.equals( Messages.nameKey("model.nation.french")));
 	}
 
 	/**
@@ -439,7 +439,7 @@ public class HighScoreTest extends FreeColTestCase{
 		
 		Map map = getTestMap(spec().getTileType("model.tile.plains"));
         Unit wagon = new ServerUnit(getGame(), map.getTile(9, 10), player, spec().getUnitType("model.unit.wagonTrain"));
-		player.addUnit(wagon)
+		player.addUnit(wagon);
 
 		int result = fixture.getUnits();
 
