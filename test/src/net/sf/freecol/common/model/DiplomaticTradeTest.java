@@ -17,44 +17,9 @@ import java.util.List;
 /**
  * The class <code>DiplomaticTradeTest</code> contains tests for the class <code>{@link DiplomaticTrade}</code>.
  *
- * @generatedBy CodePro at 5/7/19 4:37 PM
  * @author Andrew Knickman
- * @version $Revision: 1.0 $
  */
 public class DiplomaticTradeTest extends FreeColTestCase{
-	
-	
-	/**INCLUDES TESTS FOR:
-	 * DiplomaticTrade
-	 * getContext
-	 * getStatus
-	 * setStatus
-	 * getSender
-	 * setSender
-	 * getRecipient
-	 * setRecipient
-	 * getOtherPlayer
-	 * getSendMessage
-	 * getReceiveMessage
-	 * add
-	 * remove(TradeItem newItem)
-	 * remove(int index)
-	 * removeType
-	 * clear
-	 * getTradeItems
-	 * isEmpty
-	 * iterator
-	 * getItemsGivenBy
-	 * getStance
-	 * getColoniesGivenBy
-	 * getGoldGivenBy
-	 * getGoodGivenBy
-	 * getVictim
-	 * getUnitsGivenBy
-	 * getVersion
-	 * incrementVersion
-	 * toString
-	 */
 
 	/**
 	 * Run the DiplomaticTrade constructor test with contact context.
