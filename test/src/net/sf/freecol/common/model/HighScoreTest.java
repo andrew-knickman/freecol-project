@@ -29,12 +29,13 @@ public class HighScoreTest {
 	@Test
 	public void testHighScore_1()
 		{
-		Player player = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
-		player.setName("");
+		Colony colony = getStandardColony(3, 1, 8); 
+		Player player = colony.getOwner();
+        player.setName("Test Player");
 		player.setScore(1);
 		player.setNationType(new EuropeanNationType("", new Specification()));
-		player.setNewLandName("");
-		player.nationId = "";
+		player.setNewLandName("Test Land");
+		player.nationId = "model.nation.french";
 		player.playerType = Player.PlayerType.COLONIAL;
 		Date theDate = new Date();
 
@@ -49,13 +50,14 @@ public class HighScoreTest {
 	@Test
 	public void testHighScore_2()
 		{
-		Player player = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
-		player.setName("");
+		Colony colony = getStandardColony(3, 1, 8); 
+		Player player = colony.getOwner();
+		player.setName("Test Player");
 		player.setScore(1);
 		player.setNationType(new EuropeanNationType("", new Specification()));
-		player.setNewLandName("");
+		player.setNewLandName("Test Land");
 		player.setIndependentNationName("");
-		player.nationId = "";
+		player.nationId = "model.nation.french";
 		player.playerType = Player.PlayerType.COLONIAL;
 		Date theDate = new Date();
 
@@ -126,12 +128,13 @@ public class HighScoreTest {
 	@Test
 	public void testCompareTo_1()
 		{
-		Player player = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
-		player.setName("");
+		Colony colony = getStandardColony(3, 1, 8); 
+		Player player = colony.getOwner();
+		player.setName("Test Player");
 		player.setScore(1);
 		player.setNationType(new EuropeanNationType("", new Specification()));
-		player.setNewLandName("");
-		player.nationId = "";
+		player.setNewLandName("Test Land");
+		player.nationId = "model.nation.french";
 		player.playerType = Player.PlayerType.COLONIAL;
 		HighScore fixture = new HighScore(player, new Date());
 		FreeColObject other = new AbstractGoods();
@@ -149,12 +152,13 @@ public class HighScoreTest {
 	@Test
 	public void testCompareTo_2() throws XMLStreamException, IOException
 		{
-		Player player = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
-		player.setName("");
+		Colony colony = getStandardColony(3, 1, 8); 
+		Player player = colony.getOwner();
+		player.setName("Test Player");
 		player.setScore(1);
 		player.setNationType(new EuropeanNationType("", new Specification()));
-		player.setNewLandName("");
-		player.nationId = "";
+		player.setNewLandName("Test Land");
+		player.nationId = "model.nation.french";
 		player.playerType = Player.PlayerType.COLONIAL;
 		HighScore fixture = new HighScore(player, new Date());
 		FreeColObject other = new HighScore(new FreeColXMLReader(new ByteArrayInputStream("".getBytes())));
@@ -170,12 +174,13 @@ public class HighScoreTest {
 	@Test
 	public void testGetColonies_1()
 		{
-		Player player = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
-		player.setName("");
+		Colony colony = getStandardColony(3, 1, 8); 
+		Player player = colony.getOwner();
+		player.setName("Test Player");
 		player.setScore(1);
 		player.setNationType(new EuropeanNationType("", new Specification()));
-		player.setNewLandName("");
-		player.nationId = "";
+		player.setNewLandName("Test Land");
+		player.nationId = "model.nation.french";
 		player.playerType = Player.PlayerType.COLONIAL;
 		HighScore fixture = new HighScore(player, new Date());
 
@@ -190,12 +195,13 @@ public class HighScoreTest {
 	@Test
 	public void testGetDate_1()
 		{
-		Player player = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
-		player.setName("");
+		Colony colony = getStandardColony(3, 1, 8); 
+		Player player = colony.getOwner();
+		player.setName("Test Player");
 		player.setScore(1);
 		player.setNationType(new EuropeanNationType("", new Specification()));
-		player.setNewLandName("");
-		player.nationId = "";
+		player.setNewLandName("Test Land");
+		player.nationId = "model.nation.french";
 		player.playerType = Player.PlayerType.COLONIAL;
 		HighScore fixture = new HighScore(player, new Date());
 
@@ -210,12 +216,13 @@ public class HighScoreTest {
 	@Test
 	public void testGetDifficulty_1()
 		{
-		Player player = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
-		player.setName("");
+		Colony colony = getStandardColony(3, 1, 8); 
+		Player player = colony.getOwner();
+		player.setName("Test Player");
 		player.setScore(1);
 		player.setNationType(new EuropeanNationType("", new Specification()));
-		player.setNewLandName("");
-		player.nationId = "";
+		player.setNewLandName("Test Land");
+		player.nationId = "model.nation.french";
 		player.playerType = Player.PlayerType.COLONIAL;
 		HighScore fixture = new HighScore(player, new Date());
 
@@ -230,12 +237,13 @@ public class HighScoreTest {
 	@Test
 	public void testGetIndependenceTurn_1()
 		{
-		Player player = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
-		player.setName("");
+		Colony colony = getStandardColony(3, 1, 8); 
+		Player player = colony.getOwner();
+		player.setName("Test Player");
 		player.setScore(1);
 		player.setNationType(new EuropeanNationType("", new Specification()));
-		player.setNewLandName("");
-		player.nationId = "";
+		player.setNewLandName("Test Land");
+		player.nationId = "model.nation.french";
 		player.playerType = Player.PlayerType.COLONIAL;
 		HighScore fixture = new HighScore(player, new Date());
 
@@ -250,12 +258,13 @@ public class HighScoreTest {
 	@Test
 	public void testGetLevel_1()
 		{
-		Player player = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
-		player.setName("");
+		Colony colony = getStandardColony(3, 1, 8); 
+		Player player = colony.getOwner();
+		player.setName("Test Player");
 		player.setScore(1);
 		player.setNationType(new EuropeanNationType("", new Specification()));
-		player.setNewLandName("");
-		player.nationId = "";
+		player.setNewLandName("Test Land");
+		player.nationId = "model.nation.french";
 		player.playerType = Player.PlayerType.COLONIAL;
 		HighScore fixture = new HighScore(player, new Date());
 
@@ -270,12 +279,13 @@ public class HighScoreTest {
 	@Test
 	public void testGetNationId_1()
 		{
-		Player player = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
-		player.setName("");
+		Colony colony = getStandardColony(3, 1, 8); 
+		Player player = colony.getOwner();
+		player.setName("Test Player");
 		player.setScore(1);
 		player.setNationType(new EuropeanNationType("", new Specification()));
-		player.setNewLandName("");
-		player.nationId = "";
+		player.setNewLandName("Test Land");
+		player.nationId = "model.nation.french";
 		player.playerType = Player.PlayerType.COLONIAL;
 		HighScore fixture = new HighScore(player, new Date());
 
@@ -290,12 +300,13 @@ public class HighScoreTest {
 	@Test
 	public void testGetNationLabel_1()
 		{
-		Player player = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
-		player.setName("");
+		Colony colony = getStandardColony(3, 1, 8); 
+		Player player = colony.getOwner();
+		player.setName("Test Player");
 		player.setScore(1);
 		player.setNationType(new EuropeanNationType("", new Specification()));
-		player.setNewLandName("");
-		player.nationId = "";
+		player.setNewLandName("Test Land");
+		player.nationId = "model.nation.french";
 		player.playerType = Player.PlayerType.COLONIAL;
 		HighScore fixture = new HighScore(player, new Date());
 
@@ -310,12 +321,13 @@ public class HighScoreTest {
 	@Test
 	public void testGetNationTypeId_1()
 		{
-		Player player = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
-		player.setName("");
+		Colony colony = getStandardColony(3, 1, 8); 
+		Player player = colony.getOwner();
+		player.setName("Test Player");
 		player.setScore(1);
 		player.setNationType(new EuropeanNationType("", new Specification()));
-		player.setNewLandName("");
-		player.nationId = "";
+		player.setNewLandName("Test Land");
+		player.nationId = "model.nation.french";
 		player.playerType = Player.PlayerType.COLONIAL;
 		HighScore fixture = new HighScore(player, new Date());
 
@@ -330,12 +342,13 @@ public class HighScoreTest {
 	@Test
 	public void testGetNewLandName_1()
 		{
-		Player player = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
-		player.setName("");
+		Colony colony = getStandardColony(3, 1, 8); 
+		Player player = colony.getOwner();
+		player.setName("Test Player");
 		player.setScore(1);
 		player.setNationType(new EuropeanNationType("", new Specification()));
-		player.setNewLandName("");
-		player.nationId = "";
+		player.setNewLandName("Test Land");
+		player.nationId = "model.nation.french";
 		player.playerType = Player.PlayerType.COLONIAL;
 		HighScore fixture = new HighScore(player, new Date());
 
@@ -350,12 +363,13 @@ public class HighScoreTest {
 	@Test
 	public void testGetOldNationNameKey_1()
 		{
-		Player player = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
-		player.setName("");
+		Colony colony = getStandardColony(3, 1, 8); 
+		Player player = colony.getOwner();
+		player.setName("Test Player");
 		player.setScore(1);
 		player.setNationType(new EuropeanNationType("", new Specification()));
-		player.setNewLandName("");
-		player.nationId = "";
+		player.setNewLandName("Test Land");
+		player.nationId = "model.nation.french";
 		player.playerType = Player.PlayerType.COLONIAL;
 		HighScore fixture = new HighScore(player, new Date());
 
@@ -370,12 +384,13 @@ public class HighScoreTest {
 	@Test
 	public void testGetPlayerName_1()
 		{
-		Player player = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
-		player.setName("");
+		Colony colony = getStandardColony(3, 1, 8); 
+		Player player = colony.getOwner();
+		player.setName("Test Player");
 		player.setScore(1);
 		player.setNationType(new EuropeanNationType("", new Specification()));
-		player.setNewLandName("");
-		player.nationId = "";
+		player.setNewLandName("Test Land");
+		player.nationId = "model.nation.french";
 		player.playerType = Player.PlayerType.COLONIAL;
 		HighScore fixture = new HighScore(player, new Date());
 
@@ -390,12 +405,13 @@ public class HighScoreTest {
 	@Test
 	public void testGetRetirementTurn_1()
 		{
-		Player player = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
-		player.setName("");
+		Colony colony = getStandardColony(3, 1, 8); 
+		Player player = colony.getOwner();
+		player.setName("Test Player");
 		player.setScore(1);
 		player.setNationType(new EuropeanNationType("", new Specification()));
-		player.setNewLandName("");
-		player.nationId = "";
+		player.setNewLandName("Test Land");
+		player.nationId = "model.nation.french";
 		player.playerType = Player.PlayerType.COLONIAL;
 		HighScore fixture = new HighScore(player, new Date());
 
@@ -410,12 +426,13 @@ public class HighScoreTest {
 	@Test
 	public void testGetScore_1()
 		{
-		Player player = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
-		player.setName("");
+		Colony colony = getStandardColony(3, 1, 8);
+		Player player = colony.getOwner();
+		player.setName("Test Player");
 		player.setScore(1);
 		player.setNationType(new EuropeanNationType("", new Specification()));
-		player.setNewLandName("");
-		player.nationId = "";
+		player.setNewLandName("Test Land");
+		player.nationId = "model.nation.french";
 		player.playerType = Player.PlayerType.COLONIAL;
 		HighScore fixture = new HighScore(player, new Date());
 
@@ -430,12 +447,13 @@ public class HighScoreTest {
 	@Test
 	public void testGetUnits_1()
 		{
-		Player player = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
-		player.setName("");
+		Colony colony = getStandardColony(3, 1, 8);
+		Player player = colony.getOwner();
+		player.setName("Test Player");
 		player.setScore(1);
 		player.setNationType(new EuropeanNationType("", new Specification()));
-		player.setNewLandName("");
-		player.nationId = "";
+		player.setNewLandName("Test Land");
+		player.nationId = "model.nation.french";
 		player.playerType = Player.PlayerType.COLONIAL;
 		HighScore fixture = new HighScore(player, new Date());
 
@@ -462,7 +480,7 @@ public class HighScoreTest {
 	@Test
 	public void testNewHighScore()
 		{
-		Player player = new Player(new Game(new IIOMetadataNode(), ""), new IIOMetadataNode());
+		Colony colony = getStandardColony(3, 1, 8); Player player = colony.getOwner();
 		player.setScore(1);
 
 		boolean result = HighScore.newHighScore(player);
