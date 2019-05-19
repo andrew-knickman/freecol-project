@@ -4,6 +4,7 @@ import net.sf.freecol.common.model.DiplomaticTrade.TradeContext;
 import net.sf.freecol.server.model.ServerUnit;
 import net.sf.freecol.util.test.FreeColTestCase;
 import net.sf.freecol.common.model.*;
+import net.sf.freecol.server.model.ServerUnit;
 
 import java.io.InputStream;
 import java.io.StringWriter;
@@ -174,9 +175,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
 		Colony newColony = getStandardColony(1,5,5);
 		fixture.add(newColony);
-
 		DiplomaticTrade.TradeContext result = fixture.getContext();
-
 		assertTrue(result == TradeContext.CONTACT);
 	}
 	
@@ -204,7 +203,6 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 		TradeItem newItem = new GoldTradeItem(getGame(), sender, recipient, 1);
 		fixture.add(newItem);
 		DiplomaticTrade.TradeStatus result = fixture.getStatus();
-
 		assertTrue(result == DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
 	}
 	
@@ -232,9 +230,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 		TradeItem newItem = new GoldTradeItem(getGame(), sender, recipient, 1);
 		fixture.add(newItem);
 		DiplomaticTrade.TradeStatus status = DiplomaticTrade.TradeStatus.REJECT_TRADE;
-
 		fixture.setStatus(status);
-		
 		assertTrue(fixture.getStatus() == status)
 	}
 
@@ -262,7 +258,6 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 		TradeItem newItem = new GoldTradeItem(getGame(), sender, recipient, 1);
 		fixture.add(newItem);
 		Player result = fixture.getSender();
-		
 		assertEquals(sender == result);
 	}
 	
@@ -289,10 +284,9 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
 		TradeItem newItem = new GoldTradeItem(getGame(), sender, recipient, 1);
 		fixture.add(newItem);
-		Player newSender = new Player(getGame(), new IIOMetadataNode());
-
+		Colony newColony = getStandardColony(1,5,5);
+		Player newSender = newColony.getOwner();
 		fixture.setSender(newSender);
-		
 		assertEquals(fixture.getSender() == newSender);
 	}
 	
@@ -320,7 +314,6 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 		TradeItem newItem = new GoldTradeItem(getGame(), sender, recipient, 1);
 		fixture.add(newItem);
 		Player result = fixture.getRecipient();
-
 		assertTrue(recipient == result);
 	}
 	
@@ -346,10 +339,9 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 				1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
 		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
-		Player newRecipient = new Player(getGame(), new IIOMetadataNode());
-
+		Colony newColony = getStandardColony(1,5,5);
+		Player newRecipient = newColony.getOwner();
 		fixture.setRecipient(newRecipient);
-		
 		assertTrue(fixture.getRecipient == newRecipient);
 	}
 
@@ -404,7 +396,6 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
 		fixture.clear();
 		assertTrue(fixture.isEmpty());
-		
 	}
 
 	/**
@@ -433,7 +424,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 
 		List<Colony> result = fixture.getColoniesGivenBy(sender);
 
-		assertNotNull(result);
+		assertTrue(result.contains(newColony));
 	}
 	
 	/**
@@ -469,7 +460,6 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	 *
 	 * @throws FreeColException
 	 *
-	 * @generatedBy CodePro at 5/7/19 4:37 PM
 	 */
 	@Test
 	public void testGetGoodsGivenBy()
@@ -487,44 +477,16 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 				1);
 		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);		
 				
-		Map map = getTestMap(plainsType);
+		Map map = getTestMap(spec().getTileType("model.tile.plains"));
         Unit wagon = new ServerUnit(getGame(), map.getTile(9, 10), sender, spec().getUnitType("model.unit.wagonTrain"));
-        Goods newGoods = new Goods(getGame(), wagon, cottonType, 75);
-
-        assertEquals(wagon, newGoods.getLocation());
-        assertEquals(cottonType, g.getType());
-        assertEquals(75, g.getAmount());		
-		fixture.add(new GoodsTradeItem(getGame(), sender, recipient, Good???));
+        Goods newGoods = new Goods(getGame(), wagon, spec().getGoodsType("model.goods.cotton"), 75);
+	
+		fixture.add(new GoodsTradeItem(getGame(), sender, recipient, newGoods));
 		Player player = new Player(getGame(), new IIOMetadataNode());
 
 		List<Goods> result = fixture.getGoodsGivenBy(player);
-
-		assertNotNull(result);
-	}
-
-	/**
-	 * Run the List<TradeItem> getItemsGivenBy(Player) method test.
-	 *
-	 * @throws FreeColException
-	 *
-	 * @generatedBy CodePro at 5/7/19 4:37 PM
-	 */
-	@Test
-	public void testGetItemsGivenBy_1()
-		throws FreeColException {
-		DiplomaticTrade fixture = new DiplomaticTrade(getGame(), DiplomaticTrade.TradeContext.CONTACT, new Player(getGame(), new IIOMetadataNode()), new Player(getGame(), new IIOMetadataNode()), new ArrayList<TradeItem>(), 1);
-		fixture.setStatus(DiplomaticTrade.TradeStatus.ACCEPT_TRADE);
-		fixture.add(new ColonyTradeItem(getGame(), new FreeColXMLReader(new ByteArrayInputStream("".getBytes()))));
-		Player player = new Player(getGame(), new IIOMetadataNode());
-
-		List<TradeItem> result = fixture.getItemsGivenBy(player);
-
-		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.RuntimeException: Read failure
-		//       at net.sf.freecol.common.model.FreeColObject.readFromXMLElement(FreeColObject.java:912)
-		//       at net.sf.freecol.common.model.Game.<init>(Game.java:216)
-		assertNotNull(result);
+		
+		assertTrue(result.contains(newGoods));
 	}
 	
 	/**
