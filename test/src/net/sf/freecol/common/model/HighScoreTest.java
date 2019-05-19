@@ -29,9 +29,7 @@ public class HighScoreTest {
 	 * Run the HighScore(Player,Date) constructor test.
 	 */
 	@Test
-	public void te;stHighScore_1
-
-()
+	public void testHighScore_1()
 		{
 		Colony colony = getStandardColony(3, 1, 8); 
 		Player player = colony.getOwner();
