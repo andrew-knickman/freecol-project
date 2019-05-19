@@ -119,8 +119,8 @@ public class HighScoreTest extends FreeColTestCase{
 		player.playerType = Player.PlayerType.COLONIAL;
 		HighScore fixture = new HighScore(player, new Date());
 		
-		Colony colony = getStandardColony(3, 2, 2); 
-		Player otherPlayer = colony.getOwner();
+		Colony otherColony = getStandardColony(3, 2, 2); 
+		Player otherPlayer = otherColony.getOwner();
 		otherPlayer.setName("Test Player 2");
 		otherPlayer.setScore(2);
 		otherPlayer.setNationType(new EuropeanNationType("model.nationType.cooperation", new Specification()));
@@ -348,11 +348,11 @@ public class HighScoreTest extends FreeColTestCase{
 		player.playerType = Player.PlayerType.COLONIAL;
 		HighScore fixture = new HighScore(player, new Date());
 		
-		player.nationId() = "model.nation.dutch";
+		player.setNation("model.nation.dutch", new Specification());
 		
 		String result = fixture.getOldNationNameKey();
 
-		assertTrue(result.equals( Messages.nameKey("model.nation.french")));
+		assertTrue(result.equals(Messages.nameKey("model.nation.french")));
 	}
 
 	/**
