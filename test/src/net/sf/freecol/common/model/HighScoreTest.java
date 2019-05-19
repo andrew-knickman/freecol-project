@@ -28,6 +28,7 @@ import org.w3c.dom.Element;
  * The class <code>HighScoreTest</code> contains tests for the class <code>{@link HighScore}</code>.
  *
  * @author Andrew Knickman
+ * 
  */
 public class HighScoreTest extends FreeColTestCase{
 	/**
