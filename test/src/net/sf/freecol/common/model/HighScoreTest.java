@@ -348,7 +348,7 @@ public class HighScoreTest extends FreeColTestCase{
 		player.playerType = Player.PlayerType.COLONIAL;
 		HighScore fixture = new HighScore(player, new Date());
 		
-		player.setNation("model.nation.dutch", new Specification());
+		player.setNation(new Nation("model.nation.dutch", new Specification()));
 		
 		String result = fixture.getOldNationNameKey();
 
