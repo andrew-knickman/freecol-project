@@ -49,7 +49,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the DiplomaticTrade constructor test with diplomatic context.
 	 *
-	 * @throws FreeColException
+	 
 	 *
 	 */
 	@Test
@@ -72,7 +72,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the DiplomaticTrade constructor test with trade context.
 	 *
-	 * @throws FreeColException
+	 
 	 *
 	 */
 	@Test
@@ -95,7 +95,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the DiplomaticTrade constructor test with tribute context.
 	 *
-	 * @throws FreeColException
+	 
 	 *
 	 */
 	@Test
@@ -123,7 +123,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the DiplomaticTrade.TradeContext getContext() method test.
 	 *
-	 * @throws FreeColException
+	 
 	 *
 	 */
 	@Test
@@ -150,7 +150,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the DiplomaticTrade.TradeStatus getStatus() method test.
 	 *
-	 * @throws FreeColException
+	 
 	 *
 	 */
 	@Test
@@ -177,7 +177,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void setStatus(TradeStatus) method test.
 	 *
-	 * @throws FreeColException
+	 
 	 *
 	 */
 	@Test
@@ -205,7 +205,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the Player getSender() method test.
 	 *
-	 * @throws FreeColException
+	 
 	 *
 	 */
 	@Test
@@ -232,7 +232,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void setSender(Player) method test.
 	 *
-	 * @throws FreeColException
+	 
 	 *
 	 */
 	@Test
@@ -261,7 +261,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the Player getRecipient() method test.
 	 *
-	 * @throws FreeColException
+	 
 	 *
 	 */
 	@Test
@@ -288,7 +288,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void setRecipient(Player) method test.
 	 *
-	 * @throws FreeColException
+	 
 	 *
 	 */
 	@Test
@@ -316,7 +316,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void add(TradeItem) method test with gold trade item.
 	 *
-	 * @throws FreeColException
+	 
 	 *
 	 */
 	@Test
@@ -343,7 +343,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void clear() method test.
 	 *
-	 * @throws FreeColException
+	 
 	 *
 	 */
 	@Test
@@ -368,7 +368,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the List<Colony> getColoniesGivenBy(Player) method test.
 	 *
-	 * @throws FreeColException
+	 
 	 *
 	 */
 	@Test
@@ -397,7 +397,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the int getGoldGivenBy(Player) method test.
 	 *
-	 * @throws FreeColException
+	 
 	 *
 	 */
 	@Test
@@ -425,7 +425,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the List<Goods> getGoodsGivenBy(Player) method test.
 	 *
-	 * @throws FreeColException
+	 
 	 *
 	 */
 	@Test
@@ -458,7 +458,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the List<Unit> getUnitsGivenBy(Player) method test.
 	 *
-	 * @throws FreeColException
+	 
 	 *
 	 */
 	@Test
@@ -491,7 +491,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the Player getOtherPlayer(Player) method test.
 	 *
-	 * @throws FreeColException
+	 
 	 *
 	 */
 	@Test
@@ -518,7 +518,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the StringTemplate getReceiveMessage(Player) method test.
 	 *
-	 * @throws FreeColException
+	 
 	 *
 	 */
 	@Test
@@ -548,7 +548,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the StringTemplate getSendMessage(Player,Settlement) method test.
 	 *
-	 * @throws FreeColException
+	 
 	 *
 	 */
 	@Test
@@ -585,7 +585,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the Stance getStance() method test.
 	 *
-	 * @throws FreeColException
+	 
 	 *
 	 */
 	@Test
@@ -613,7 +613,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the List<TradeItem> getTradeItems() method test.
 	 *
-	 * @throws FreeColException
+	 
 	 *
 	 */
 	@Test
@@ -644,7 +644,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the int getVersion() method test.
 	 *
-	 * @throws FreeColException
+	 
 	 *
 	 */
 	@Test
@@ -672,7 +672,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the Player getVictim() method test.
 	 *
-	 * @throws FreeColException
+	 
 	 *
 	 */
 	@Test
@@ -700,7 +700,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void incrementVersion() method test.
 	 *
-	 * @throws FreeColException
+	 
 	 *
 	 */
 	@Test
@@ -729,7 +729,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the boolean isEmpty() method test.
 	 *
-	 * @throws FreeColException
+	 
 	 *
 	 */
 	@Test
@@ -756,7 +756,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the Iterator<TradeItem> iterator() method test.
 	 *
-	 * @throws FreeColException
+	 
 	 *
 	 */
 	@Test
@@ -785,7 +785,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void remove(int) method by trade item test.
 	 *
-	 * @throws FreeColException
+	 
 	 *
 	 */
 	@Test
@@ -816,7 +816,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the void removeType(Class<? extends TradeItem>) method test.
 	 *
-	 * @throws FreeColException
+	 
 	 *
 	 */
 	@Test
@@ -848,7 +848,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Run the String toString() method test.
 	 *
-	 * @throws FreeColException
+	 
 	 *
 	 */
 	@Test
@@ -888,7 +888,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Perform pre-test initialization.
 	 *
-	 * @throws FreeColException
+	 
 	 *         if the initialization fails for some reason
 	 *
 	 */
@@ -900,7 +900,7 @@ public class DiplomaticTradeTest extends FreeColTestCase{
 	/**
 	 * Perform post-test clean-up.
 	 *
-	 * @throws FreeColException
+	 
 	 *         if the clean-up fails for some reason
 	 *
 	 */
